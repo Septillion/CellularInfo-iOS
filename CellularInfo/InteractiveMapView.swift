@@ -10,10 +10,12 @@ import MapKit
 import CoreLocation
 
 struct InteractiveMapView: UIViewRepresentable {
-    @ObservedObject var locationManager = LocationManager()
-    //@State var timesOfRecenter : Int = 0
     
-    private var recievedData : FinalDataStructure?
+    @ObservedObject var locationManager = LocationManager()
+    let mapViewDelegate = MapViewDelegate()
+    
+    
+    //private var recievedData : [FinalDataStructure]?
 
     
     func makeUIView(context: Context) -> some MKMapView {
@@ -30,13 +32,29 @@ struct InteractiveMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
+        uiView.delegate = mapViewDelegate
         let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
+        
         
         //uiView.showsUserLocation = true
         uiView.setCenter(coordinate, animated: true)
+        
+        let heatmap = DTMHeatmap()
+        var data = CloudRelatedStuff()
+        data.getData()
+        //heatmap.setData(data.recievedData)
+        uiView.addOverlay(heatmap)
+        
         //self.timesOfRecenter+=1
     }
 
+}
+
+class MapViewDelegate: NSObject, MKMapViewDelegate{
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = DTMHeatmapRenderer(overlay: overlay)
+        return renderer
+    }
 }
 
 struct MapView_Previews: PreviewProvider {

@@ -16,6 +16,12 @@
 		6CCFD1A52553DD89004F4F4B /* CloudRelatedStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */; };
 		6CCFD1A825541BAC004F4F4B /* CellularInfoMapKitOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD1A725541BAC004F4F4B /* CellularInfoMapKitOverlay.swift */; };
 		6CCFD1B025542BE0004F4F4B /* CoordinateTransformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD1AF25542BE0004F4F4B /* CoordinateTransformation.m */; };
+		6CCFD24525543B62004F4F4B /* DTMDiffHeatmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD20925543B61004F4F4B /* DTMDiffHeatmap.m */; };
+		6CCFD24625543B62004F4F4B /* NSValue+MKMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD20A25543B61004F4F4B /* NSValue+MKMapPoint.m */; };
+		6CCFD24725543B62004F4F4B /* DTMHeatmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD20D25543B61004F4F4B /* DTMHeatmap.m */; };
+		6CCFD24825543B62004F4F4B /* DTMHeatmapRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD20F25543B61004F4F4B /* DTMHeatmapRenderer.m */; };
+		6CCFD2B725543BD1004F4F4B /* DTMDiffColorProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD2B425543BD1004F4F4B /* DTMDiffColorProvider.m */; };
+		6CCFD2B825543BD1004F4F4B /* DTMColorProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD2B525543BD1004F4F4B /* DTMColorProvider.m */; };
 		6CD7C7C325503B8D003F7B42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7C225503B8D003F7B42 /* AppDelegate.swift */; };
 		6CD7C7C525503B8D003F7B42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7C425503B8D003F7B42 /* SceneDelegate.swift */; };
 		6CD7C7C725503B8D003F7B42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7C625503B8D003F7B42 /* ContentView.swift */; };
@@ -42,6 +48,18 @@
 		6CCFD1A725541BAC004F4F4B /* CellularInfoMapKitOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellularInfoMapKitOverlay.swift; sourceTree = "<group>"; };
 		6CCFD1AE25542B96004F4F4B /* CoordinateTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordinateTransformation.h; sourceTree = "<group>"; };
 		6CCFD1AF25542BE0004F4F4B /* CoordinateTransformation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoordinateTransformation.m; sourceTree = "<group>"; };
+		6CCFD20725543B61004F4F4B /* DTMHeatmapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMHeatmapRenderer.h; sourceTree = "<group>"; };
+		6CCFD20925543B61004F4F4B /* DTMDiffHeatmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMDiffHeatmap.m; sourceTree = "<group>"; };
+		6CCFD20A25543B61004F4F4B /* NSValue+MKMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+MKMapPoint.m"; sourceTree = "<group>"; };
+		6CCFD20B25543B61004F4F4B /* DTMHeatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMHeatmap.h; sourceTree = "<group>"; };
+		6CCFD20C25543B61004F4F4B /* DTMDiffHeatmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMDiffHeatmap.h; sourceTree = "<group>"; };
+		6CCFD20D25543B61004F4F4B /* DTMHeatmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMHeatmap.m; sourceTree = "<group>"; };
+		6CCFD20E25543B61004F4F4B /* NSValue+MKMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+MKMapPoint.h"; sourceTree = "<group>"; };
+		6CCFD20F25543B61004F4F4B /* DTMHeatmapRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMHeatmapRenderer.m; sourceTree = "<group>"; };
+		6CCFD2B325543BD1004F4F4B /* DTMDiffColorProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMDiffColorProvider.h; sourceTree = "<group>"; };
+		6CCFD2B425543BD1004F4F4B /* DTMDiffColorProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMDiffColorProvider.m; sourceTree = "<group>"; };
+		6CCFD2B525543BD1004F4F4B /* DTMColorProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMColorProvider.m; sourceTree = "<group>"; };
+		6CCFD2B625543BD1004F4F4B /* DTMColorProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMColorProvider.h; sourceTree = "<group>"; };
 		6CD7C7BF25503B8D003F7B42 /* CellularInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CellularInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD7C7C225503B8D003F7B42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CD7C7C425503B8D003F7B42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +95,25 @@
 				6C331B162553D0A500C88CAA /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CCFD20825543B61004F4F4B /* Heatmaps */ = {
+			isa = PBXGroup;
+			children = (
+				6CCFD2B625543BD1004F4F4B /* DTMColorProvider.h */,
+				6CCFD2B525543BD1004F4F4B /* DTMColorProvider.m */,
+				6CCFD2B325543BD1004F4F4B /* DTMDiffColorProvider.h */,
+				6CCFD2B425543BD1004F4F4B /* DTMDiffColorProvider.m */,
+				6CCFD20725543B61004F4F4B /* DTMHeatmapRenderer.h */,
+				6CCFD20F25543B61004F4F4B /* DTMHeatmapRenderer.m */,
+				6CCFD20925543B61004F4F4B /* DTMDiffHeatmap.m */,
+				6CCFD20A25543B61004F4F4B /* NSValue+MKMapPoint.m */,
+				6CCFD20E25543B61004F4F4B /* NSValue+MKMapPoint.h */,
+				6CCFD20B25543B61004F4F4B /* DTMHeatmap.h */,
+				6CCFD20C25543B61004F4F4B /* DTMDiffHeatmap.h */,
+				6CCFD20D25543B61004F4F4B /* DTMHeatmap.m */,
+			);
+			path = Heatmaps;
 			sourceTree = "<group>";
 		};
 		6CD7C7B625503B8D003F7B42 = {
@@ -123,6 +160,7 @@
 				6C331AF62552D17A00C88CAA /* CellularInfo-Bridging-Header.h */,
 				6CCFD1AE25542B96004F4F4B /* CoordinateTransformation.h */,
 				6CCFD1AF25542BE0004F4F4B /* CoordinateTransformation.m */,
+				6CCFD20825543B61004F4F4B /* Heatmaps */,
 				6CD7C7CA25503B9C003F7B42 /* Preview Content */,
 			);
 			path = CellularInfo;
@@ -207,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CCFD24725543B62004F4F4B /* DTMHeatmap.m in Sources */,
 				6C331B0E2553CAD700C88CAA /* PlainPing.swift in Sources */,
 				6C331B0D2553CAD700C88CAA /* SimplePingAdapter.swift in Sources */,
 				6CD7C7DD2550422E003F7B42 /* UIDevice.swift in Sources */,
@@ -217,11 +256,16 @@
 				6C331B192553D1E300C88CAA /* FixedMapView.swift in Sources */,
 				6CD7C7E625504349003F7B42 /* NetworkInformation.swift in Sources */,
 				6CCFD1A52553DD89004F4F4B /* CloudRelatedStuff.swift in Sources */,
+				6CCFD24825543B62004F4F4B /* DTMHeatmapRenderer.m in Sources */,
 				6C331B0F2553CAD700C88CAA /* SimplePing.m in Sources */,
+				6CCFD24525543B62004F4F4B /* DTMDiffHeatmap.m in Sources */,
 				6CD7C7E325504249003F7B42 /* LocationManager.swift in Sources */,
 				6CD7C7C525503B8D003F7B42 /* SceneDelegate.swift in Sources */,
+				6CCFD2B825543BD1004F4F4B /* DTMColorProvider.m in Sources */,
 				6C331B1D2553D7C300C88CAA /* FinalDataStructure.swift in Sources */,
+				6CCFD2B725543BD1004F4F4B /* DTMDiffColorProvider.m in Sources */,
 				6CCFD1A825541BAC004F4F4B /* CellularInfoMapKitOverlay.swift in Sources */,
+				6CCFD24625543B62004F4F4B /* NSValue+MKMapPoint.m in Sources */,
 				6CD7C7C725503B8D003F7B42 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

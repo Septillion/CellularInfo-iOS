@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6750" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rZZ-zG-rOk">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="KWY-SO-77h"/>
+                                </connections>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Nnq-LN-hIg">
+                                <rect key="frame" x="26" y="552" width="548" height="29"/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Week 1"/>
+                                    <segment title="Week 3"/>
+                                    <segment title="Diff"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlValueChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="qy2-ZZ-jRM"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rZZ-zG-rOk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="1IM-Gn-eRO"/>
+                            <constraint firstItem="rZZ-zG-rOk" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="3oj-l3-V0m"/>
+                            <constraint firstItem="Nnq-LN-hIg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="AmM-LG-KRN"/>
+                            <constraint firstItem="rZZ-zG-rOk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Dfs-Vi-4od"/>
+                            <constraint firstAttribute="trailing" secondItem="rZZ-zG-rOk" secondAttribute="trailing" id="TVe-S7-OZd"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Nnq-LN-hIg" secondAttribute="bottom" constant="20" id="etj-Xa-VtB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Nnq-LN-hIg" secondAttribute="trailing" constant="10" id="iiB-az-JFp"/>
+                            <constraint firstItem="Nnq-LN-hIg" firstAttribute="top" secondItem="rZZ-zG-rOk" secondAttribute="bottom" constant="-48" id="obi-Do-hVA"/>
+                            <constraint firstItem="Nnq-LN-hIg" firstAttribute="leading" secondItem="rZZ-zG-rOk" secondAttribute="trailing" constant="-471" id="rKi-kA-e94"/>
+                            <constraint firstItem="Nnq-LN-hIg" firstAttribute="leading" secondItem="rZZ-zG-rOk" secondAttribute="trailing" constant="-471" id="rcI-3K-I9N"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="obi-Do-hVA"/>
+                                <exclude reference="rKi-kA-e94"/>
+                                <exclude reference="rcI-3K-I9N"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="rZZ-zG-rOk" id="j9U-zj-z7B"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="350" y="288"/>
+        </scene>
+    </scenes>
+</document>

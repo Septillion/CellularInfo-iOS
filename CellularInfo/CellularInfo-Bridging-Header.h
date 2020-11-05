@@ -4,3 +4,8 @@
 
 #import "SimplePing.h"
 #import "CoordinateTransformation.h"
+#import "DTMColorProvider.h"
+#import "DTMDiffColorProvider.h"
+#import "DTMHeatmapRenderer.h"
+#import "DTMHeatmap.h"
+#import "NSValue+MKMapPoint.h"

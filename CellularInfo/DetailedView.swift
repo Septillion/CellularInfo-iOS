@@ -27,9 +27,10 @@ struct DetailedView: View {
             
             Spacer()
             
-            InteractiveMapView()
+            FixedMapView()
                 .frame(width: .infinity, height: 100)
                 .cornerRadius(8)
+                
             
             Group {
                 Text(UIDevice().type.rawValue)
@@ -58,7 +59,7 @@ struct DetailedView: View {
         if (networkInfo.isWiFiConnected){
             
         }
-        self.dataReadyForUpload = FinalDataStructure(AveragedPingLatency: pingNumberAveraged, DeviceName: UIDevice().type.rawValue, Location: LocationManager().lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573), MobileCarrier: networkInfo.carrierName, RadioAccessTechnology: networkInfo.radioAccessTech)
+        self.dataReadyForUpload = FinalDataStructure(AveragedPingLatency: pingNumberAveraged, DeviceName: UIDevice().type.rawValue, Location: LocationManager().lastLocation?.coordinate, MobileCarrier: networkInfo.carrierName, RadioAccessTechnology: networkInfo.radioAccessTech)
         let cloudKitmanager = CloudRelatedStuff.CloudKitManager()
         cloudKitmanager.PushData(finalData: [dataReadyForUpload!], completionHandler: {_,_ in
             return

@@ -11,8 +11,10 @@ import CloudKit
 
 class CloudRelatedStuff {
     
+    //var recievedData : [FinalDataStructure]?
+    //var dataReadyToSend : [FinalDataStructure]?
+    
     var recievedData : [FinalDataStructure]?
-    var dataReadyToSend : [FinalDataStructure]?
     
     enum FetchError {
         case fetchingError, noRecords, none, addingError
@@ -69,9 +71,23 @@ class CloudRelatedStuff {
         
     }
     
-    
-    
-    
+    func getData() {
+        CloudRelatedStuff.CloudKitManager().PullData(completion: {
+            (records, error) in
+            guard error == .none, let mRecords = records else {
+                //deal with error
+                return
+            }
+            
+            DispatchQueue.main.async {
+                for i in mRecords{
+                    let data = FinalDataStructure().populateWith(record: i)
+                    self.recievedData?.append(data)
+                }
+            }
+            
+        })
+    }
     
     
 }
