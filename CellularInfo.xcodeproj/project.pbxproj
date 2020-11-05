@@ -10,7 +10,11 @@
 		6C331B0D2553CAD700C88CAA /* SimplePingAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B092553CAD700C88CAA /* SimplePingAdapter.swift */; };
 		6C331B0E2553CAD700C88CAA /* PlainPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B0B2553CAD700C88CAA /* PlainPing.swift */; };
 		6C331B0F2553CAD700C88CAA /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B0C2553CAD700C88CAA /* SimplePing.m */; };
-		6C331B122553CBAD00C88CAA /* DetailedNetworkInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B112553CBAD00C88CAA /* DetailedNetworkInformation.swift */; };
+		6C331B172553D0A500C88CAA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C331B162553D0A500C88CAA /* CloudKit.framework */; };
+		6C331B192553D1E300C88CAA /* FixedMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B182553D1E300C88CAA /* FixedMapView.swift */; };
+		6C331B1D2553D7C300C88CAA /* FinalDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B1C2553D7C300C88CAA /* FinalDataStructure.swift */; };
+		6CCFD1A52553DD89004F4F4B /* CloudRelatedStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */; };
+		6CCFD1A825541BAC004F4F4B /* CellularInfoMapKitOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD1A725541BAC004F4F4B /* CellularInfoMapKitOverlay.swift */; };
 		6CD7C7C325503B8D003F7B42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7C225503B8D003F7B42 /* AppDelegate.swift */; };
 		6CD7C7C525503B8D003F7B42 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7C425503B8D003F7B42 /* SceneDelegate.swift */; };
 		6CD7C7C725503B8D003F7B42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7C625503B8D003F7B42 /* ContentView.swift */; };
@@ -18,7 +22,7 @@
 		6CD7C7CC25503B9C003F7B42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CD7C7CB25503B9C003F7B42 /* Preview Assets.xcassets */; };
 		6CD7C7CF25503B9C003F7B42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CD7C7CD25503B9C003F7B42 /* LaunchScreen.storyboard */; };
 		6CD7C7DD2550422E003F7B42 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7DC2550422E003F7B42 /* UIDevice.swift */; };
-		6CD7C7E02550423B003F7B42 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7DF2550423B003F7B42 /* MapView.swift */; };
+		6CD7C7E02550423B003F7B42 /* InteractiveMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7DF2550423B003F7B42 /* InteractiveMapView.swift */; };
 		6CD7C7E325504249003F7B42 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7E225504249003F7B42 /* LocationManager.swift */; };
 		6CD7C7E625504349003F7B42 /* NetworkInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7E525504349003F7B42 /* NetworkInformation.swift */; };
 		6CD7C7E925510C96003F7B42 /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7E825510C96003F7B42 /* DetailedView.swift */; };
@@ -30,7 +34,11 @@
 		6C331B0A2553CAD700C88CAA /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePing.h; path = "../../test ping/test ping/SimplePing.h"; sourceTree = "<group>"; };
 		6C331B0B2553CAD700C88CAA /* PlainPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlainPing.swift; path = "../../test ping/test ping/PlainPing.swift"; sourceTree = "<group>"; };
 		6C331B0C2553CAD700C88CAA /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePing.m; path = "../../test ping/test ping/SimplePing.m"; sourceTree = "<group>"; };
-		6C331B112553CBAD00C88CAA /* DetailedNetworkInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNetworkInformation.swift; sourceTree = "<group>"; };
+		6C331B162553D0A500C88CAA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		6C331B182553D1E300C88CAA /* FixedMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedMapView.swift; sourceTree = "<group>"; };
+		6C331B1C2553D7C300C88CAA /* FinalDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalDataStructure.swift; sourceTree = "<group>"; };
+		6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudRelatedStuff.swift; sourceTree = "<group>"; };
+		6CCFD1A725541BAC004F4F4B /* CellularInfoMapKitOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellularInfoMapKitOverlay.swift; sourceTree = "<group>"; };
 		6CD7C7BF25503B8D003F7B42 /* CellularInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CellularInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD7C7C225503B8D003F7B42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CD7C7C425503B8D003F7B42 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,7 +48,7 @@
 		6CD7C7CE25503B9C003F7B42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CD7C7D025503B9C003F7B42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CD7C7DC2550422E003F7B42 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
-		6CD7C7DF2550423B003F7B42 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		6CD7C7DF2550423B003F7B42 /* InteractiveMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveMapView.swift; sourceTree = "<group>"; };
 		6CD7C7E225504249003F7B42 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		6CD7C7E525504349003F7B42 /* NetworkInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInformation.swift; sourceTree = "<group>"; };
 		6CD7C7E825510C96003F7B42 /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
@@ -53,17 +61,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C331B172553D0A500C88CAA /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C331B152553D0A500C88CAA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C331B162553D0A500C88CAA /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6CD7C7B625503B8D003F7B42 = {
 			isa = PBXGroup;
 			children = (
 				6CD7C7C125503B8D003F7B42 /* CellularInfo */,
 				6CD7C7C025503B8D003F7B42 /* Products */,
+				6C331B152553D0A500C88CAA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,10 +102,13 @@
 				6CD7C7C425503B8D003F7B42 /* SceneDelegate.swift */,
 				6CD7C7C625503B8D003F7B42 /* ContentView.swift */,
 				6CD7C7E825510C96003F7B42 /* DetailedView.swift */,
-				6C331B112553CBAD00C88CAA /* DetailedNetworkInformation.swift */,
 				6CD7C7E525504349003F7B42 /* NetworkInformation.swift */,
 				6CD7C7DC2550422E003F7B42 /* UIDevice.swift */,
-				6CD7C7DF2550423B003F7B42 /* MapView.swift */,
+				6CD7C7DF2550423B003F7B42 /* InteractiveMapView.swift */,
+				6CCFD1A725541BAC004F4F4B /* CellularInfoMapKitOverlay.swift */,
+				6C331B1C2553D7C300C88CAA /* FinalDataStructure.swift */,
+				6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */,
+				6C331B182553D1E300C88CAA /* FixedMapView.swift */,
 				6CD7C7E225504249003F7B42 /* LocationManager.swift */,
 				6C331B0B2553CAD700C88CAA /* PlainPing.swift */,
 				6C331B0A2553CAD700C88CAA /* SimplePing.h */,
@@ -185,13 +206,16 @@
 				6C331B0D2553CAD700C88CAA /* SimplePingAdapter.swift in Sources */,
 				6CD7C7DD2550422E003F7B42 /* UIDevice.swift in Sources */,
 				6CD7C7E925510C96003F7B42 /* DetailedView.swift in Sources */,
-				6CD7C7E02550423B003F7B42 /* MapView.swift in Sources */,
+				6CD7C7E02550423B003F7B42 /* InteractiveMapView.swift in Sources */,
 				6CD7C7C325503B8D003F7B42 /* AppDelegate.swift in Sources */,
+				6C331B192553D1E300C88CAA /* FixedMapView.swift in Sources */,
 				6CD7C7E625504349003F7B42 /* NetworkInformation.swift in Sources */,
+				6CCFD1A52553DD89004F4F4B /* CloudRelatedStuff.swift in Sources */,
 				6C331B0F2553CAD700C88CAA /* SimplePing.m in Sources */,
 				6CD7C7E325504249003F7B42 /* LocationManager.swift in Sources */,
 				6CD7C7C525503B8D003F7B42 /* SceneDelegate.swift in Sources */,
-				6C331B122553CBAD00C88CAA /* DetailedNetworkInformation.swift in Sources */,
+				6C331B1D2553D7C300C88CAA /* FinalDataStructure.swift in Sources */,
+				6CCFD1A825541BAC004F4F4B /* CellularInfoMapKitOverlay.swift in Sources */,
 				6CD7C7C725503B8D003F7B42 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

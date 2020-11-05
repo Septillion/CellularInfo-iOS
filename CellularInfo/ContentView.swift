@@ -15,12 +15,11 @@ struct ContentView: View {
     @State var pingNumberDouble : [Double] = []
     @State var pingNumberCurrent: Double = 0
     
-    
     let networkInfo = NetworkInformation()
     
     var body: some View {
         ZStack{
-            MapView()
+            InteractiveMapView()
                 .edgesIgnoringSafeArea(.all)
             
             VStack{
@@ -30,7 +29,7 @@ struct ContentView: View {
                     Group {
                         Text(UIDevice().type.rawValue)
                             .font(.title)
-                        Text(networkInfo.carrierName + " " + networkInfo.radioAccessTech)
+                        Text("活跃：" + networkInfo.carrierName + " " + networkInfo.radioAccessTech)
                         Text("当前延迟：\(Int(pingNumberCurrent))ms (平均：\(Int(pingNumberAveraged))ms)")
                             .onAppear(perform: {
                                 OperationQueue().addOperation {
@@ -72,7 +71,7 @@ struct ContentView: View {
                         .padding()
                         .padding(.bottom, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 }).sheet(isPresented: $showSheetView, content: {
-                    DetailedView()
+                    DetailedView(pingNumberAveraged: pingNumberAveraged)
                 })
             }
             

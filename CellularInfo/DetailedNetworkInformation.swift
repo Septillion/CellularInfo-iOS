@@ -7,8 +7,12 @@
 
 import Foundation
 
-final class DetailedNetworkInformation:ObservableObject {
+class DetailedNetworkInformation:ObservableObject {
     @Published var pingNumberAveraged : Double = 0
     @Published var pingNumberDouble : [Double] = []
     @Published var pingNumberCurrent: Double = 0
+    
+    init() {
+        
+    }
 }

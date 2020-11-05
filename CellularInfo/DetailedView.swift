@@ -6,18 +6,16 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct DetailedView: View {
     
     let networkInfo = NetworkInformation()
-    @State var pingNumberAveraged : Double = 0
-    @State var pingNumberDouble : [Double] = []
-    @State var pingNumberCurrent: Double = 0
+    var pingNumberAveraged : Double
+    @State var dataReadyForUpload: FinalDataStructure?
     
     var body: some View {
-        
-        
-        
+      
         VStack {
             
             Text("Disclaimer")
@@ -29,43 +27,20 @@ struct DetailedView: View {
             
             Spacer()
             
-            MapView()
+            InteractiveMapView()
                 .frame(width: .infinity, height: 100)
                 .cornerRadius(8)
             
             Group {
                 Text(UIDevice().type.rawValue)
                     .font(.title)
-                Text(networkInfo.carrierName + " " + networkInfo.radioAccessTech)
-                Text("当前延迟：\(Int(pingNumberCurrent))ms (平均：\(Int(pingNumberAveraged))ms)")
-                    .onAppear(perform: {
-                        OperationQueue().addOperation {
-                            for _ in 1...1000000
-                            {
-                                OperationQueue.main.addOperation {
-                                    PlainPing.ping("www.qq.com", withTimeout: 10.0, completionBlock: { (timeElapsed:Double?, error:Error?) in
-                                        if let latency = timeElapsed {
-                                            print("latency (ms): \(latency)")
-                                            pingNumberCurrent = latency
-                                            pingNumberDouble.append(latency)
-                                            let pingNumberCombined = pingNumberDouble.reduce(0,+)
-                                            pingNumberAveraged = pingNumberCombined/Double(pingNumberDouble.count)
-                                        }
-                                        if let error = error {
-                                            print("error: \(error.localizedDescription)")
-                                        }
-                                    })
-                                }
-                                sleep(1)
-                                
-                            }
-                        }
-                    })
+                Text("活跃：" + networkInfo.carrierName + " " + networkInfo.radioAccessTech)
+                Text("平均延迟：\(Int(pingNumberAveraged))ms")
                 
             }.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .topLeading)
             
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {uploadData()}, label: {
                 Text("同意并提交")
                     .frame(minWidth: 100, maxWidth: .infinity, idealHeight: 48, alignment: .center)
                     .padding()
@@ -78,11 +53,22 @@ struct DetailedView: View {
         .padding()
         
     }
+    
+    func uploadData() {
+        if (networkInfo.isWiFiConnected){
+            
+        }
+        self.dataReadyForUpload = FinalDataStructure(AveragedPingLatency: pingNumberAveraged, DeviceName: UIDevice().type.rawValue, Location: LocationManager().lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573), MobileCarrier: networkInfo.carrierName, RadioAccessTechnology: networkInfo.radioAccessTech)
+        let cloudKitmanager = CloudRelatedStuff.CloudKitManager()
+        cloudKitmanager.PushData(finalData: [dataReadyForUpload!], completionHandler: {_,_ in
+            return
+        })
+    }
 }
 
 struct DetailedView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedView()
+        DetailedView(pingNumberAveraged: 10)
     }
 }
 

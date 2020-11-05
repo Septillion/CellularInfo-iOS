@@ -10,32 +10,15 @@ import CoreTelephony
 import Network
 import SystemConfiguration.CaptiveNetwork
 
-final class NetworkInformation: ObservableObject {
+final class NetworkInformation {
     
-    @Published var pingNumberAveraged : Double = 0
-    @Published var pingNumberDouble : [Double] = []
-    @Published var pingNumberCurrent: Double = 0
-    
-    var interfaceType: String = ""
-    @Published var carrierName: String = ""
-    @Published var radioAccessTech: String = ""
-    var reachability: String = "Internet Error"
-    @Published var isWiFiConnected: Bool = false
-    
-    @Published var pingNumberInMilisecond: Double?{
-        willSet{
-            objectWillChange.send()
-        }
-    }
+    var carrierName: String = ""
+    var radioAccessTech: String = ""
+    var isWiFiConnected: Bool = false
+    var ssid: String?
     
     init() {
         
-        for type in NWPathMonitor().currentPath.availableInterfaces{
-            if (interfaceType != ""){
-                interfaceType += " "
-            }
-            interfaceType += "\(type)"
-        }
         
         let monitorWiFi = NWPathMonitor(requiredInterfaceType: .wifi)
         monitorWiFi.pathUpdateHandler = {
@@ -46,45 +29,34 @@ final class NetworkInformation: ObservableObject {
                 self.isWiFiConnected = false
             }
         }
-        
-        if isWiFiConnected {
-            carrierName = "WiFi: \(getWiFiName() ?? "Connected")"
-        }else{
-            let networkInfo = CTTelephonyNetworkInfo()
-            if let dataServiceIdentifier = networkInfo.dataServiceIdentifier,
-               let allProviders = networkInfo.serviceSubscriberCellularProviders,
-               let allRadioAccessTechs = networkInfo.serviceCurrentRadioAccessTechnology,
-               let currentProvider = allProviders[dataServiceIdentifier],
-               let currentRadioAccessTech = allRadioAccessTechs[dataServiceIdentifier]
-            {
-                self.carrierName = "活跃：\(currentProvider.carrierName ?? "Unknown Carrier") \(currentRadioAccessTech.replacingOccurrences(of: "CTRadioAccessTechnology", with: ""))"
-                
-            }
-        }
-        
-        PlainPing.ping("www.qq.com", withTimeout: 10.0, completionBlock: {
-            (timeElapsed:Double?, error:Error?) in
-            if let latency = timeElapsed {
-                self.pingNumberInMilisecond = latency
-                print(latency)
-            }
-            if let error = error {
-                print("error: \(error.localizedDescription)")
-            }
-        })
+        getWiFiName()
+        aqquireCellularCarrierAndRadioAccessTech()
     }
     
-    func getWiFiName() -> String? {
-        var ssid: String?
+    private func getWiFiName() {
         if let interfaces = CNCopySupportedInterfaces() as NSArray? {
             for interface in interfaces {
                 if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
                     ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    isWiFiConnected = true
                     break
                 }
             }
         }
-        return ssid
+    }
+    
+    private func aqquireCellularCarrierAndRadioAccessTech(){
+        let networkInfo = CTTelephonyNetworkInfo()
+        if let dataServiceIdentifier = networkInfo.dataServiceIdentifier,
+           let allProviders = networkInfo.serviceSubscriberCellularProviders,
+           let allRadioAccessTechs = networkInfo.serviceCurrentRadioAccessTechnology,
+           let currentProvider = allProviders[dataServiceIdentifier],
+           let currentRadioAccessTech = allRadioAccessTechs[dataServiceIdentifier]
+        {
+            self.carrierName = currentProvider.carrierName ?? "Unknown Carrier"
+            self.radioAccessTech = currentRadioAccessTech.replacingOccurrences(of: "CTRadioAccessTechnology", with: "")
+            
+        }
     }
     
 }
