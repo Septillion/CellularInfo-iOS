@@ -23,6 +23,17 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack{
+                
+                HStack {
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame( width: .infinity, height: 24, alignment: .topLeading)
+                    
+                    Spacer()
+                }.padding()
+                
+                
                 Spacer()
                 
                 VStack {

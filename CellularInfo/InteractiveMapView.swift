@@ -20,6 +20,7 @@ struct InteractiveMapView: UIViewRepresentable {
         let mkv = MKMapView(frame: .zero)
         
         let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
+        
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
         
         mkv.setRegion(region, animated: true)
@@ -30,6 +31,7 @@ struct InteractiveMapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
+        
         //uiView.showsUserLocation = true
         uiView.setCenter(coordinate, animated: true)
         //self.timesOfRecenter+=1

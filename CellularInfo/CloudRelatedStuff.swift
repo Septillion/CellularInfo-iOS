@@ -39,7 +39,7 @@ class CloudRelatedStuff {
                 let record = i.convert()
                 
                 publicDatabase.save(record, completionHandler: {(record, error) in
-                    guard let errormessage = error else {
+                    guard error != nil else {
                         completionHandler(record, .none)
                         // Delete local data
                         return

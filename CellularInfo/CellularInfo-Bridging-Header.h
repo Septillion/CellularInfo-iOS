@@ -3,3 +3,4 @@
 //
 
 #import "SimplePing.h"
+#import "CoordinateTransformation.h"
