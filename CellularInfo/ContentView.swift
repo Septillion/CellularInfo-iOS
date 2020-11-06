@@ -43,6 +43,8 @@ struct ContentView: View {
                         Text("活跃：" + networkInfo.carrierName + " " + networkInfo.radioAccessTech)
                         Text("当前延迟：\(Int(pingNumberCurrent))ms (平均：\(Int(pingNumberAveraged))ms)")
                             .onAppear(perform: {
+                                
+                                //Ping
                                 OperationQueue().addOperation {
                                     for _ in 1...1000000
                                     {

@@ -13,6 +13,7 @@ struct DetailedView: View {
     let networkInfo = NetworkInformation()
     var pingNumberAveraged : Double
     @State var dataReadyForUpload: FinalDataStructure?
+    @ObservedObject var locationManager = LocationManager()
     
     var body: some View {
       
@@ -57,9 +58,9 @@ struct DetailedView: View {
     
     func uploadData() {
         if (networkInfo.isWiFiConnected){
-            
+            // TODO: Disable Upload
         }
-        self.dataReadyForUpload = FinalDataStructure(AveragedPingLatency: pingNumberAveraged, DeviceName: UIDevice().type.rawValue, Location: LocationManager().lastLocation?.coordinate, MobileCarrier: networkInfo.carrierName, RadioAccessTechnology: networkInfo.radioAccessTech)
+        self.dataReadyForUpload = FinalDataStructure(AveragedPingLatency: pingNumberAveraged, DeviceName: UIDevice().type.rawValue, Location: locationManager.lastLocation?.coordinate, MobileCarrier: networkInfo.carrierName, RadioAccessTechnology: networkInfo.radioAccessTech)
         let cloudKitmanager = CloudRelatedStuff.CloudKitManager()
         cloudKitmanager.PushData(finalData: [dataReadyForUpload!], completionHandler: {_,_ in
             return

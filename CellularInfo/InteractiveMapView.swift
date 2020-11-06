@@ -15,7 +15,8 @@ struct InteractiveMapView: UIViewRepresentable {
     let mapViewDelegate = MapViewDelegate()
     
     
-    //private var recievedData : [FinalDataStructure]?
+    @State private var recievedData : [FinalDataStructure] = []
+    @State private var heatMapData = NSMutableDictionary()
 
     
     func makeUIView(context: Context) -> some MKMapView {
@@ -35,17 +36,38 @@ struct InteractiveMapView: UIViewRepresentable {
         uiView.delegate = mapViewDelegate
         let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
         
+        //uiView.setCenter(coordinate, animated: true)
         
-        //uiView.showsUserLocation = true
-        uiView.setCenter(coordinate, animated: true)
+        var heatmap = DTMHeatmap()
+        let manager = CloudRelatedStuff.CloudKitManager()
+        manager.PullData(completion: {(records, error) in
+            guard error == .none , let mRecords = records else{
+                //deal with error
+                return
+            }
+            
+            DispatchQueue.main.async {
+                for i in mRecords {
+                    var data = FinalDataStructure()
+                    data.populateWith(record: i)
+                    self.recievedData.append(data)
+                }
+                
+                for j in recievedData {
+                    if j.Location != nil{
+                        let weight: Double = 1
+                        let mapPoint = MKMapPoint(j.Location!)
+                        let value = NSValue(mkMapPoint: mapPoint)
+                        heatMapData[value] = NSNumber(value: weight)
+                    }
+                }
+                
+                heatmap.setData(heatMapData as? [AnyHashable : Any])
+                uiView.addOverlay(heatmap)
+                
+            }
+        })
         
-        let heatmap = DTMHeatmap()
-        var data = CloudRelatedStuff()
-        data.getData()
-        //heatmap.setData(data.recievedData)
-        uiView.addOverlay(heatmap)
-        
-        //self.timesOfRecenter+=1
     }
 
 }

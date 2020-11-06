@@ -26,7 +26,7 @@ class CloudRelatedStuff {
             let publicDatabase = CKContainer(identifier: "iCloud.publicCellularInfo").publicCloudDatabase
             let query = CKQuery(recordType: "CellularInfo", predicate: NSPredicate(value: true))
             
-            query.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
+            //query.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
             
             publicDatabase.perform(query, inZoneWith: CKRecordZone.default().zoneID, completionHandler: {(records, error) -> Void in
                 self.processQueryResponseWith(records: records, error: error as NSError?, completion: {fetchedRecords, FetchError in
@@ -81,7 +81,8 @@ class CloudRelatedStuff {
             
             DispatchQueue.main.async {
                 for i in mRecords{
-                    let data = FinalDataStructure().populateWith(record: i)
+                    var data = FinalDataStructure()
+                    data.populateWith(record: i)
                     self.recievedData?.append(data)
                 }
             }
