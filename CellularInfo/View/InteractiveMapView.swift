@@ -11,25 +11,22 @@ import CoreLocation
 
 struct InteractiveMapView: UIViewRepresentable {
     
-    @ObservedObject var locationManager = LocationManager()
+    //@ObservedObject var locationManager = LocationManager()
     let mapViewDelegate = MapViewDelegate()
     
     
     @State private var recievedData : [FinalDataStructure] = []
     @State private var heatMapData = NSMutableDictionary()
-
+    
     
     func makeUIView(context: Context) -> some MKMapView {
         let mkv = MKMapView(frame: .zero)
         
-        let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
-        
-        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-        
-        mkv.setRegion(region, animated: true)
+        // Set a Starting Point
+        mkv.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 34.322700, longitude: 108.552500), span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)), animated: false)
         mkv.showsUserLocation = true
         
-        var heatmap = DTMHeatmap()
+        let heatmap = DTMHeatmap()
         let manager = CloudRelatedStuff.CloudKitManager()
         manager.PullData(completion: {(records, error) in
             guard error == .none , let mRecords = records else{
@@ -64,14 +61,10 @@ struct InteractiveMapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         uiView.delegate = mapViewDelegate
-        let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
-        
-        //uiView.setCenter(coordinate, animated: true)
-        
-
-        
+        //let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
+        uiView.setUserTrackingMode(.follow, animated: true) 
     }
-
+    
 }
 
 class MapViewDelegate: NSObject, MKMapViewDelegate{

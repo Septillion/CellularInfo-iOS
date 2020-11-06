@@ -28,7 +28,7 @@ struct ContentView: View {
                     Image("logo")
                         .resizable()
                         .scaledToFit()
-                        .frame( width: .infinity, height: 24, alignment: .topLeading)
+                        .frame(height: 24, alignment: .topLeading)
                     
                     Spacer()
                 }.padding()
@@ -84,7 +84,7 @@ struct ContentView: View {
                         .padding()
                         .padding(.bottom, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 }).sheet(isPresented: $showSheetView, content: {
-                    DetailedView(pingNumberAveraged: pingNumberAveraged)
+                    DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: pingNumberAveraged)
                 })
             }
             

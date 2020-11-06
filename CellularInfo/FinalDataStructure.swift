@@ -23,8 +23,6 @@ struct FinalDataStructure {
         //self.Location = (record.object(forKey: "Location") as? CLLocation)?.coordinate
         if let location1 = record.object(forKey: "Location") as? CLLocation {
             self.Location = location1.coordinate
-            print(location1.coordinate)
-            print(Location)
         }
         self.MobileCarrier = record.object(forKey: "MobileCarrier") as! String
         self.RadioAccessTechnology = record.object(forKey: "RadioAccessTechnology") as! String
