@@ -14,13 +14,16 @@
 // Play with the pivot point and max alpha to affect the look of the heatmap
 
 // This number should be between 0 and 1
-static const CGFloat kSBAlphaPivotX = 0.333;
+//static const CGFloat kSBAlphaPivotX = 0.333;
+static const CGFloat kSBAlphaPivotX = 0.99999999999999;
 
 // This number should be between 0 and MAX_ALPHA
-static const CGFloat kSBAlphaPivotY = 0.5;
+//static const CGFloat kSBAlphaPivotY = 0.5;
+static const CGFloat kSBAlphaPivotY = 1;
 
 // This number should be between 0 and 1
-static const CGFloat kSBMaxAlpha = 0.85;
+//static const CGFloat kSBMaxAlpha = 0.85;
+static const CGFloat kSBMaxAlpha = 1;
 
 @interface DTMColorProvider : NSObject
 

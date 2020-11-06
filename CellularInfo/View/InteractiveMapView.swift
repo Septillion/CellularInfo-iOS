@@ -43,7 +43,7 @@ struct InteractiveMapView: UIViewRepresentable {
                 
                 for j in recievedData {
                     if j.Location != nil{
-                        let weight: Double = 1
+                        let weight: Double = j.AveragedPingLatency
                         let mapPoint = MKMapPoint(j.Location!)
                         let value = NSValue(mkMapPoint: mapPoint)
                         heatMapData[value] = NSNumber(value: weight)
@@ -61,7 +61,6 @@ struct InteractiveMapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         uiView.delegate = mapViewDelegate
-        //let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
         uiView.setUserTrackingMode(.follow, animated: true) 
     }
     

@@ -20,7 +20,6 @@ struct FinalDataStructure {
     mutating func populateWith(record: CKRecord){
         self.AveragedPingLatency = record.object(forKey: "AveragedPingLatency") as! Double
         self.DeviceName = record.object(forKey: "DeviceName") as! String
-        //self.Location = (record.object(forKey: "Location") as? CLLocation)?.coordinate
         if let location1 = record.object(forKey: "Location") as? CLLocation {
             self.Location = location1.coordinate
         }

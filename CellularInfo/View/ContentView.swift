@@ -15,7 +15,7 @@ struct ContentView: View {
     @State var pingNumberDouble : [Double] = []
     @State var pingNumberCurrent: Double = 0
     
-    let networkInfo = NetworkInformation()
+    let networkInfo = CellularAndWifiInformation()
     
     var body: some View {
         ZStack{

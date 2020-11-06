@@ -29,8 +29,11 @@
         *alpha = kSBAlphaPivotY + ((kSBMaxAlpha - kSBAlphaPivotY) / (1 - kSBAlphaPivotX)) * (value - kSBAlphaPivotX);
     }
     
+    
     //formula converts a number from 0 to 1.0 to an rgb color.
     //uses MATLAB/Octave colorbar code
+    
+    /* Original Code
     if (value <= 0) {
         *red = *green = *blue = *alpha = 0;
     } else if (value < 0.125) {
@@ -52,6 +55,19 @@
         *red = MAX(1 - 4 * (value - 0.875), 0.5);
         *green = *blue = 0;
     }
+    */
+    
+    //Modified by Septillion
+    if (value <= 0){
+        *red = *green = *blue = *alpha = 0;
+    } else if (0 < value < 1){
+        *red = *blue = 0;
+        *green = value;
+    } else {
+        *red = *blue = 0;
+        *green = 1.0;
+    }
+    //End Mod
     
     *alpha *= maxVal;
     *blue *= *alpha;

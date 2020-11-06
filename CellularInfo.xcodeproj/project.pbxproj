@@ -436,6 +436,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;
@@ -463,6 +464,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfoRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;

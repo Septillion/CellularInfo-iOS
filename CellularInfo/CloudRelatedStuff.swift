@@ -21,8 +21,6 @@ class CloudRelatedStuff {
             let publicDatabase = CKContainer(identifier: "iCloud.publicCellularInfo").publicCloudDatabase
             let query = CKQuery(recordType: "CellularInfo", predicate: NSPredicate(value: true))
             
-            //query.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
-            
             publicDatabase.perform(query, inZoneWith: CKRecordZone.default().zoneID, completionHandler: {(records, error) -> Void in
                 self.processQueryResponseWith(records: records, error: error as NSError?, completion: {fetchedRecords, FetchError in
                     completion(fetchedRecords, FetchError)
@@ -48,7 +46,6 @@ class CloudRelatedStuff {
             }
             
         }
-        
         
         private func processQueryResponseWith (records: [CKRecord]?, error: NSError?, completion: @escaping ([CKRecord]?, FetchError)->Void){
             guard error == nil else {

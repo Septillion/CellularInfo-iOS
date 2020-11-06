@@ -10,7 +10,7 @@
 #import "DTMColorProvider.h"
 
 // This sets the spread of the heat from each map point (in screen pts.)
-static const NSInteger kSBHeatRadiusInPoints = 48;
+static const NSInteger kSBHeatRadiusInPoints = 500;
 
 @interface DTMHeatmapRenderer ()
 @property (nonatomic, readonly) float *scaleMatrix;
@@ -111,6 +111,7 @@ static const NSInteger kSBHeatRadiusInPoints = 48;
                 }
             }
         }
+        
         
         CGFloat red, green, blue, alpha;
         uint indexOrigin;

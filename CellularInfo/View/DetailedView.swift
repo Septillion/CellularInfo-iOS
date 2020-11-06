@@ -13,7 +13,7 @@ struct DetailedView: View {
     @Binding var showSheetView: Bool
     var pingNumberAveraged : Double
     
-    let networkInfo = NetworkInformation()
+    let networkInfo = CellularAndWifiInformation()
     @State var alertMessage: String = "网络错误"
     @State var butttonMesssage: String = "同意并提交"
     @State var dataReadyForUpload: FinalDataStructure?

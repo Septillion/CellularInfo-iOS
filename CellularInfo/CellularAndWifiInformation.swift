@@ -10,7 +10,7 @@ import CoreTelephony
 import Network
 import SystemConfiguration.CaptiveNetwork
 
-final class NetworkInformation {
+final class CellularAndWifiInformation {
     
     var carrierName: String = ""
     var radioAccessTech: String = ""
