@@ -29,15 +29,6 @@ struct InteractiveMapView: UIViewRepresentable {
         mkv.setRegion(region, animated: true)
         mkv.showsUserLocation = true
         
-        return mkv
-    }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        uiView.delegate = mapViewDelegate
-        let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
-        
-        //uiView.setCenter(coordinate, animated: true)
-        
         var heatmap = DTMHeatmap()
         let manager = CloudRelatedStuff.CloudKitManager()
         manager.PullData(completion: {(records, error) in
@@ -63,10 +54,21 @@ struct InteractiveMapView: UIViewRepresentable {
                 }
                 
                 heatmap.setData(heatMapData as? [AnyHashable : Any])
-                uiView.addOverlay(heatmap)
+                mkv.addOverlay(heatmap)
                 
             }
         })
+        
+        return mkv
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        uiView.delegate = mapViewDelegate
+        let coordinate = locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
+        
+        //uiView.setCenter(coordinate, animated: true)
+        
+
         
     }
 

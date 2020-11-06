@@ -13,6 +13,7 @@ struct DetailedView: View {
     let networkInfo = NetworkInformation()
     var pingNumberAveraged : Double
     @State var dataReadyForUpload: FinalDataStructure?
+    @State var showAlert: Bool = false
     @ObservedObject var locationManager = LocationManager()
     
     var body: some View {
@@ -50,6 +51,8 @@ struct DetailedView: View {
                     .cornerRadius(16)
                     .foregroundColor(.white)
                     .font(.title)
+            }).alert(isPresented: $showAlert, content: {
+                Alert(title: Text("Alert"), message: Text("internet error or is on wifi"), dismissButton: .default(Text("Got it")))
             })
         }
         .padding()
@@ -57,8 +60,10 @@ struct DetailedView: View {
     }
     
     func uploadData() {
-        if (networkInfo.isWiFiConnected){
-            // TODO: Disable Upload
+        if (networkInfo.isWiFiConnected)||(networkInfo.carrierName=="")||(pingNumberAveraged == 0){
+            // Disable Upload
+            showAlert = true
+            return
         }
         self.dataReadyForUpload = FinalDataStructure(AveragedPingLatency: pingNumberAveraged, DeviceName: UIDevice().type.rawValue, Location: locationManager.lastLocation?.coordinate, MobileCarrier: networkInfo.carrierName, RadioAccessTechnology: networkInfo.radioAccessTech)
         let cloudKitmanager = CloudRelatedStuff.CloudKitManager()
