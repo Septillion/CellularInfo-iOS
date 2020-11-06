@@ -12,7 +12,7 @@ The app depends heavily on Apple's CloudKit service, therefore expect no Plug-n-
 
 However, it is welcome to copy snippets of code from this project and use them in your projects. This app wouldn't exist if it wasn't for the vibrant open source community that thankfully exists.
 
-Apart from the open-source libraries I used in this project, everything else is licensed under CC-BY 4.0, meaning you can do whatever you want with it.
+Apart from the open-source libraries I used in this project, everything else is licensed under CC-0 1.0, meaning you can do whatever you want with it.
 
 ## Special Thanks to these open-source projects and their developers
 
