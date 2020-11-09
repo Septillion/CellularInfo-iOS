@@ -42,9 +42,9 @@ struct InteractiveMapView: UIViewRepresentable {
                 }
                 
                 for j in recievedData {
-                    if j.Location != nil{
+                    if (j.Location.latitude != 0)&&(j.Location.longitude != 0){
                         let weight: Double = j.AveragedPingLatency
-                        let mapPoint = MKMapPoint(j.Location!)
+                        let mapPoint = MKMapPoint(j.Location)
                         let value = NSValue(mkMapPoint: mapPoint)
                         heatMapData[value] = NSNumber(value: weight)
                     }

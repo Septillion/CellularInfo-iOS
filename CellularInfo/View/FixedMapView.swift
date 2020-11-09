@@ -12,29 +12,29 @@ struct FixedMapView: UIViewRepresentable {
 
     //@ObservedObject var locationManager = LocationManager()
     
-    private var recievedData : FinalDataStructure?
-
-    
+    var coordinate: CLLocationCoordinate2D
+ 
     func makeUIView(context: Context) -> some MKMapView {
         let mkv = MKMapView(frame: .zero)
         
-        let coordinate = CLLocationCoordinate2D(latitude: 39.908743, longitude: 116.397573)
-        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-        mkv.setRegion(region, animated: true)
-        mkv.showsUserLocation = true
+        //let coordinate = coordinate
+        //let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+        //mkv.setRegion(region, animated: false)
+        //mkv.showsUserLocation = true
         mkv.isUserInteractionEnabled = false
         
         return mkv
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        uiView.setUserTrackingMode(.follow, animated: false)
+        //uiView.setUserTrackingMode(.follow, animated: false)
+        uiView.setRegion(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)), animated: false)
     }
     
 }
 
 struct FixedMapView_Previews: PreviewProvider {
     static var previews: some View {
-        FixedMapView()
+        FixedMapView(coordinate: CLLocationCoordinate2D(latitude: 34.322700, longitude: 108.552500))
     }
 }

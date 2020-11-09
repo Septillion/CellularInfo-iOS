@@ -25,28 +25,22 @@ struct DetailedView: View {
         
         NavigationView{
             VStack {
-                HStack {
-                    FixedMapView()
-                        .frame(width: 110, height: 110)
-                        .cornerRadius(8)
-                    
-                    VStack(alignment: .leading) {
-                        Text("机型：" + UIDevice().type.rawValue)
-                        Text("运营商：" + networkInfo.carrierName + " " + networkInfo.radioAccessTech)
-                        Text("平均延迟：\(Int(pingNumberAveraged))ms")
-                    }.padding()
-                    
-                    Spacer()
-                    
+                
+                List(){
+                    InfoCardView(finalData:FinalDataStructure(
+                                    AveragedPingLatency: pingNumberAveraged,
+                                    DeviceName: UIDevice().type.rawValue,
+                                    Location: locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                                    MobileCarrier: networkInfo.carrierName,
+                                    RadioAccessTechnology: networkInfo.radioAccessTech))
                 }
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(8)
                 
                 Spacer()
                 
                 Text("我们非常重视您的隐私，仅上述显示信息会被提交。本 app 基于 CloudKit 构建，我们不设任何中转服务器用于接受或处理信息。您可访问 github.com/Septillion 查阅原始代码。")
                     .frame( maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                     .font(.footnote)
+                    .padding()
                 
                 Button(action: {uploadData()}, label: {
                     Text(butttonMesssage)
@@ -58,9 +52,8 @@ struct DetailedView: View {
                         .font(.title)
                 }).alert(isPresented: $showAlert, content: {
                     Alert(title: Text("错误"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
-                })
+                }).padding()
             }
-            .padding()
             .navigationBarTitle(Text("即将提交"), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 print("取消提交")
@@ -102,7 +95,13 @@ struct DetailedView: View {
             return
         }
         
-        self.dataReadyForUpload = FinalDataStructure(AveragedPingLatency: pingNumberAveraged, DeviceName: UIDevice().type.rawValue, Location: locationManager.lastLocation?.coordinate, MobileCarrier: networkInfo.carrierName, RadioAccessTechnology: networkInfo.radioAccessTech)
+        self.dataReadyForUpload = FinalDataStructure(
+            AveragedPingLatency: pingNumberAveraged,
+            DeviceName: UIDevice().type.rawValue,
+            Location: locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            MobileCarrier: networkInfo.carrierName,
+            RadioAccessTechnology: networkInfo.radioAccessTech)
+        
         let cloudKitmanager = CloudRelatedStuff.CloudKitManager()
         cloudKitmanager.PushData(finalData: [dataReadyForUpload!], completionHandler: {_,_ in
             
