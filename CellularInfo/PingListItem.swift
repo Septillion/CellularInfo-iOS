@@ -65,6 +65,7 @@ class AGroupOfDomainsAndPings : ObservableObject {
     }
 }
 
+/*
 struct PingListItem: View {
     
     var DomainAndping: DomainAndPing
@@ -104,3 +105,4 @@ struct PingListItem_Previews: PreviewProvider {
             .previewLayout(.fixed(width: 414, height: 70))
     }
 }
+*/

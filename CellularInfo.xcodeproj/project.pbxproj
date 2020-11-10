@@ -152,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				6CD7C7C625503B8D003F7B42 /* ContentView.swift */,
-				6CAB8CC725592D3C0010BD81 /* PingListItem.swift */,
 				6C6341AF2559167800E98EA8 /* MainTabView.swift */,
 				6C6341AA2558E37F00E98EA8 /* InfoCardView.swift */,
 				6CD7C7E825510C96003F7B42 /* DetailedView.swift */,
@@ -188,6 +187,7 @@
 				6CD7C7C425503B8D003F7B42 /* SceneDelegate.swift */,
 				6CCFD2C9255558B0004F4F4B /* View */,
 				6CD7C7E525504349003F7B42 /* CellularAndWifiInformation.swift */,
+				6CAB8CC725592D3C0010BD81 /* PingListItem.swift */,
 				6C331B1C2553D7C300C88CAA /* FinalDataStructure.swift */,
 				6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */,
 				6CD7C7E225504249003F7B42 /* LocationManager.swift */,

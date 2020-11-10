@@ -20,7 +20,7 @@ struct InfoCardView: View {
             VStack(alignment: .leading) {
                 Text("机型：" + finalData.DeviceName)
                 Text("运营商：" + finalData.MobileCarrier + " " + finalData.RadioAccessTechnology)
-                Text("平均延迟：\(Int(finalData.AveragedPingLatency))ms")
+                Text("平均延迟：\(String(format: "%.1f", finalData.AveragedPingLatency))ms")
                 Spacer()
             }.padding()
             

@@ -10,7 +10,7 @@ import MapKit
 
 struct FixedMapView: UIViewRepresentable {
 
-    //@ObservedObject var locationManager = LocationManager()
+    @ObservedObject var locationManager = LocationManager()
     
     var coordinate: CLLocationCoordinate2D
  

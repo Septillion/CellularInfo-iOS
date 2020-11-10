@@ -11,10 +11,14 @@ import CoreLocation
 struct ContentView: View {
     
     @State var showSheetView = false
-    @State var pingNumberAveraged : Double = 0
+    //@State var pingNumberAveraged : Double = 0
     @State var pingNumberDouble : [Double] = []
-    @State var pingNumberCurrent: Double = 0
+    //@State var pingNumberCurrent: Double = 0
     @State var StartButtonEnabled : Bool = true
+    @State var SubmitButtonEnabled : Bool = false
+    @State var currentArrayIndex: Int = 0
+    @State var averagePing = DomainAndPing(id: 10086, domain: "平均", ping: 0)
+    let hapticsGenerator = UINotificationFeedbackGenerator()
     
     @ObservedObject var domainAndPing = AGroupOfDomainsAndPings()
     
@@ -24,12 +28,46 @@ struct ContentView: View {
         
         VStack{
             
-            List {
+            //Heaader
+            HStack {
                 VStack(alignment: .leading) {
                     Text(UIDevice().type.rawValue).font(.title)
                     Text("活跃：" + networkInfo.carrierName + " " + networkInfo.radioAccessTech)
                 }
-                
+                Spacer()
+                Button(action: {
+                    
+                    // Clear the View
+                    averagePing.setPing(ping: 0)
+                    for i in 0...(domainAndPing.count-1)
+                    {
+                        self.domainAndPing.daps[i].setPing(ping:0)
+                    }
+                    StartButtonEnabled = false
+                    SubmitButtonEnabled = false
+                    self.pingNext()
+                    
+                }, label: {
+                    HStack {
+                        Image(systemName:"play.fill")
+                        Text("Ping!")
+                    }
+                    .frame(minWidth: 80, maxWidth: 100, idealHeight: 48, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .padding()
+                    .background(Color.accentColor)
+                    .cornerRadius(16)
+                    .foregroundColor(.white)
+                    .font(.body)
+                })
+                .disabled(!StartButtonEnabled)
+
+            }
+            .padding()
+            .background(Color(.secondarySystemBackground))
+            
+            //List
+            List {
+     
                 ForEach(domainAndPing.daps){ mDomainAndPing in
                     //PingListItem(DomainAndping: mDomainAndPing)
                     HStack {
@@ -40,115 +78,66 @@ struct ContentView: View {
                         
                     }
                 }
+                
+                // Average Result at the Bottom
+                VStack {
+                    HStack {
+                        Text("平均").font(.headline)
+          
+                        //Submit Button
+                        HStack {
+                            Button(action: {
+                                self.showSheetView = true
+                            }, label: {
+                                HStack {
+                                    //Image(systemName: "square.and.arrow.up")
+                                    Text("提交此结果")
+                                }
+                                .foregroundColor(Color.accentColor)
+                                
+                            })
+                            .disabled(!SubmitButtonEnabled)
+                            .sheet(isPresented: $showSheetView, content: {
+                                DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: averagePing.ping)
+                            })
+                        }
+                        
+                        Spacer()
+                        
+                        Text(averagePing.latencyString)
+                            .foregroundColor(averagePing.latencyColor)
+                            .font(.headline)
+                    }
+                }
             }
             
             Spacer()
-            
-            VStack {
-                Group {
-                    
-                    Text("平均：\(Int(pingNumberAveraged))ms")
-                        .onAppear(perform: {
-                            
-                        })
-                }.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .topLeading)
-            }.padding(.horizontal)
-            
-            
-            Button(action: {
-                StartButtonEnabled = false
-                
-                // Clear the View
-                for i in 0...(domainAndPing.count-1)
-                {
-                    self.domainAndPing.daps[i].setPing(ping:0)
-                }
-                
-                
-                
-                /*
-                DispatchQueue.main.async {
-                    for i in 0...(domainAndPing.count-1)
-                    {
-                        var currentLatency : [Double] = []
-                        PlainPing.ping(domainAndPing.daps[i].domain, withTimeout: 10.0, completionBlock: { (timeElapsed:Double?, error:Error?) in
-                            if let latency = timeElapsed {
-                                print("latency (ms): \(latency)")
-                                currentLatency.append(latency)
-                                self.domainAndPing.daps[i].setPing(ping: latency )
-                            }
-                            if let error = error {
-                                print("error: \(error.localizedDescription)")
-                            }
-                        })
-                        usleep(500000)
-                    }
-                    StartButtonEnabled = true
-                }
-                 */
-                
-                /*
-                //Ping
-                OperationQueue().addOperation {
-                    for i in 0...(domainAndPing.count-1)
-                    {
-                        var currentLatency : [Double] = []
-                        OperationQueue.main.addOperation {
-                            
-                            StartButtonEnabled = false
-                            
-                            PlainPing.ping(domainAndPing.daps[i].domain, withTimeout: 10.0, completionBlock: { (timeElapsed:Double?, error:Error?) in
-                                if let latency = timeElapsed {
-                                    print("latency (ms): \(latency)")
-                                    currentLatency.append(latency)
-                                    self.domainAndPing.daps[i].setPing(ping: latency )
-                                }
-                                if let error = error {
-                                    print("error: \(error.localizedDescription)")
-                                }
-                            })
-                        }
-                        usleep(1000000)
-                        StartButtonEnabled = true
-                    }
-                }
-                 */
-                
-                self.pingNext()
-                
-            }, label: {
-                Text("开始测试")
-                    .frame(minWidth: 100, maxWidth: .infinity, idealHeight: 48, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .padding()
-                    .background(Color.accentColor)
-                    .cornerRadius(16)
-                    .foregroundColor(.white)
-                    .font(.title)
-                    .padding()
-                    .padding(.bottom, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-            })
-            .disabled(!StartButtonEnabled)
-            .sheet(isPresented: $showSheetView, content: {
-                DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: pingNumberAveraged)
-            })
         }
     }
     
     func pingNext() {
         
-        guard domainAndPing.daps.count > 0 else{
+        guard domainAndPing.daps.count > currentArrayIndex else{
+            currentArrayIndex = 0
+            StartButtonEnabled = true
+            SubmitButtonEnabled = true
+            averagePing.setPing(ping: (pingNumberDouble.reduce(0,+)/Double(pingNumberDouble.count)))
+            hapticsGenerator.notificationOccurred(.success)
             return
         }
         
-        let ping = domainAndPing.daps.removeFirst().domain
+        let ping = domainAndPing.daps[currentArrayIndex].domain
         PlainPing.ping(ping,withTimeout: 1.0, completionBlock: {
             (timeElapsed:Double?, error:Error?) in
                     if let latency = timeElapsed {
                         print("\(ping) latency (ms): \(latency)")
+                        self.domainAndPing.daps[currentArrayIndex].setPing(ping: latency)
+                        self.pingNumberDouble.append(latency)
                     }
                     if let error = error {
                         print("error: \(error.localizedDescription)")
                     }
+                    currentArrayIndex += 1
                     self.pingNext()
         })
     }
