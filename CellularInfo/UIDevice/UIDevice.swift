@@ -41,14 +41,14 @@ iPadMini4          = "iPad Mini 4",
 iPadMini5          = "iPad Mini 5",
 
 //iPad Pro
-iPadPro9_7         = "iPad Pro 9.7\"",
-iPadPro10_5        = "iPad Pro 10.5\"",
-iPadPro11          = "iPad Pro 11\"",
-iPadPro2_11        = "iPad Pro 11\" 2nd gen",
-iPadPro12_9        = "iPad Pro 12.9\"",
-iPadPro2_12_9      = "iPad Pro 2 12.9\"",
-iPadPro3_12_9      = "iPad Pro 3 12.9\"",
-iPadPro4_12_9      = "iPad Pro 4 12.9\"",
+iPadPro9_7         = "9.7 英寸 iPad Pro",
+iPadPro10_5        = "10.5 英寸 iPad Pro",
+iPadPro11          = "11 英寸 iPad Pro",
+iPadPro2_11        = "11 英寸 iPad Pro（第二代）",
+iPadPro12_9        = "12.9 英寸 iPad Pro",
+iPadPro2_12_9      = "12.9 英寸 iPad Pro（第二代）",
+iPadPro3_12_9      = "12.9 英寸 iPad Pro（第三代）",
+iPadPro4_12_9      = "12.9 英寸 iPad Pro（第四代）",
 
 //iPhone
 iPhone4            = "iPhone 4",

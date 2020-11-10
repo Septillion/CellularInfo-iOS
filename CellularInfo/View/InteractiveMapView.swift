@@ -11,7 +11,7 @@ import CoreLocation
 
 struct InteractiveMapView: UIViewRepresentable {
     
-    //@ObservedObject var locationManager = LocationManager()
+    @ObservedObject var locationManager = LocationManager()
     let mapViewDelegate = MapViewDelegate()
     
     

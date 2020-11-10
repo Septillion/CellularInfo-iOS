@@ -19,6 +19,7 @@ struct DetailedView: View {
     @State var dataReadyForUpload: FinalDataStructure?
     @State var showAlert: Bool = false
     @ObservedObject var locationManager = LocationManager()
+    var isTestDoneOnWifi : Bool
     let hapticsGenerator = UINotificationFeedbackGenerator()
     
     var body: some View {
@@ -68,7 +69,7 @@ struct DetailedView: View {
     
     func uploadData() {
         
-        if networkInfo.isWiFiConnected{
+        if isTestDoneOnWifi{
             self.alertMessage = "不可以上传基于 WiFi 的测试结果"
             hapticsGenerator.notificationOccurred(.warning)
             showAlert = true

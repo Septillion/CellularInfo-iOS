@@ -17,11 +17,11 @@ struct ContentView: View {
     @State var currentArrayIndex: Int = 0
     @State var averagePing = DomainAndPing(id: 10086, domain: "平均", ping: 0)
     @State var currentNetwork : String = ""
+    @State var pingButtonString = "Ping!"
+    @State var isTestDoneOnWifi: Bool = false
     let hapticsGenerator = UIImpactFeedbackGenerator()
     
     @ObservedObject var domainAndPing = AGroupOfDomainsAndPings()
-    
-    //let networkInfo = CellularAndWifiInformation()
     
     var body: some View {
         
@@ -37,15 +37,18 @@ struct ContentView: View {
                         })
                 }
                 Spacer()
+                
+                //Ping! Button
                 Button(action: {
-                    
                     // Clear the View
                     averagePing.setPing(ping: 0)
                     for i in 0...(domainAndPing.count-1)
                     {
                         self.domainAndPing.daps[i].setPing(ping:0)
                     }
+                    pingNumberDouble.removeAll()
                     StartButtonEnabled = false
+                    pingButtonString = "Pinging..."
                     SubmitButtonEnabled = false
                     getCurrentNetwork()
                     self.pingNext()
@@ -53,7 +56,7 @@ struct ContentView: View {
                 }, label: {
                     HStack {
                         Image(systemName:"play.fill")
-                        Text("Ping!")
+                        Text(pingButtonString)
                     }
                     .frame(minWidth: 80, maxWidth: 100, idealHeight: 48, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .padding()
@@ -78,7 +81,6 @@ struct ContentView: View {
                         Spacer()
                         Text(mDomainAndPing.latencyString)
                             .foregroundColor(mDomainAndPing.latencyColor)
-                        
                     }
                 }
                 
@@ -91,6 +93,7 @@ struct ContentView: View {
                         HStack {
                             Button(action: {
                                 self.showSheetView = true
+                                SubmitButtonEnabled = false
                             }, label: {
                                 HStack {
                                     //Image(systemName: "square.and.arrow.up")
@@ -101,7 +104,7 @@ struct ContentView: View {
                             })
                             .disabled(!SubmitButtonEnabled)
                             .sheet(isPresented: $showSheetView, content: {
-                                DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: averagePing.ping)
+                                DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: averagePing.ping, isTestDoneOnWifi: self.isTestDoneOnWifi)
                             })
                         }
                         
@@ -123,14 +126,19 @@ struct ContentView: View {
         guard domainAndPing.daps.count > currentArrayIndex else{
             currentArrayIndex = 0
             StartButtonEnabled = true
+            hapticsGenerator.impactOccurred()
+            pingButtonString = "Ping!"
+            if pingNumberDouble.count < domainAndPing.count {
+                averagePing.setPing(ping: 999999)
+                return
+            }  
             SubmitButtonEnabled = true
             averagePing.setPing(ping: (pingNumberDouble.reduce(0,+)/Double(pingNumberDouble.count)))
-            hapticsGenerator.impactOccurred()
             return
         }
         
         let ping = domainAndPing.daps[currentArrayIndex].domain
-        PlainPing.ping(ping,withTimeout: 1.0, completionBlock: {
+        PlainPing.ping(ping, withTimeout: 4.0, completionBlock: {
             (timeElapsed:Double?, error:Error?) in
                     if let latency = timeElapsed {
                         print("\(ping) latency (ms): \(latency)")
@@ -138,6 +146,8 @@ struct ContentView: View {
                         self.pingNumberDouble.append(latency)
                     }
                     if let error = error {
+                        self.domainAndPing.daps[currentArrayIndex].setPing(ping: 999999)
+                        //self.pingNumberDouble.append(999999)
                         print("error: \(error.localizedDescription)")
                     }
                     currentArrayIndex += 1
@@ -146,9 +156,13 @@ struct ContentView: View {
     }
     
     func getCurrentNetwork() {
+        
         let networkInfo = CellularAndWifiInformation()
         currentNetwork = networkInfo.carrierName + " " + networkInfo.radioAccessTech
+        isTestDoneOnWifi = false
+        
         if networkInfo.isWiFiConnected{
+            isTestDoneOnWifi = true
             currentNetwork = "WiFi: " + networkInfo.ssid!
         }
     }
