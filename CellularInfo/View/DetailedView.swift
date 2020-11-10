@@ -54,6 +54,7 @@ struct DetailedView: View {
                     Alert(title: Text("错误"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
                 }).padding()
             }
+            //.background(Color(.secondarySystemFill))
             .navigationBarTitle(Text("即将提交"), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 print("取消提交")
@@ -68,7 +69,7 @@ struct DetailedView: View {
     func uploadData() {
         
         if networkInfo.isWiFiConnected{
-            self.alertMessage = "已连接 Wi-Fi，请关闭后再试"
+            self.alertMessage = "不可以上传基于 WiFi 的测试结果"
             hapticsGenerator.notificationOccurred(.warning)
             showAlert = true
             return

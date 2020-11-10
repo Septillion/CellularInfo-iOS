@@ -30,7 +30,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>为准确显示您在地图上的位置，且确保提交的信息有效，我们需要获取您的位置</string>
+	<string>选择“允许”来查看您附近的信号状况。在提交测试结果时，我们也需要获取您的位置，来确保数据的有效性。</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -18,8 +18,7 @@ final class CellularAndWifiInformation {
     var ssid: String?
     
     init() {
-        
-        
+ 
         let monitorWiFi = NWPathMonitor(requiredInterfaceType: .wifi)
         monitorWiFi.pathUpdateHandler = {
             path in

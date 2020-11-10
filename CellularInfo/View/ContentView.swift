@@ -11,18 +11,17 @@ import CoreLocation
 struct ContentView: View {
     
     @State var showSheetView = false
-    //@State var pingNumberAveraged : Double = 0
     @State var pingNumberDouble : [Double] = []
-    //@State var pingNumberCurrent: Double = 0
     @State var StartButtonEnabled : Bool = true
     @State var SubmitButtonEnabled : Bool = false
     @State var currentArrayIndex: Int = 0
     @State var averagePing = DomainAndPing(id: 10086, domain: "平均", ping: 0)
-    let hapticsGenerator = UINotificationFeedbackGenerator()
+    @State var currentNetwork : String = ""
+    let hapticsGenerator = UIImpactFeedbackGenerator()
     
     @ObservedObject var domainAndPing = AGroupOfDomainsAndPings()
     
-    let networkInfo = CellularAndWifiInformation()
+    //let networkInfo = CellularAndWifiInformation()
     
     var body: some View {
         
@@ -32,7 +31,10 @@ struct ContentView: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(UIDevice().type.rawValue).font(.title)
-                    Text("活跃：" + networkInfo.carrierName + " " + networkInfo.radioAccessTech)
+                    Text(currentNetwork)
+                        .onAppear(perform: {
+                            getCurrentNetwork()
+                        })
                 }
                 Spacer()
                 Button(action: {
@@ -45,6 +47,7 @@ struct ContentView: View {
                     }
                     StartButtonEnabled = false
                     SubmitButtonEnabled = false
+                    getCurrentNetwork()
                     self.pingNext()
                     
                 }, label: {
@@ -122,7 +125,7 @@ struct ContentView: View {
             StartButtonEnabled = true
             SubmitButtonEnabled = true
             averagePing.setPing(ping: (pingNumberDouble.reduce(0,+)/Double(pingNumberDouble.count)))
-            hapticsGenerator.notificationOccurred(.success)
+            hapticsGenerator.impactOccurred()
             return
         }
         
@@ -140,6 +143,14 @@ struct ContentView: View {
                     currentArrayIndex += 1
                     self.pingNext()
         })
+    }
+    
+    func getCurrentNetwork() {
+        let networkInfo = CellularAndWifiInformation()
+        currentNetwork = networkInfo.carrierName + " " + networkInfo.radioAccessTech
+        if networkInfo.isWiFiConnected{
+            currentNetwork = "WiFi: " + networkInfo.ssid!
+        }
     }
 }
 

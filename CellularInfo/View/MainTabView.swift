@@ -26,11 +26,14 @@ struct MainTabView: View {
                         Text("浏览")
                     }
                 
+                /*
                 //Tab3
                 Text("About")
                     .tabItem {
                         Image(systemName: "questionmark.circle.fill")
                         Text("FAQ") }
+ 
+                 */
             }
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(leading:
