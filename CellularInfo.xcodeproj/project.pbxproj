@@ -37,6 +37,19 @@
 		6CD7C7E925510C96003F7B42 /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7E825510C96003F7B42 /* DetailedView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6C649F19255D23EA00C4423C /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		6C331AF62552D17A00C88CAA /* CellularInfo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CellularInfo-Bridging-Header.h"; sourceTree = "<group>"; };
 		6C331B092553CAD700C88CAA /* SimplePingAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePingAdapter.swift; sourceTree = "<group>"; };
@@ -222,6 +235,7 @@
 				6CD7C7BB25503B8D003F7B42 /* Sources */,
 				6CD7C7BC25503B8D003F7B42 /* Frameworks */,
 				6CD7C7BD25503B8D003F7B42 /* Resources */,
+				6C649F19255D23EA00C4423C /* Embed App Clips */,
 			);
 			buildRules = (
 			);
@@ -443,12 +457,13 @@
 		6CD7C7D425503B9C003F7B42 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;
@@ -471,12 +486,13 @@
 		6CD7C7D525503B9C003F7B42 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfoRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;

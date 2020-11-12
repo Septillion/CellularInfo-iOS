@@ -52,7 +52,7 @@ struct DetailedView: View {
                         .foregroundColor(.white)
                         .font(.title)
                 }).alert(isPresented: $showAlert, content: {
-                    Alert(title: Text("错误"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
+                    Alert(title: Text("请等一下！"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
                 }).padding()
             }
             //.background(Color(.secondarySystemFill))
@@ -70,14 +70,14 @@ struct DetailedView: View {
     func uploadData() {
         
         if isTestDoneOnWifi{
-            self.alertMessage = "不可以上传基于 WiFi 的测试结果"
+            self.alertMessage = "不可以上传基于 WiFi 的测试结果，我们只接受使用蜂窝网络进行的测试。"
             hapticsGenerator.notificationOccurred(.warning)
             showAlert = true
             return
         }
         
         if networkInfo.carrierName == "" {
-            self.alertMessage = "蜂窝网络未连接"
+            self.alertMessage = "蜂窝网络未连接，我们只接受使用蜂窝网络进行的测试。"
             hapticsGenerator.notificationOccurred(.warning)
             showAlert = true
             return
@@ -91,7 +91,7 @@ struct DetailedView: View {
         }
         
         if locationManager.lastLocation == nil {
-            self.alertMessage = "获取位置失败，请确认权限"
+            self.alertMessage = "获取位置失败，请确认权限。"
             hapticsGenerator.notificationOccurred(.warning)
             showAlert = true
             return
