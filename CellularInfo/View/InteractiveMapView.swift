@@ -17,6 +17,8 @@ struct InteractiveMapView: UIViewRepresentable {
     
     @State private var recievedData : [FinalDataStructure] = []
     @State private var heatMapData = NSMutableDictionary()
+    @State private var heatMapDataHighLatency = NSMutableDictionary()
+    @State private var heatMapDataLowLatency = NSMutableDictionary()
     
     
     func makeUIView(context: Context) -> some MKMapView {
@@ -26,7 +28,9 @@ struct InteractiveMapView: UIViewRepresentable {
         mkv.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 34.322700, longitude: 108.552500), span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)), animated: false)
         mkv.showsUserLocation = true
         
-        let heatmap = DTMHeatmap()
+        //let heatmap = DTMHeatmap()
+        let heatmap = DTMDiffHeatmap()
+        
         let manager = CloudRelatedStuff.CloudKitManager()
         manager.PullData(completion: {(records, error) in
             guard error == .none , let mRecords = records else{
@@ -46,22 +50,32 @@ struct InteractiveMapView: UIViewRepresentable {
                         let weight: Double = j.AveragedPingLatency
                         let mapPoint = MKMapPoint(j.Location)
                         let value = NSValue(mkMapPoint: mapPoint)
-                        heatMapData[value] = NSNumber(value: weight)
+                        
+                        //heatMapData[value] = NSNumber(value: weight)
+                        
+                        if weight < 100 { // MARK: Differentiating Point
+                            heatMapDataLowLatency[value] = NSNumber(value: weight)
+                        }else {
+                            heatMapDataHighLatency[value] = NSNumber(value: weight)
+                        }
                     }
                 }
                 
-                heatmap.setData(heatMapData as? [AnyHashable : Any])
+                //heatmap.setData(heatMapData as? [AnyHashable : Any])
+                heatmap.setBeforeData(heatMapDataLowLatency as? [AnyHashable : Any], afterData: heatMapDataHighLatency as? [AnyHashable : Any])
+                
                 mkv.addOverlay(heatmap)
                 
             }
         })
         
+        mkv.setUserTrackingMode(.follow, animated: true)
         return mkv
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         uiView.delegate = mapViewDelegate
-        uiView.setUserTrackingMode(.follow, animated: true) 
+        uiView.setUserTrackingMode(.follow, animated: true)
     }
     
 }

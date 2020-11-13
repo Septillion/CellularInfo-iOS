@@ -60,9 +60,14 @@
         if (point.y > lowerRightPoint.y) lowerRightPoint.y = point.y;
         
         double abs = ABS(value);
+        //MARK:  Modified by Septillion
+        /* Original Code
         if (abs > self.maxValue) {
             self.maxValue = abs;
         }
+        */
+        self.maxValue = 300;
+        //End Mod
         
         //bucket the map point:
         int col = point.x / (kSBMapKitPoints / kSBZoomZeroDimension);

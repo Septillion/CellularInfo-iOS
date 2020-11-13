@@ -9,3 +9,4 @@
 #import "DTMHeatmapRenderer.h"
 #import "DTMHeatmap.h"
 #import "NSValue+MKMapPoint.h"
+#import "DTMDiffHeatmap.h"
