@@ -54,7 +54,7 @@ struct InteractiveMapView: UIViewRepresentable {
                         
                         //heatMapData[value] = NSNumber(value: weight)
                         
-                        if weight < 100 { // MARK: Differentiating Point
+                        if weight < 150 { // MARK: Differentiating Point
                             heatMapDataLowLatency[value] = NSNumber(value: weight)
                         }else {
                             heatMapDataHighLatency[value] = NSNumber(value: weight)

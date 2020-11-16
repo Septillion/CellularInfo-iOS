@@ -124,6 +124,9 @@
         // Scale the value down by the max and add it to the return dictionary
         NSNumber *value = [self.pointsWithHeat objectForKey:key];
         double unscaled = [value doubleValue];
+        if (unscaled == 999999) {
+            unscaled = 300;
+        }
         double scaled = unscaled / scaleFactor;
         
         MKMapPoint bucketPoint;
