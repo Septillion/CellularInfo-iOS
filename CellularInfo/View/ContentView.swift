@@ -172,7 +172,7 @@ struct ContentView: View {
         
         //MARK: Ping
         let ping = domainAndPing.daps[currentArrayIndex].domain
-        PlainPing.ping(ping, withTimeout: 2.0, completionBlock: {
+        PlainPing.ping(ping, withTimeout: 4.0, completionBlock: {
             (timeElapsed:Double?, error:Error?) in
             if let latency = timeElapsed {
                 print("\(ping) latency (ms): \(latency)")

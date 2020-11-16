@@ -34,7 +34,7 @@ struct MainTabView: View {
                 InteractiveMapView()
                     .edgesIgnoringSafeArea(.all).navigationBarTitle("", displayMode: .inline)
                     .navigationBarItems(leading:
-                                            Image(                                                       "logo")
+                                            Image("logo")
                                             .resizable()
                                             .scaledToFit()
                                             .frame(height: 16, alignment: .topLeading))
@@ -43,7 +43,7 @@ struct MainTabView: View {
             .navigationViewStyle(StackNavigationViewStyle())
             .tabItem {
                 Image(systemName: "map.fill")
-                Text("浏览")
+                Text("热力图")
             }
             
             /*

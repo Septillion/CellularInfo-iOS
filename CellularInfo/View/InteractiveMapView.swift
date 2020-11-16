@@ -55,9 +55,11 @@ struct InteractiveMapView: UIViewRepresentable {
                         //heatMapData[value] = NSNumber(value: weight)
                         
                         if weight < 150 { // MARK: Differentiating Point
-                            heatMapDataLowLatency[value] = NSNumber(value: weight)
+                            heatMapDataLowLatency[value] = NSNumber(value: 1)
+                            //heatMapDataLowLatency[value] = NSNumber(value: weight)
                         }else {
-                            heatMapDataHighLatency[value] = NSNumber(value: weight)
+                            heatMapDataHighLatency[value] = NSNumber(value: 1)
+                            //heatMapDataHighLatency[value] = NSNumber(value: weight)
                         }
                     }
                 }
@@ -76,7 +78,7 @@ struct InteractiveMapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         uiView.delegate = mapViewDelegate
-        uiView.setUserTrackingMode(.follow, animated: true)
+        //uiView.setUserTrackingMode(.follow, animated: true)
     }
     
 }
