@@ -8,9 +8,11 @@
 import SwiftUI
 import CoreLocation
 
+//MARK: The first page of the app that handles the Ping! functionality.
 struct ContentView: View {
     
     @State var showSheetView = false
+    @State var showAlert: Bool = false
     @State var pingNumberDouble : [Double] = []
     @State var StartButtonEnabled : Bool = true
     @State var SubmitButtonEnabled : Bool = false
@@ -18,9 +20,13 @@ struct ContentView: View {
     @State var averagePing = DomainAndPing(id: 10086, domain: "平均", ping: 0)
     @State var currentNetwork : String = ""
     @State var pingButtonString = "Ping!"
+    @State var submitButtonString = ""
+    @State var alertMessage: String = ""
     @State var isTestDoneOnWifi: Bool = false
+    @State var isTestDoneOnVPN: Bool = false
     let hapticsGenerator = UISelectionFeedbackGenerator()
     let hapticsGeneratorHeavy = UIImpactFeedbackGenerator(style: .heavy)
+    let hapticsGeneratorNotifications = UINotificationFeedbackGenerator()
     
     @ObservedObject var domainAndPing = AGroupOfDomainsAndPings()
     
@@ -51,6 +57,7 @@ struct ContentView: View {
                     pingNumberDouble.removeAll()
                     StartButtonEnabled = false
                     pingButtonString = "Pinging..."
+                    self.submitButtonString = ""
                     SubmitButtonEnabled = false
                     getCurrentNetwork()
                     self.pingNext()
@@ -92,26 +99,44 @@ struct ContentView: View {
                     HStack {
                         Text("平均").font(.headline)
                         
+                        Spacer()
+                        
                         //Submit Button
                         HStack {
                             Button(action: {
+                                
+                                if isTestDoneOnWifi{
+                                    self.alertMessage = "不可以上传基于 WiFi 的测试结果，我们只接受使用蜂窝网络进行的测试。"
+                                    hapticsGeneratorNotifications.notificationOccurred(.warning)
+                                    showAlert = true
+                                    return
+                                }
+                                
+                                if isTestDoneOnVPN{
+                                    self.alertMessage = "不可以上传基于 VPN 的测试结果，此结果可能不准确。"
+                                    hapticsGeneratorNotifications.notificationOccurred(.warning)
+                                    showAlert = true
+                                    return
+                                }
+                                
                                 self.showSheetView = true
                                 SubmitButtonEnabled = false
                             }, label: {
                                 HStack {
                                     //Image(systemName: "square.and.arrow.up")
-                                    Text("提交此结果")
+                                    Text(self.submitButtonString)
                                 }
                                 .foregroundColor(Color.accentColor)
                                 
                             })
                             .disabled(!SubmitButtonEnabled)
                             .sheet(isPresented: $showSheetView, content: {
-                                DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: averagePing.ping, isTestDoneOnWifi: self.isTestDoneOnWifi)
+                                DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: averagePing.ping)
+                            })
+                            .alert(isPresented: $showAlert, content: {
+                                Alert(title: Text("请等一下！"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
                             })
                         }
-                        
-                        Spacer()
                         
                         Text(averagePing.latencyString)
                             .foregroundColor(averagePing.latencyColor)
@@ -133,10 +158,14 @@ struct ContentView: View {
             SubmitButtonEnabled = true
             hapticsGeneratorHeavy.impactOccurred(intensity: 100)
             pingButtonString = "Ping!"
+            
+            // if one of the pings didn't come through
             if pingNumberDouble.count < domainAndPing.count {
                 averagePing.setPing(ping: 999999)
                 return
-            }  
+            }
+            // Otherwise
+            self.submitButtonString = "提交此结果"
             averagePing.setPing(ping: (pingNumberDouble.reduce(0,+)/Double(pingNumberDouble.count)))
             return
         }
@@ -170,6 +199,13 @@ struct ContentView: View {
         if networkInfo.isWiFiConnected{
             isTestDoneOnWifi = true
             currentNetwork = "WiFi: " + networkInfo.ssid!
+        }
+        
+        if networkInfo.isConnectedToVpn {
+            isTestDoneOnVPN = true
+            currentNetwork = "已连接到 VPN"
+        }else {
+            isTestDoneOnVPN = false
         }
     }
 }

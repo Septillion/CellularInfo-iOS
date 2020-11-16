@@ -15,7 +15,7 @@ struct InfoCardView: View {
         HStack {
             FixedMapView(coordinate: finalData.Location)
                 .frame(width: 110, height: 110)
-                .cornerRadius(8)
+                .cornerRadius(16)
             
             VStack(alignment: .leading) {
                 Text("机型：" + finalData.DeviceName)

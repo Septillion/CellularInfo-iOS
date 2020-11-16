@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 import CoreLocation
 
+//MARK: Second page of the app that display a Map and a HeatMap overlay.
 struct InteractiveMapView: UIViewRepresentable {
     
     @ObservedObject var locationManager = LocationManager()

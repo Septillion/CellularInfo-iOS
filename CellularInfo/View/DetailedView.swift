@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 
+//MARK: The modal sheet that pops up when you hit the submit button
 struct DetailedView: View {
     
     @Binding var showSheetView: Bool
@@ -19,7 +20,7 @@ struct DetailedView: View {
     @State var dataReadyForUpload: FinalDataStructure?
     @State var showAlert: Bool = false
     @ObservedObject var locationManager = LocationManager()
-    var isTestDoneOnWifi : Bool
+    // var isTestDoneOnWifi : Bool
     let hapticsGenerator = UINotificationFeedbackGenerator()
     
     var body: some View {
@@ -27,14 +28,18 @@ struct DetailedView: View {
         NavigationView{
             VStack {
                 
-                List(){
-                    InfoCardView(finalData:FinalDataStructure(
-                                    AveragedPingLatency: pingNumberAveraged,
-                                    DeviceName: UIDevice().type.rawValue,
-                                    Location: locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                                    MobileCarrier: networkInfo.carrierName,
-                                    RadioAccessTechnology: networkInfo.radioAccessTech))
-                }
+                
+                InfoCardView(finalData:FinalDataStructure(
+                                AveragedPingLatency: pingNumberAveraged,
+                                DeviceName: UIDevice().type.rawValue,
+                                Location: locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                                MobileCarrier: networkInfo.carrierName,
+                                RadioAccessTechnology: networkInfo.radioAccessTech))
+                    .background(Color(.secondarySystemFill))
+                    .frame(height: 110, alignment: .leading)
+                    .cornerRadius(16)
+                    .padding()
+                
                 
                 Spacer()
                 
@@ -68,13 +73,6 @@ struct DetailedView: View {
     }
     
     func uploadData() {
-        
-        if isTestDoneOnWifi{
-            self.alertMessage = "不可以上传基于 WiFi 的测试结果，我们只接受使用蜂窝网络进行的测试。"
-            hapticsGenerator.notificationOccurred(.warning)
-            showAlert = true
-            return
-        }
         
         if networkInfo.carrierName == "" {
             self.alertMessage = "蜂窝网络未连接，我们只接受使用蜂窝网络进行的测试。"

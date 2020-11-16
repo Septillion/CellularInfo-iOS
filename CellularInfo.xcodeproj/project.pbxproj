@@ -252,7 +252,7 @@
 		6CD7C7B725503B8D003F7B42 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1210;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					6CD7C7BE25503B8D003F7B42 = {
@@ -463,7 +463,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;
@@ -492,7 +492,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfoRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;

@@ -16,18 +16,19 @@ final class CellularAndWifiInformation {
     var radioAccessTech: String = ""
     var isWiFiConnected: Bool = false
     var ssid: String?
-    
-    init() {
- 
-        let monitorWiFi = NWPathMonitor(requiredInterfaceType: .wifi)
-        monitorWiFi.pathUpdateHandler = {
-            path in
-            if path.status == .satisfied{
-                self.isWiFiConnected = true
-            }else{
-                self.isWiFiConnected = false
+    var isConnectedToVpn: Bool {
+        if let settings = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? Dictionary<String, Any>,
+            let scopes = settings["__SCOPED__"] as? [String:Any] {
+            for (key, _) in scopes {
+             if key.contains("tap") || key.contains("tun") || key.contains("ppp") || key.contains("ipsec") {
+                    return true
+                }
             }
         }
+        return false
+    }
+    
+    init() {
         getWiFiName()
         aqquireCellularCarrierAndRadioAccessTech()
     }
