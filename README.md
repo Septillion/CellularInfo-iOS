@@ -17,7 +17,10 @@ Apart from the open-source libraries I used in this project, everything else is 
 ## Special Thanks to these open-source projects and their developers
 
 dan-dunn for (DTMHeatMap)[https://github.com/dataminr/DTMHeatmap]
+
 seeppp for (PlainPing)[https://github.com/naptics/PlainPing]
+
 Alessandro Ornano for (UIDevice Extension)[https://stackoverflow.com/a/46234519]
+
 MLS for GCJ-02 Coordinate Transformation
 
