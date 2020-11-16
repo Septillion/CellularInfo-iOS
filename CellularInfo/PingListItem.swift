@@ -64,6 +64,6 @@ class AGroupOfDomainsAndPings : ObservableObject {
                      DomainAndPing(id: 9, domain: "dianping.com", ping: 0),
                      DomainAndPing(id: 10, domain: "zhihu.com", ping: 0),
                      DomainAndPing(id: 11, domain: "sogou.com", ping: 0),
-                     DomainAndPing(id: 12, domain: "sspai.com", ping: 0),]
+                     DomainAndPing(id: 12, domain: "pinduoduo.com", ping: 0),]
     }
 }
