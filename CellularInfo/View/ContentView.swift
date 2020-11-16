@@ -158,14 +158,13 @@ struct ContentView: View {
             SubmitButtonEnabled = true
             hapticsGeneratorHeavy.impactOccurred(intensity: 100)
             pingButtonString = "Ping!"
-            
+            self.submitButtonString = "提交此结果"
             // if one of the pings didn't come through
             if pingNumberDouble.count < domainAndPing.count {
                 averagePing.setPing(ping: 999999)
                 return
             }
             // Otherwise
-            self.submitButtonString = "提交此结果"
             averagePing.setPing(ping: (pingNumberDouble.reduce(0,+)/Double(pingNumberDouble.count)))
             return
         }
