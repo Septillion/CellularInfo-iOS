@@ -11,7 +11,7 @@ struct MainTabView: View {
     var body: some View {
         
         TabView{
-            //Tab 1
+            //MARK: - Tab 1
             NavigationView{
                 ContentView()
                     .navigationBarTitle("", displayMode: .inline)
@@ -29,16 +29,26 @@ struct MainTabView: View {
             }
             
             
-            //Tab 2
+            //MARK: - Tab 2
             NavigationView{
-                InteractiveMapView()
-                    .edgesIgnoringSafeArea(.all).navigationBarTitle("", displayMode: .inline)
-                    .navigationBarItems(leading:
-                                            Image("logo")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(height: 16, alignment: .topLeading))
-                
+                ZStack{
+                    InteractiveMapView()
+                        .edgesIgnoringSafeArea(.all).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarItems(leading:
+                                                Image("logo")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(height: 16, alignment: .topLeading))
+                    
+                    VStack {
+                        Spacer()
+                        Text("数据量较大，需要 3-5 分钟加载")
+                            .padding()
+                            .font(.caption)
+                        
+                        
+                    }
+                }
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .tabItem {
@@ -47,7 +57,7 @@ struct MainTabView: View {
             }
             
             /*
-             //Tab3
+             // MARK: - Tab3
              Text("About")
              .tabItem {
              Image(systemName: "questionmark.circle.fill")

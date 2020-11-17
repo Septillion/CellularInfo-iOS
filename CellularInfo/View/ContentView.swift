@@ -34,7 +34,7 @@ struct ContentView: View {
         
         VStack{
             
-            //Header
+            //MARK: - Header
             HStack {
                 VStack(alignment: .leading) {
                     Text(UIDevice().type.rawValue).font(.title)
@@ -45,7 +45,7 @@ struct ContentView: View {
                 }
                 Spacer()
                 
-                //MARK: Ping! Button
+                //MARK: - Ping! Button
                 Button(action: {
                     // Clear the View
                     averagePing.setPing(ping: 0)
@@ -81,7 +81,7 @@ struct ContentView: View {
             .padding()
             .background(Color(.secondarySystemBackground))
             
-            //List
+            //MARK: - List
             List {
                 
                 ForEach(domainAndPing.daps){ mDomainAndPing in
@@ -94,14 +94,14 @@ struct ContentView: View {
                     }
                 }
                 
-                // MARK: Average Result at the Bottom
+                // MARK: - Average Result at the Bottom
                 VStack {
                     HStack {
                         Text("平均").font(.headline)
                         
                         Spacer()
                         
-                        //Submit Button
+                        //MARK: - Submit Button
                         HStack {
                             Button(action: {
                                 
@@ -151,7 +151,7 @@ struct ContentView: View {
     
     func pingNext() {
         
-        //MARK: Final Work
+        //MARK: - Final Work
         guard domainAndPing.daps.count > currentArrayIndex else{
             currentArrayIndex = 0
             StartButtonEnabled = true
@@ -169,7 +169,7 @@ struct ContentView: View {
             return
         }
         
-        //MARK: Ping
+        //MARK: - Ping
         let ping = domainAndPing.daps[currentArrayIndex].domain
         PlainPing.ping(ping, withTimeout: 4.0, completionBlock: {
             (timeElapsed:Double?, error:Error?) in
@@ -189,6 +189,7 @@ struct ContentView: View {
         })
     }
     
+    //MARK: -
     func getCurrentNetwork() {
         
         let networkInfo = CellularAndWifiInformation()

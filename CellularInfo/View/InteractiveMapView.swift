@@ -32,45 +32,103 @@ struct InteractiveMapView: UIViewRepresentable {
         //let heatmap = DTMHeatmap()
         let heatmap = DTMDiffHeatmap()
         
+        // MARK: - Pull and Populate Heatmap
         let manager = CloudRelatedStuff.CloudKitManager()
-        manager.PullData(completion: {(records, error) in
-            guard error == .none , let mRecords = records else{
-                //deal with error
-                return
-            }
-            
-            DispatchQueue.main.async {
-                for i in mRecords {
-                    var data = FinalDataStructure()
-                    data.populateWith(record: i)
-                    self.recievedData.append(data)
-                }
-                
-                for j in recievedData {
-                    if (j.Location.latitude != 0)&&(j.Location.longitude != 0){
-                        let weight: Double = j.AveragedPingLatency
-                        let mapPoint = MKMapPoint(j.Location)
-                        let value = NSValue(mkMapPoint: mapPoint)
-                        
-                        //heatMapData[value] = NSNumber(value: weight)
-                        
-                        if weight < 150 { // MARK: Differentiating Point
-                            heatMapDataLowLatency[value] = NSNumber(value: 1)
-                            //heatMapDataLowLatency[value] = NSNumber(value: weight)
-                        }else {
-                            heatMapDataHighLatency[value] = NSNumber(value: 1)
-                            //heatMapDataHighLatency[value] = NSNumber(value: weight)
+        
+        // MARK: - Original Code
+        /*
+         manager.PullData(completion: {(records, error) in
+         guard error == .none , let mRecords = records else{
+         //deal with error
+         return
+         }
+         
+         // Convert data structure
+         DispatchQueue.main.async {
+         for i in mRecords {
+         var data = FinalDataStructure()
+         data.populateWith(record: i)
+         self.recievedData.append(data)
+         }
+         
+         // populate data
+         for j in recievedData {
+         if (j.Location.latitude != 0)&&(j.Location.longitude != 0){
+         let weight: Double = j.AveragedPingLatency
+         let mapPoint = MKMapPoint(j.Location)
+         let value = NSValue(mkMapPoint: mapPoint)
+         
+         //heatMapData[value] = NSNumber(value: weight)
+         
+         if weight < 150 { // MARK: Differentiating Point
+         heatMapDataLowLatency[value] = NSNumber(value: 1)
+         //heatMapDataLowLatency[value] = NSNumber(value: weight)
+         }else {
+         heatMapDataHighLatency[value] = NSNumber(value: 1)
+         //heatMapDataHighLatency[value] = NSNumber(value: weight)
+         }
+         }
+         }
+         
+         // Add to heatmap
+         //heatmap.setData(heatMapData as? [AnyHashable : Any])
+         heatmap.setBeforeData(heatMapDataLowLatency as? [AnyHashable : Any], afterData: heatMapDataHighLatency as? [AnyHashable : Any])
+         
+         mkv.addOverlay(heatmap)
+         
+         }
+         })
+         */
+        // MARK: - New Attempt
+        manager.cloudKitLoadRecords(){(records, error) -> Void in
+            if let error = error {
+                // do something
+                print(error)
+            } else {
+                if let mRecords = records {
+                    // do something
+                    
+                    
+                    DispatchQueue.main.async {
+                        for i in mRecords {
+                            var data = FinalDataStructure()
+                            data.populateWith(record: i)
+                            self.recievedData.append(data)
                         }
+                        
+                        // populate data
+                        for j in recievedData {
+                            if (j.Location.latitude != 0)&&(j.Location.longitude != 0){
+                                let weight: Double = j.AveragedPingLatency
+                                let mapPoint = MKMapPoint(j.Location)
+                                let value = NSValue(mkMapPoint: mapPoint)
+                                
+                                //heatMapData[value] = NSNumber(value: weight)
+                                
+                                if weight < 999998 { // MARK: Differentiating Point
+                                    heatMapDataLowLatency[value] = NSNumber(value: 1)
+                                    //heatMapDataLowLatency[value] = NSNumber(value: weight)
+                                }else {
+                                    heatMapDataHighLatency[value] = NSNumber(value: 1)
+                                    //heatMapDataHighLatency[value] = NSNumber(value: weight)
+                                }
+                            }
+                        }
+                        
+                        // Add to heatmap
+                        //heatmap.setData(heatMapData as? [AnyHashable : Any])
+                        heatmap.setBeforeData(heatMapDataLowLatency as? [AnyHashable : Any], afterData: heatMapDataHighLatency as? [AnyHashable : Any])
+                        
+                        mkv.addOverlay(heatmap)
+                        
                     }
+                    
+                    
+                } else {
+                    // do something
                 }
-                
-                //heatmap.setData(heatMapData as? [AnyHashable : Any])
-                heatmap.setBeforeData(heatMapDataLowLatency as? [AnyHashable : Any], afterData: heatMapDataHighLatency as? [AnyHashable : Any])
-                
-                mkv.addOverlay(heatmap)
-                
             }
-        })
+        }
         
         mkv.setUserTrackingMode(.follow, animated: true)
         return mkv

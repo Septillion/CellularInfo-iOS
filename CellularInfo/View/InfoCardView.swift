@@ -10,6 +10,8 @@ import SwiftUI
 struct InfoCardView: View {
     var finalData : FinalDataStructure
     
+    @State var averagePingString = ""
+    
     var body: some View {
         
         HStack {
@@ -20,7 +22,13 @@ struct InfoCardView: View {
             VStack(alignment: .leading) {
                 Text("机型：" + finalData.DeviceName)
                 Text("运营商：" + finalData.MobileCarrier + " " + finalData.RadioAccessTechnology)
-                Text("平均延迟：\(String(format: "%.1f", finalData.AveragedPingLatency))ms")
+                Text(self.averagePingString)
+                    .onAppear(perform: {
+                        self.averagePingString = "平均延迟：\(String(format: "%.1f", finalData.AveragedPingLatency))ms"
+                        if finalData.AveragedPingLatency == 999999 {
+                            self.averagePingString = "平均延迟：error"
+                        }
+                    })
                 Spacer()
             }.padding()
             

@@ -19,6 +19,7 @@ struct DetailedView: View {
     @State var butttonMesssage: String = "同意并提交"
     @State var dataReadyForUpload: FinalDataStructure?
     @State var showAlert: Bool = false
+    @State var isSubmitButtonEnabled : Bool = true
     @ObservedObject var locationManager = LocationManager()
     // var isTestDoneOnWifi : Bool
     let hapticsGenerator = UINotificationFeedbackGenerator()
@@ -58,7 +59,8 @@ struct DetailedView: View {
                         .font(.title)
                 }).alert(isPresented: $showAlert, content: {
                     Alert(title: Text("请等一下！"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
-                }).padding()
+                }).disabled(!isSubmitButtonEnabled)
+                .padding()
             }
             //.background(Color(.secondarySystemFill))
             .navigationBarTitle(Text("即将提交"), displayMode: .inline)
@@ -95,6 +97,9 @@ struct DetailedView: View {
             return
         }
         
+        self.butttonMesssage = "提交中"
+        self.isSubmitButtonEnabled = false
+        
         self.dataReadyForUpload = FinalDataStructure(
             AveragedPingLatency: pingNumberAveraged,
             DeviceName: UIDevice().type.rawValue,
@@ -107,6 +112,8 @@ struct DetailedView: View {
             
             hapticsGenerator.notificationOccurred(.success)
             self.showSheetView = false
+            self.isSubmitButtonEnabled = true
+            self.butttonMesssage = "同意并提交"
             return
         })
     }
