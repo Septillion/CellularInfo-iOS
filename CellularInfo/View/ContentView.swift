@@ -32,7 +32,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        VStack{
+        VStack (spacing: 0){
             
             //MARK: - Header
             HStack {
@@ -144,8 +144,6 @@ struct ContentView: View {
                     }
                 }
             }
-            
-            Spacer()
         }
     }
     

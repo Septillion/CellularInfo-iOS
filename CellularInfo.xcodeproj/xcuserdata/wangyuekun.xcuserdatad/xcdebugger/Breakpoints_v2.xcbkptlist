@@ -270,8 +270,8 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "PushData(finalData:completionHandler:)"
             landmarkType = "7">
             <Locations>
@@ -318,8 +318,8 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "PushData(finalData:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,8 +334,8 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "PushData(finalData:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -350,8 +350,8 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "PushData(finalData:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -366,8 +366,8 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "PushData(finalData:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -462,39 +462,39 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "PullData(completion:)"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "PullData(visibleMapRect:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "3DABC09C-80D3-467C-9A70-C4A54A395E8E - de69fb6d42e3fe78"
+                  uuid = "3DABC09C-80D3-467C-9A70-C4A54A395E8E - 8b1883ea6ec490fd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CellularInfo.CloudRelatedStuff.CloudKitManager.PullData(completion: (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; ()) -&gt; ()"
+                  symbolName = "CellularInfo.CloudRelatedStuff.CloudKitManager.PullData(visibleMapRect: __C.MKMapRect, completion: (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; ()) -&gt; ()"
                   moduleName = "CellularInfo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/CloudRelatedStuff.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "500">
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "868">
                </Location>
                <Location
-                  uuid = "3DABC09C-80D3-467C-9A70-C4A54A395E8E - 32f208dd018735a2"
+                  uuid = "3DABC09C-80D3-467C-9A70-C4A54A395E8E - 281eaa38d143505a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CellularInfo.CloudRelatedStuff.CloudKitManager.PullData(completion: (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CellularInfo.CloudRelatedStuff.CloudKitManager.PullData(visibleMapRect: __C.MKMapRect, completion: (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; ()) -&gt; ()"
                   moduleName = "CellularInfo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/CloudRelatedStuff.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
                   offsetFromSymbolStart = "60">
                </Location>
             </Locations>
@@ -510,39 +510,39 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "PullData(completion:)"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "PullData(visibleMapRect:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D404F565-E500-46F0-A20A-F165E18EE632 - 32f208dd018735a2"
+                  uuid = "D404F565-E500-46F0-A20A-F165E18EE632 - 281eaa38d143505a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CellularInfo.CloudRelatedStuff.CloudKitManager.PullData(completion: (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CellularInfo.CloudRelatedStuff.CloudKitManager.PullData(visibleMapRect: __C.MKMapRect, completion: (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; ()) -&gt; ()"
                   moduleName = "CellularInfo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/CloudRelatedStuff.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
                   offsetFromSymbolStart = "60">
                </Location>
                <Location
-                  uuid = "D404F565-E500-46F0-A20A-F165E18EE632 - e0e094c4641fba3f"
+                  uuid = "D404F565-E500-46F0-A20A-F165E18EE632 - db87ab20e89161f2"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; () in closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CellularInfo.CloudRelatedStuff.CloudKitManager.PullData(completion: (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; () in closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CellularInfo.CloudRelatedStuff.CloudKitManager.PullData(visibleMapRect: __C.MKMapRect, completion: (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; ()) -&gt; ()"
                   moduleName = "CellularInfo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/CloudRelatedStuff.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
                   offsetFromSymbolStart = "60">
                </Location>
             </Locations>
@@ -558,9 +558,9 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "PullData(completion:)"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "PullData(visibleMapRect:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -654,8 +654,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "pingNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -670,8 +670,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "pingNext()"
             landmarkType = "7">
             <Locations>
@@ -718,8 +718,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "pingNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -734,8 +734,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "pingNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -750,8 +750,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "pingNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -766,8 +766,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "pingNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -974,8 +974,8 @@
             filePath = "CellularInfo/View/InteractiveMapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "makeUIView(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -990,8 +990,8 @@
             filePath = "CellularInfo/View/InteractiveMapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "updateUIView(_:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1054,8 +1054,8 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "PushData(finalData:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1070,8 +1070,8 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "PushData(finalData:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1086,8 +1086,8 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "PushData(finalData:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1104,7 +1104,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "82"
             endingLineNumber = "82"
-            landmarkName = "PullData(completion:)"
+            landmarkName = "PullData(visibleMapRect:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1118,8 +1118,184 @@
             filePath = "CellularInfo/CloudRelatedStuff.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "processQueryResponseWith(records:error:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89966A7C-1A34-4AE5-B635-B81DCBCE36DE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CellularInfo/View/InteractiveMapView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "updateUIView(_:context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C6C82365-F4FA-4ECC-ABB0-6D1836281DEB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CellularInfo/View/InteractiveMapView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "updateUIView(_:context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C6C82365-F4FA-4ECC-ABB0-6D1836281DEB - e968411cbe9bba2f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CellularInfo.InteractiveMapView.updateUIView(_: &lt;&lt;opaque return type of CellularInfo.InteractiveMapView.makeUIView(context: SwiftUI.UIViewRepresentableContext&lt;CellularInfo.InteractiveMapView&gt;) -&gt; some&gt;&gt;.0, context: SwiftUI.UIViewRepresentableContext&lt;CellularInfo.InteractiveMapView&gt;) -&gt; ()"
+                  moduleName = "CellularInfo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/View/InteractiveMapView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "C6C82365-F4FA-4ECC-ABB0-6D1836281DEB - 16994f7a3323a6a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; () in CellularInfo.InteractiveMapView.updateUIView(_: &lt;&lt;opaque return type of CellularInfo.InteractiveMapView.makeUIView(context: SwiftUI.UIViewRepresentableContext&lt;CellularInfo.InteractiveMapView&gt;) -&gt; some&gt;&gt;.0, context: SwiftUI.UIViewRepresentableContext&lt;CellularInfo.InteractiveMapView&gt;) -&gt; ()"
+                  moduleName = "CellularInfo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/View/InteractiveMapView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "272">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E01CA3E8-3037-49BB-B99E-2D24A8BF0AAC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CellularInfo/View/InteractiveMapView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "updateUIView(_:context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E01CA3E8-3037-49BB-B99E-2D24A8BF0AAC - 16994f7a3323b30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; () in CellularInfo.InteractiveMapView.updateUIView(_: &lt;&lt;opaque return type of CellularInfo.InteractiveMapView.makeUIView(context: SwiftUI.UIViewRepresentableContext&lt;CellularInfo.InteractiveMapView&gt;) -&gt; some&gt;&gt;.0, context: SwiftUI.UIViewRepresentableContext&lt;CellularInfo.InteractiveMapView&gt;) -&gt; ()"
+                  moduleName = "CellularInfo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/View/InteractiveMapView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "348">
+               </Location>
+               <Location
+                  uuid = "E01CA3E8-3037-49BB-B99E-2D24A8BF0AAC - bbe68b3384219262"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CKRecord&gt;&gt;, CellularInfo.CloudRelatedStuff.FetchError) -&gt; () in CellularInfo.InteractiveMapView.updateUIView(_: &lt;&lt;opaque return type of CellularInfo.InteractiveMapView.makeUIView(context: SwiftUI.UIViewRepresentableContext&lt;CellularInfo.InteractiveMapView&gt;) -&gt; some&gt;&gt;.0, context: SwiftUI.UIViewRepresentableContext&lt;CellularInfo.InteractiveMapView&gt;) -&gt; ()"
+                  moduleName = "CellularInfo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/View/InteractiveMapView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
+                  offsetFromSymbolStart = "204">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B7E8E70C-690E-403C-8622-C4C90ECA22C5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CellularInfo/CloudRelatedStuff.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "PullData(visibleMapRect:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEB5DF4F-6A3B-462C-8B52-443943978099"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CellularInfo/CloudRelatedStuff.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "processQueryResponseWith(records:error:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7BAE153D-5A10-44C4-96B3-A7B3B2894CD3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CellularInfo/CloudRelatedStuff.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "processQueryResponseWith(records:error:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BA53E26D-11D8-4A0C-B9DA-461E9A4A56E1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CellularInfo/CloudRelatedStuff.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "processQueryResponseWith(records:error:completion:)"
             landmarkType = "7">
          </BreakpointContent>

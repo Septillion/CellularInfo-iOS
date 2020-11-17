@@ -36,7 +36,7 @@ struct DetailedView: View {
                                 Location: locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
                                 MobileCarrier: networkInfo.carrierName,
                                 RadioAccessTechnology: networkInfo.radioAccessTech))
-                    .background(Color(.secondarySystemFill))
+                    .background(Color(.secondarySystemBackground))
                     .frame(height: 110, alignment: .leading)
                     .cornerRadius(16)
                     .padding()

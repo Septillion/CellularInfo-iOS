@@ -21,16 +21,17 @@ struct InteractiveMapView: UIViewRepresentable {
     @State private var heatMapDataHighLatency = NSMutableDictionary()
     @State private var heatMapDataLowLatency = NSMutableDictionary()
     
+    //let heatmap = DTMHeatmap()
+    let heatmap = DTMDiffHeatmap()
     
     func makeUIView(context: Context) -> some MKMapView {
+        
         let mkv = MKMapView(frame: .zero)
         
         // Set a Starting Point
         mkv.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 34.322700, longitude: 108.552500), span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)), animated: false)
         mkv.showsUserLocation = true
-        
-        //let heatmap = DTMHeatmap()
-        let heatmap = DTMDiffHeatmap()
+        mkv.setUserTrackingMode(.follow, animated: true)
         
         // MARK: - Pull and Populate Heatmap
         let manager = CloudRelatedStuff.CloudKitManager()
@@ -79,64 +80,116 @@ struct InteractiveMapView: UIViewRepresentable {
          }
          })
          */
-        // MARK: - New Attempt
-        manager.cloudKitLoadRecords(){(records, error) -> Void in
-            if let error = error {
-                // do something
-                print(error)
-            } else {
-                if let mRecords = records {
-                    // do something
-                    
-                    
-                    DispatchQueue.main.async {
-                        for i in mRecords {
-                            var data = FinalDataStructure()
-                            data.populateWith(record: i)
-                            self.recievedData.append(data)
-                        }
-                        
-                        // populate data
-                        for j in recievedData {
-                            if (j.Location.latitude != 0)&&(j.Location.longitude != 0){
-                                let weight: Double = j.AveragedPingLatency
-                                let mapPoint = MKMapPoint(j.Location)
-                                let value = NSValue(mkMapPoint: mapPoint)
-                                
-                                //heatMapData[value] = NSNumber(value: weight)
-                                
-                                if weight < 999998 { // MARK: Differentiating Point
-                                    heatMapDataLowLatency[value] = NSNumber(value: 1)
-                                    //heatMapDataLowLatency[value] = NSNumber(value: weight)
-                                }else {
-                                    heatMapDataHighLatency[value] = NSNumber(value: 1)
-                                    //heatMapDataHighLatency[value] = NSNumber(value: weight)
-                                }
-                            }
-                        }
-                        
-                        // Add to heatmap
-                        //heatmap.setData(heatMapData as? [AnyHashable : Any])
-                        heatmap.setBeforeData(heatMapDataLowLatency as? [AnyHashable : Any], afterData: heatMapDataHighLatency as? [AnyHashable : Any])
-                        
-                        mkv.addOverlay(heatmap)
-                        
-                    }
-                    
-                    
-                } else {
-                    // do something
-                }
-            }
-        }
+        // MARK: - Second Attempt
+        /*
+         manager.PullEverythingFromTheCloud(){(records, error) -> Void in
+         if let error = error {
+         // do something
+         print(error)
+         } else {
+         if let mRecords = records {
+         // do something
+         
+         
+         DispatchQueue.main.async {
+         for i in mRecords {
+         var data = FinalDataStructure()
+         data.populateWith(record: i)
+         self.recievedData.append(data)
+         }
+         
+         // populate data
+         for j in recievedData {
+         if (j.Location.latitude != 0)&&(j.Location.longitude != 0){
+         let weight: Double = j.AveragedPingLatency
+         let mapPoint = MKMapPoint(j.Location)
+         let value = NSValue(mkMapPoint: mapPoint)
+         
+         //heatMapData[value] = NSNumber(value: weight)
+         
+         if weight < 999998 { // MARK: Differentiating Point
+         heatMapDataLowLatency[value] = NSNumber(value: 1)
+         //heatMapDataLowLatency[value] = NSNumber(value: weight)
+         }else {
+         heatMapDataHighLatency[value] = NSNumber(value: 1)
+         //heatMapDataHighLatency[value] = NSNumber(value: weight)
+         }
+         }
+         }
+         
+         // Add to heatmap
+         //heatmap.setData(heatMapData as? [AnyHashable : Any])
+         heatmap.setBeforeData(heatMapDataLowLatency as? [AnyHashable : Any], afterData: heatMapDataHighLatency as? [AnyHashable : Any])
+         
+         mkv.addOverlay(heatmap)
+         
+         }
+         
+         
+         } else {
+         // do something
+         }
+         }
+         }
+         */
         
-        mkv.setUserTrackingMode(.follow, animated: true)
+        
+        
+        
+        
+        
         return mkv
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         uiView.delegate = mapViewDelegate
         //uiView.setUserTrackingMode(.follow, animated: true)
+        
+        // MARK: - Third Attempt
+        
+        let manager = CloudRelatedStuff.CloudKitManager()
+        manager.PullData(visibleMapRect: uiView.visibleMapRect, completion: {(records, error) in
+            guard error == .none , let mRecords = records else{
+                //deal with error
+                return
+            }
+            
+            // Convert data structure
+            DispatchQueue.main.async {
+                for i in mRecords {
+                    var data = FinalDataStructure()
+                    data.populateWith(record: i)
+                    self.recievedData.append(data)
+                }
+                
+                // populate data
+                for j in recievedData {
+                    if (j.Location.latitude != 0)&&(j.Location.longitude != 0){
+                        let weight: Double = j.AveragedPingLatency
+                        let mapPoint = MKMapPoint(j.Location)
+                        let value = NSValue(mkMapPoint: mapPoint)
+                        
+                        //heatMapData[value] = NSNumber(value: weight)
+                        
+                        if weight < 150 { // MARK: Differentiating Point
+                            heatMapDataLowLatency[value] = NSNumber(value: 1)
+                            //heatMapDataLowLatency[value] = NSNumber(value: weight)
+                        }else {
+                            heatMapDataHighLatency[value] = NSNumber(value: 1)
+                            //heatMapDataHighLatency[value] = NSNumber(value: weight)
+                        }
+                    }
+                }
+                
+                // Add to heatmap
+                //heatmap.setData(heatMapData as? [AnyHashable : Any])
+                heatmap.setBeforeData(heatMapDataLowLatency as? [AnyHashable : Any], afterData: heatMapDataHighLatency as? [AnyHashable : Any])
+                
+                uiView.addOverlay(heatmap)
+                
+            }
+        })
+        
     }
     
 }

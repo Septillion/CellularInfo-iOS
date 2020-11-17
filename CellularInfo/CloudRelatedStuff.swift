@@ -17,7 +17,7 @@ class CloudRelatedStuff {
     
     struct CloudKitManager {
         
-        func cloudKitLoadRecords(result: @escaping (_ objects: [CKRecord]?, _ error: Error?) -> Void) {
+        func PullEverythingFromTheCloud(result: @escaping (_ objects: [CKRecord]?, _ error: Error?) -> Void) {
             // predicate
             let predicate = NSPredicate(value: true)
             // query
@@ -34,20 +34,20 @@ class CloudRelatedStuff {
             func recurrentOperations(cursor: CKQueryOperation.Cursor?){
                 let recurrentOperation = CKQueryOperation(cursor: cursor!)
                 recurrentOperation.recordFetchedBlock = { (record:CKRecord!) -> Void in
-                    print("-> cloudKitLoadRecords - recurrentOperations - fetch \(recurrentOperationsCounter)")
+                    print("-> PullEverythingFromTheCloud - recurrentOperations - fetch \(recurrentOperationsCounter)")
                     recurrentOperationsCounter += 1
                     records.append(record)
                 }
                 recurrentOperation.queryCompletionBlock = { (cursor: CKQueryOperation.Cursor?, error: Error?) -> Void in
                     if ((error) != nil) {
-                        print("-> cloudKitLoadRecords - recurrentOperations - error - \(String(describing: error))")
+                        print("-> PullEverythingFromTheCloud - recurrentOperations - error - \(String(describing: error))")
                         result(nil, error)
                     } else {
                         if cursor != nil {
-                            print("-> cloudKitLoadRecords - recurrentOperations - records \(records.count) - cursor \(cursor!.description)")
+                            print("-> PullEverythingFromTheCloud - recurrentOperations - records \(records.count) - cursor \(cursor!.description)")
                             recurrentOperations(cursor: cursor!)
                         } else {
-                            print("-> cloudKitLoadRecords - recurrentOperations - records \(records.count) - cursor nil - done")
+                            print("-> PullEverythingFromTheCloud - recurrentOperations - records \(records.count) - cursor nil - done")
                             result(records, nil)
                         }
                     }
@@ -58,20 +58,20 @@ class CloudRelatedStuff {
             var initialOperationCounter = 1
             let initialOperation = CKQueryOperation(query: cloudKitQuery)
             initialOperation.recordFetchedBlock = { (record:CKRecord!) -> Void in
-                print("-> cloudKitLoadRecords - initialOperation - fetch \(initialOperationCounter)")
+                print("-> PullEverythingFromTheCloud - initialOperation - fetch \(initialOperationCounter)")
                 initialOperationCounter += 1
                 records.append(record)
             }
             initialOperation.queryCompletionBlock = { (cursor: CKQueryOperation.Cursor?, error: Error?) -> Void in
                 if ((error) != nil) {
-                    print("-> cloudKitLoadRecords - initialOperation - error - \(String(describing: error))")
+                    print("-> PullEverythingFromTheCloud - initialOperation - error - \(String(describing: error))")
                     result(nil, error)
                 } else {
                     if cursor != nil {
-                        print("-> cloudKitLoadRecords - initialOperation - records \(records.count) - cursor \(cursor!.description)")
+                        print("-> PullEverythingFromTheCloud - initialOperation - records \(records.count) - cursor \(cursor!.description)")
                         recurrentOperations(cursor: cursor!)
                     } else {
-                        print("-> cloudKitLoadRecords - initialOperation - records \(records.count) - cursor nil - done")
+                        print("-> PullEverythingFromTheCloud - initialOperation - records \(records.count) - cursor nil - done")
                         result(records, nil)
                     }
                 }
@@ -79,9 +79,24 @@ class CloudRelatedStuff {
             publicDatabase.add(initialOperation)
         }
         
-        func PullData(completion: @escaping ([CKRecord]?, FetchError) -> Void){
+        func PullData(visibleMapRect: MKMapRect, completion: @escaping ([CKRecord]?, FetchError) -> Void){
+            
+            //Calculate the Center and Diagnal Length of the MapRect
+            let mapCenter = visibleMapRect.origin.coordinate
+            let centerLocation = CLLocation(latitude: mapCenter.latitude, longitude: mapCenter.longitude)
+        
+            //Pythagorean theorem
+            let x: CGFloat = CGFloat(visibleMapRect.width)
+            let y: CGFloat = CGFloat(visibleMapRect.height)
+            let radius : CGFloat = sqrt((x * x) + (y * y))
+            //let radius = 100000
+            
+            let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(Location, %@) < %f", centerLocation, radius)
+            //let predicate = NSPredicate(value: true)
+            
+            
             let publicDatabase = CKContainer(identifier: "iCloud.publicCellularInfo").publicCloudDatabase
-            let query = CKQuery(recordType: "CellularInfo", predicate: NSPredicate(value: true))
+            let query = CKQuery(recordType: "CellularInfo", predicate: predicate)
 
             publicDatabase.perform(query, inZoneWith: CKRecordZone.default().zoneID, completionHandler: {(records, error) -> Void in
                 self.processQueryResponseWith(records: records, error: error as NSError?, completion: {fetchedRecords, FetchError in
@@ -111,6 +126,7 @@ class CloudRelatedStuff {
         
         private func processQueryResponseWith (records: [CKRecord]?, error: NSError?, completion: @escaping ([CKRecord]?, FetchError)->Void){
             guard error == nil else {
+                print(error)
                 completion(nil, .fetchingError)
                 return
             }
