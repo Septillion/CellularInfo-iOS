@@ -10,12 +10,15 @@ import Foundation
 import CloudKit
 
 class CloudRelatedStuff {
+
     
     enum FetchError {
         case fetchingError, noRecords, none, addingError
     }
     
     struct CloudKitManager {
+        
+        //private var lastMapRect: MKMapRect = MKMapRect(origin: MKMapPoint(x: 1, y: 1), size: MKMapSize(width: 1, height: 1))
         
         func PullEverythingFromTheCloud(result: @escaping (_ objects: [CKRecord]?, _ error: Error?) -> Void) {
             // predicate
@@ -80,6 +83,8 @@ class CloudRelatedStuff {
         }
         
         func PullData(visibleMapRect: MKMapRect, completion: @escaping ([CKRecord]?, FetchError) -> Void){
+            
+            //updateLastMapRect(currentMapRect: visibleMapRect)
             
             //Calculate the Center and Diagnal Length of the MapRect
             let mapCenter = visibleMapRect.origin.coordinate

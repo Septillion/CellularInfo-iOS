@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CoreLocation
+//import CoreLocation
 
 //MARK: The first page of the app that handles the Ping! functionality.
 struct ContentView: View {
@@ -105,19 +105,20 @@ struct ContentView: View {
                         HStack {
                             Button(action: {
                                 
-                                if isTestDoneOnWifi{
-                                    self.alertMessage = "不可以上传基于 WiFi 的测试结果，我们只接受使用蜂窝网络进行的测试。"
-                                    hapticsGeneratorNotifications.notificationOccurred(.warning)
-                                    showAlert = true
-                                    return
-                                }
-                                
                                 if isTestDoneOnVPN{
                                     self.alertMessage = "不可以上传基于 VPN 的测试结果，此结果可能不准确。"
                                     hapticsGeneratorNotifications.notificationOccurred(.warning)
                                     showAlert = true
                                     return
                                 }
+                                
+                                if isTestDoneOnWifi{
+                                    self.alertMessage = "不可以上传基于 WiFi 的测试结果，我们只接受使用蜂窝网络进行的测试。"
+                                    hapticsGeneratorNotifications.notificationOccurred(.warning)
+                                    showAlert = true
+                                    return
+                                }
+
                                 
                                 self.showSheetView = true
                                 SubmitButtonEnabled = false

@@ -42,7 +42,7 @@ struct MainTabView: View {
                     
                     VStack {
                         Spacer()
-                        Text("数据量较大，需要 3-5 分钟加载")
+                        Text("数据渐进式加载")
                             .padding()
                             .font(.caption)
                         

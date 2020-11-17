@@ -31,6 +31,7 @@ struct InteractiveMapView: UIViewRepresentable {
         // Set a Starting Point
         mkv.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 34.322700, longitude: 108.552500), span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)), animated: false)
         mkv.showsUserLocation = true
+        mkv.showsScale = true
         mkv.setUserTrackingMode(.follow, animated: true)
         
         // MARK: - Pull and Populate Heatmap
@@ -133,11 +134,7 @@ struct InteractiveMapView: UIViewRepresentable {
          }
          */
         
-        
-        
-        
-        
-        
+   
         return mkv
     }
     
@@ -186,6 +183,7 @@ struct InteractiveMapView: UIViewRepresentable {
                 heatmap.setBeforeData(heatMapDataLowLatency as? [AnyHashable : Any], afterData: heatMapDataHighLatency as? [AnyHashable : Any])
                 
                 uiView.addOverlay(heatmap)
+                print("InteractiveMapView: New Data Points Added")
                 
             }
         })

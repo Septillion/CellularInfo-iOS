@@ -51,6 +51,10 @@ class LocationManager: NSObject, ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
     
     private let locationsManager = CLLocationManager()
+    
+    func stopUpdating() {
+        self.locationsManager.stopUpdatingLocation()
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {

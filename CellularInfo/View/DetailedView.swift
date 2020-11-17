@@ -114,6 +114,7 @@ struct DetailedView: View {
             self.showSheetView = false
             self.isSubmitButtonEnabled = true
             self.butttonMesssage = "同意并提交"
+            //locationManager.stopUpdating()
             return
         })
     }
