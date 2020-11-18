@@ -42,7 +42,7 @@ struct MainTabView: View {
                     
                     VStack {
                         Spacer()
-                        Text("数据渐进式加载")
+                        Text("根据查看范围，数据渐进式加载")
                             .padding()
                             .font(.caption)
                         
@@ -56,14 +56,27 @@ struct MainTabView: View {
                 Text("热力图")
             }
             
-            /*
-             // MARK: - Tab3
-             Text("About")
-             .tabItem {
-             Image(systemName: "questionmark.circle.fill")
-             Text("FAQ") }
-             
-             */
+            
+            // MARK: - Tab3
+            
+            NavigationView{
+                InsightView()
+                    .navigationBarTitle("", displayMode: .inline)
+                    .navigationBarItems(leading:
+                                            Image("logo")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(height: 16, alignment: .topLeading))
+                
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .tabItem {
+                Image(systemName: "chart.bar.fill")
+                Text("解读")
+                
+            }
+           
+            //MARK: - End of TabView
         }
         
     }

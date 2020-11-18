@@ -15,6 +15,7 @@
 		6C331B1D2553D7C300C88CAA /* FinalDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B1C2553D7C300C88CAA /* FinalDataStructure.swift */; };
 		6C6341AB2558E37F00E98EA8 /* InfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6341AA2558E37F00E98EA8 /* InfoCardView.swift */; };
 		6C6341B02559167800E98EA8 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6341AF2559167800E98EA8 /* MainTabView.swift */; };
+		6C77A7492564E3B10078100B /* InsightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C77A7482564E3B10078100B /* InsightView.swift */; };
 		6CAB8CC825592D3C0010BD81 /* PingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB8CC725592D3C0010BD81 /* PingListItem.swift */; };
 		6CCFD1A52553DD89004F4F4B /* CloudRelatedStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */; };
 		6CCFD1B025542BE0004F4F4B /* CoordinateTransformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCFD1AF25542BE0004F4F4B /* CoordinateTransformation.m */; };
@@ -61,6 +62,7 @@
 		6C331B1C2553D7C300C88CAA /* FinalDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalDataStructure.swift; sourceTree = "<group>"; };
 		6C6341AA2558E37F00E98EA8 /* InfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCardView.swift; sourceTree = "<group>"; };
 		6C6341AF2559167800E98EA8 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		6C77A7482564E3B10078100B /* InsightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightView.swift; sourceTree = "<group>"; };
 		6CAB8CC725592D3C0010BD81 /* PingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingListItem.swift; sourceTree = "<group>"; };
 		6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudRelatedStuff.swift; sourceTree = "<group>"; };
 		6CCFD1AE25542B96004F4F4B /* CoordinateTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoordinateTransformation.h; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				6CD7C7C625503B8D003F7B42 /* ContentView.swift */,
+				6C77A7482564E3B10078100B /* InsightView.swift */,
 				6C6341AF2559167800E98EA8 /* MainTabView.swift */,
 				6C6341AA2558E37F00E98EA8 /* InfoCardView.swift */,
 				6CD7C7E825510C96003F7B42 /* DetailedView.swift */,
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CCFD24725543B62004F4F4B /* DTMHeatmap.m in Sources */,
+				6C77A7492564E3B10078100B /* InsightView.swift in Sources */,
 				6C331B0E2553CAD700C88CAA /* PlainPing.swift in Sources */,
 				6C331B0D2553CAD700C88CAA /* SimplePingAdapter.swift in Sources */,
 				6CD7C7DD2550422E003F7B42 /* UIDevice.swift in Sources */,
@@ -463,7 +467,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;
@@ -492,7 +496,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfoRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;

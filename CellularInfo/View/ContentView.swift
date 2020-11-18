@@ -60,7 +60,10 @@ struct ContentView: View {
                     self.submitButtonString = ""
                     SubmitButtonEnabled = false
                     getCurrentNetwork()
+                    
                     self.pingNext()
+                    
+                    
                     
                 }, label: {
                     HStack {

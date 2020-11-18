@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 class CloudRelatedStuff {
-
+    
     
     enum FetchError {
         case fetchingError, noRecords, none, addingError
@@ -18,20 +18,20 @@ class CloudRelatedStuff {
     
     struct CloudKitManager {
         
-        //private var lastMapRect: MKMapRect = MKMapRect(origin: MKMapPoint(x: 1, y: 1), size: MKMapSize(width: 1, height: 1))
-        
         func PullEverythingFromTheCloud(result: @escaping (_ objects: [CKRecord]?, _ error: Error?) -> Void) {
+            
             // predicate
             let predicate = NSPredicate(value: true)
+            
             // query
             let cloudKitQuery = CKQuery(recordType: "CellularInfo", predicate: predicate)
-
+            
             // records to store
             var records = [CKRecord]()
-
+            
             //operation basis
             let publicDatabase = CKContainer(identifier: "iCloud.publicCellularInfo").publicCloudDatabase
-
+            
             // recurrent operations function
             var recurrentOperationsCounter = 100
             func recurrentOperations(cursor: CKQueryOperation.Cursor?){
@@ -82,6 +82,7 @@ class CloudRelatedStuff {
             publicDatabase.add(initialOperation)
         }
         
+        // Pulling data within visible area
         func PullData(visibleMapRect: MKMapRect, completion: @escaping ([CKRecord]?, FetchError) -> Void){
             
             //updateLastMapRect(currentMapRect: visibleMapRect)
@@ -89,11 +90,11 @@ class CloudRelatedStuff {
             //Calculate the Center and Diagnal Length of the MapRect
             let mapCenter = visibleMapRect.origin.coordinate
             let centerLocation = CLLocation(latitude: mapCenter.latitude, longitude: mapCenter.longitude)
-        
+            
             //Pythagorean theorem
             let x: CGFloat = CGFloat(visibleMapRect.width)
             let y: CGFloat = CGFloat(visibleMapRect.height)
-            let radius : CGFloat = sqrt((x * x) + (y * y))
+            let radius : CGFloat = max(x,y)/2
             //let radius = 100000
             
             let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(Location, %@) < %f", centerLocation, radius)
@@ -102,7 +103,7 @@ class CloudRelatedStuff {
             
             let publicDatabase = CKContainer(identifier: "iCloud.publicCellularInfo").publicCloudDatabase
             let query = CKQuery(recordType: "CellularInfo", predicate: predicate)
-
+            
             publicDatabase.perform(query, inZoneWith: CKRecordZone.default().zoneID, completionHandler: {(records, error) -> Void in
                 self.processQueryResponseWith(records: records, error: error as NSError?, completion: {fetchedRecords, FetchError in
                     completion(fetchedRecords, FetchError)
@@ -131,7 +132,6 @@ class CloudRelatedStuff {
         
         private func processQueryResponseWith (records: [CKRecord]?, error: NSError?, completion: @escaping ([CKRecord]?, FetchError)->Void){
             guard error == nil else {
-                print(error)
                 completion(nil, .fetchingError)
                 return
             }
