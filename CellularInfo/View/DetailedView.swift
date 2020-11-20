@@ -21,7 +21,6 @@ struct DetailedView: View {
     @State var showAlert: Bool = false
     @State var isSubmitButtonEnabled : Bool = true
     @ObservedObject var locationManager = LocationManager()
-    // var isTestDoneOnWifi : Bool
     let hapticsGenerator = UINotificationFeedbackGenerator()
     
     var body: some View {

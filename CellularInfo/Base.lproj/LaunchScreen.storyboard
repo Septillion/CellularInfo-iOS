@@ -23,7 +23,7 @@
                                 <items>
                                     <tabBarItem title="测试" image="antenna.radiowaves.left.and.right" catalog="system" id="Hy1-kx-j2g"/>
                                     <tabBarItem title="热力图" image="map.fill" catalog="system" id="aoC-te-j5x"/>
-                                    <tabBarItem title="解读" image="chart.bar.fill" catalog="system" id="74i-AC-l3J"/>
+                                    <tabBarItem title="解读" image="chart.bar.doc.horizontal.fill" catalog="system" id="74i-AC-l3J"/>
                                 </items>
                             </tabBar>
                         </subviews>
@@ -37,7 +37,7 @@
     </scenes>
     <resources>
         <image name="antenna.radiowaves.left.and.right" catalog="system" width="128" height="109"/>
-        <image name="chart.bar.fill" catalog="system" width="128" height="92"/>
+        <image name="chart.bar.doc.horizontal.fill" catalog="system" width="115" height="128"/>
         <image name="map.fill" catalog="system" width="128" height="110"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

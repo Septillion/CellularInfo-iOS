@@ -71,7 +71,7 @@ struct MainTabView: View {
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .tabItem {
-                Image(systemName: "chart.bar.fill")
+                Image(systemName: "chart.bar.doc.horizontal.fill")
                 Text("解读")
                 
             }

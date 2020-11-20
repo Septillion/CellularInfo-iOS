@@ -76,7 +76,7 @@ struct ContentView: View {
                     .cornerRadius(8)
                     .foregroundColor(.white)
                     .font(.body)
-                    .shadow(radius: 4)
+                    .shadow(color: .accentColor, radius: 3, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                 })
                 .disabled(!StartButtonEnabled)
                 

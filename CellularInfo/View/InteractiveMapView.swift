@@ -12,11 +12,11 @@ import CoreLocation
 //MARK: Second page of the app that display a Map and a HeatMap overlay.
 struct InteractiveMapView: UIViewRepresentable {
     
-    //@ObservedObject var locationManager = LocationManager()
+    @ObservedObject var locationManager = LocationManager()
     let mapViewDelegate = MapViewDelegate()
     
     
-    @State private var recievedData : [FinalDataStructure] = []
+    //@State private var recievedData : [FinalDataStructure] = []
     @State private var heatMapData = NSMutableDictionary()
     @State private var heatMapDataHighLatency = NSMutableDictionary()
     @State private var heatMapDataLowLatency = NSMutableDictionary()
@@ -44,6 +44,7 @@ struct InteractiveMapView: UIViewRepresentable {
         // MARK: - Pull and Populate Heatmap. Third Attempt, Now progressively fetch data
         
         guard !MKMapRectEqualToRect(uiView.visibleMapRect, lastMapRect) else{
+            print("Map Area didn't change, abort fetching.")
             return
         }
             
@@ -59,19 +60,16 @@ struct InteractiveMapView: UIViewRepresentable {
                 for i in mRecords {
                     var data = FinalDataStructure()
                     data.populateWith(record: i)
-                    self.recievedData.append(data)
-                }
-                
-                // populate data
-                for j in recievedData {
-                    if (j.Location.latitude != 0)&&(j.Location.longitude != 0){
-                        let weight: Double = j.AveragedPingLatency
-                        let mapPoint = MKMapPoint(j.Location)
+                    //self.recievedData.append(data)
+                    
+                    if (data.Location.latitude != 0)&&(data.Location.longitude != 0){
+                        let weight: Double = data.AveragedPingLatency
+                        let mapPoint = MKMapPoint(data.Location)
                         let value = NSValue(mkMapPoint: mapPoint)
                         
                         //heatMapData[value] = NSNumber(value: weight)
                         
-                        if weight < 150 { // MARK: Differentiating Point
+                        if weight < 999999 { // MARK: Differentiating Point
                             heatMapDataLowLatency[value] = NSNumber(value: 1)
                             //heatMapDataLowLatency[value] = NSNumber(value: weight)
                         }else {

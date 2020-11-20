@@ -11,9 +11,7 @@ struct InsightView: View {
     
     //Button and Text States
     @State private var isFetchButtonEnabled: Bool = true
-    @State private var FetchButtonText = "获取全部数据"
-
-    
+    @State private var FetchButtonText = "加载全部数据"
     
     // Variable to Hold Data
     @State private var recievedData : [FinalDataStructure] = []
@@ -30,7 +28,13 @@ struct InsightView: View {
     @State private var PercentOfError: CGFloat = 0
     
     //MARK: 平均 Ping 值
+    @State var AveragePingDeviceModels: [String] = ["-","-","-","-","-","-","-","-","-"]
+    @State var AveragePingNumbers: [Double] = [0,0,0,0,0,0,0,0,0]
+    @State var AveragePingPercentOfBarLength: [CGFloat] = [0,0,0,0,0,0,0,0,0]
     
+    //MARK: 蜂窝技术
+    @State var RadioAccessTechName: [String] = ["-","-","-","-","-"]
+    @State var RadioAccessTechPercent: [Double] = [0,0,0,0,0]
     
     var body: some View {
         
@@ -79,9 +83,7 @@ struct InsightView: View {
                 }
                 
                 VStack{
-                    
-                    
-                    
+                         
                     Divider()
                     
                     HStack {
@@ -141,7 +143,7 @@ struct InsightView: View {
                     HStack {
                         VStack (alignment: .leading, spacing: 3) {
                             HStack {
-                                Text("error（存在幸存者偏差）")
+                                Text("error（可能存在幸存者偏差）")
                                 Spacer()
                                 Text("\(NSString(format: "%.1f", PercentOfError * 100))%")
                             }
@@ -163,89 +165,218 @@ struct InsightView: View {
             }
             
             // MARK: - 平均 ping 值
-            
             VStack (spacing: 10){
                 
                 HStack {
                     VStack(alignment: .leading) {
                         Text("平均 Ping 值")
                             .font(.headline)
-                        Text("除去 error 和海外数据")
+                        Text("除去 error 和海外，按数据量排序")
                             .font(.caption)
                     }
                     Spacer()
                 }
                 
                 VStack{
-                    
                     Divider()
                     
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("iPhone 12")
-                                Spacer()
-                                Text("1425ms")
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[0])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[0]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[0] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            Rectangle()
-                                .frame(width: .infinity, height: 20)
-                                .foregroundColor(.accentColor)
                         }
+                        
+                        Divider()
+                        
                     }
                     
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("12.9 英寸 iPad Pro（第二代）")
-                                Spacer()
-                                Text("425ms")
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[1])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[1]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[1] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            Rectangle()
-                                .frame(width: .infinity, height: 20)
-                                .foregroundColor(.accentColor)
                         }
+                        
+                        Divider()
+                        
                     }
                     
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("iPhone 12 Pro Max")
-                                Spacer()
-                                Text("25ms")
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[2])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[2]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[2] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            Rectangle()
-                                .frame(width: .infinity, height: 20)
-                                .foregroundColor(.accentColor)
                         }
+                        
+                        Divider()
+                        
                     }
                     
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("12.9 英寸 iPad Pro（第四代）")
-                                Spacer()
-                                Text("5ms")
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[3])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[3]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[3] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            Rectangle()
-                                .frame(width: .infinity, height: 20)
-                                .foregroundColor(.accentColor)
                         }
+                        
+                        Divider()
+                        
                     }
                     
-                    Divider()
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[4])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[4]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[4] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                    }
+                    
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[5])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[5]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[5] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                    }
+                    
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[6])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[6]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[6] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                    }
+                    
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[7])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[7]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[7] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                    }
+                    
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(AveragePingDeviceModels[8])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", AveragePingNumbers[8]))ms")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(AveragePingPercentOfBarLength[8] * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                    }
+                    
+                    
+                    
                     
                 }
                 .padding([.leading, .bottom])
             }
             
             // MARK: - 蜂窝技术覆盖率
-            
             VStack (spacing: 10){
                 
                 HStack {
@@ -262,66 +393,116 @@ struct InsightView: View {
                     
                     Divider()
                     
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            
-                            HStack {
-                                Text("LTE")
-                                Spacer()
-                                Text("40%")
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[0])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[0] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[0]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            Rectangle()
-                                .frame(width: .infinity, height: 20)
-                                .foregroundColor(.accentColor)
                         }
+                        
+                        Divider()
+                        
                     }
                     
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("NRNSA")
-                                Spacer()
-                                Text("40%")
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[1])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[1] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[1]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            Rectangle()
-                                .frame(width: 80, height: 20)
-                                .foregroundColor(.accentColor)
                         }
+                        
+                        Divider()
+                        
                     }
                     
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("NR")
-                                Spacer()
-                                Text("40%")
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[2])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[2] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[2]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            Rectangle()
-                                .frame(width: 40, height: 20)
-                                .foregroundColor(.accentColor)
                         }
+                        
+                        Divider()
+                        
                     }
                     
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("WCDMA")
-                                Spacer()
-                                Text("40%")
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[3])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[3] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[3]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            Rectangle()
-                                .frame(width: 10, height: 20)
-                                .foregroundColor(.accentColor)
                         }
+                        
+                        Divider()
+                        
                     }
                     
-                    Divider()
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[4])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[4] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[4]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
                     
                 }
                 .padding([.leading, .bottom])
@@ -340,52 +521,101 @@ struct InsightView: View {
         
         recievedData.removeAll()
         isFetchButtonEnabled = false
-        FetchButtonText = "获取中"
+        FetchButtonText = "正在下载..."
         TotalDataCountString = "获取中"
         
         let manager = CloudRelatedStuff.CloudKitManager()
         
+        //MARK: - Initiating Pull Everything From The Cloud
+        
         manager.PullEverythingFromTheCloud(){(records, error) -> Void in
             if let error = error {
-                // do something
+                // Something Wrong
                 print(error)
             } else {
                 if let mRecords = records {
-                    // do something
                     
+                    // MARK: - Pulling Success
                     
+                    // initiating temporary variables
+                    
+                    //MARK: Data Count: 范围分布
                     var NumberOfItemsBelowLatencyTierOne = 0.0
                     var NumberOfItemsBetweenLatencyTierOneAndTierTwo = 0.0
                     var NumberOfItemsAboveLatencyTierTwo = 0.0
                     var NumberOfError = 0.0
                     var LouWangZhiYu = 0.0
                     
+                    //MARK: Data Count: 平均 Ping 值
+                    var averagePingCombined: [String : Double] = [:] // String: Device Model, Double: Sum of Ping
+                    var averagePingCount: [String : Int ] = [:] // String: Device Model, Double: How Many Are There
+                    
+                    //MARK: Data Count: 蜂窝技术
+                    var radioAccessTechCount: [String : Int] = [:] // String: Radio Access Tech, Int: How Many Are There
+                    
+                    FetchButtonText = "处理数据..."
+                    
+                    // MARK: - Put Data into its corresponding catagories.
                     DispatchQueue.main.async {
+                        
                         for i in mRecords {
                             var data = FinalDataStructure()
                             data.populateWith(record: i)
                             
-                            //Don't do anything unless location is within China
-                            if (!CoordinateTransformation.isLocationOut(ofChina: data.Location)){
-                                self.recievedData.append(data)
-                                
-                                //MARK: Sort Data: 范围分布
-                                if data.AveragedPingLatency <= Double(TierOne) {
-                                    NumberOfItemsBelowLatencyTierOne += 1
-                                }else if data.AveragedPingLatency > Double(TierOne) && data.AveragedPingLatency < Double(TierTwo) {
-                                    NumberOfItemsBetweenLatencyTierOneAndTierTwo += 1
-                                }else if data.AveragedPingLatency >= Double(TierTwo) && data.AveragedPingLatency < 999999{
-                                    NumberOfItemsAboveLatencyTierTwo += 1
-                                }else if data.AveragedPingLatency == 999999 {
-                                    NumberOfError += 1
-                                }else {
-                                    LouWangZhiYu += 1
-                                }
+                            // Ignore data that is outside of China.
+                            guard !CoordinateTransformation.isLocationOut(ofChina: data.Location) else{
+                                continue
                             }
                             
+                            self.recievedData.append(data)
+                            
+                            //MARK: Sort Data: 范围分布
+                            if data.AveragedPingLatency <= Double(TierOne) {
+                                NumberOfItemsBelowLatencyTierOne += 1
+                            }else if data.AveragedPingLatency > Double(TierOne) && data.AveragedPingLatency < Double(TierTwo) {
+                                NumberOfItemsBetweenLatencyTierOneAndTierTwo += 1
+                            }else if data.AveragedPingLatency >= Double(TierTwo) && data.AveragedPingLatency < 999999{
+                                NumberOfItemsAboveLatencyTierTwo += 1
+                            }else if data.AveragedPingLatency == 999999 {
+                                NumberOfError += 1
+                            }else {
+                                LouWangZhiYu += 1
+                            }
+                            
+                            //MARK: Sort Data: 平均 Ping 值
+                            //Initializing Dictionaries
+                            if averagePingCount[data.DeviceName] == nil {
+                                averagePingCount[data.DeviceName] = 0
+                            }
+                            if averagePingCombined[data.DeviceName] == nil {
+                                averagePingCombined[data.DeviceName] = 0
+                            }
+                            
+                            // Only counting those that are not error
+                            if !(data.AveragedPingLatency == 999999) {
+                                averagePingCombined[data.DeviceName]! += data.AveragedPingLatency
+                                averagePingCount[data.DeviceName]! += 1
+                            }
+                            
+                            //MARK: Sort Data: 蜂窝技术
+                            //Initializing Dictionaries
+                            if radioAccessTechCount[data.RadioAccessTechnology] == nil {
+                                radioAccessTechCount[data.RadioAccessTechnology] = 0
+                            }
+                            
+                            radioAccessTechCount[data.RadioAccessTechnology]! += 1
+                                           
                         }
                         
+                        //MARK: - Calculating Ratio
                         let count = Double (recievedData.count)
+                        
+                        // Populate View
+                        FetchButtonText = "加载完成"
+                        isFetchButtonEnabled = true
+                        
+                        //MARK: 总数据量
+                        TotalDataCountString = "\(recievedData.count)"
                         
                         //MARK: Analyze Data: 范围分布
                         PercentOfItemsBelowLatencyTierOne = CGFloat(NumberOfItemsBelowLatencyTierOne / count)
@@ -394,18 +624,58 @@ struct InsightView: View {
                         PercentOfError = CGFloat(NumberOfError / count)
                         
                         
-                        
-                        // Populate View
-                        FetchButtonText = "获取完成"
-                        isFetchButtonEnabled = true
-                        
-                        //MARK: 总数据量
-                        TotalDataCountString = "\(recievedData.count)"
-                        
-                        //MARK: 范围分布
-                        
-                        
                         //MARK: 平均 Ping 值
+                        
+                        // Sort by Number of Data points.
+                        let sortedAveragePingCount = averagePingCount.sorted{(first, second) -> Bool in
+                            return first.value > second.value
+                        }
+                        
+                        // Local Variable to hold temporary data
+                        var AveragePingDeviceModels: [String] = []
+                        var AveragePingNumbers: [Double] = []
+                        var AveragePingPercentOfBarLength: [CGFloat] = []
+                        
+                        //Calculate
+                        for i in sortedAveragePingCount {
+                            AveragePingDeviceModels.append(i.key)
+                            AveragePingNumbers.append(averagePingCombined[i.key]! / Double(i.value))
+                        }
+                        
+                        for j in AveragePingNumbers{
+                            AveragePingPercentOfBarLength.append(CGFloat(j / AveragePingNumbers.max()!))
+                        }
+                        
+                        print("Available Models: \(AveragePingDeviceModels)")
+                        
+                        // Report Upstream
+                        self.AveragePingDeviceModels = AveragePingDeviceModels
+                        self.AveragePingNumbers = AveragePingNumbers
+                        self.AveragePingPercentOfBarLength = AveragePingPercentOfBarLength
+                        
+                        
+                        //MARK: 蜂窝技术
+                        
+                        // Sort by Count
+                        let sortedRadioAccessTech = radioAccessTechCount.sorted{(first, second) -> Bool in
+                            return first.value > second.value
+                        }
+                        
+                        // Local variables to hold temporary data
+                        var RadioAccessTechName: [String] = []
+                        var RadioAccessTechPercent: [Double] = []
+                        
+                        for i in sortedRadioAccessTech{
+                            RadioAccessTechName.append(i.key)
+                            RadioAccessTechPercent.append(Double(i.value)/Double(recievedData.count))
+                        }
+                        
+                        print("Available RATs: \(RadioAccessTechName)")
+                        print(RadioAccessTechPercent)
+                        
+                        // Report Upstream
+                        self.RadioAccessTechName = RadioAccessTechName
+                        self.RadioAccessTechPercent = RadioAccessTechPercent
                         
                         //MARK: -End of DispatchQueue
                     }
