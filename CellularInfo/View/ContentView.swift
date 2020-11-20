@@ -20,7 +20,7 @@ struct ContentView: View {
     @State var averagePing = DomainAndPing(id: 10086, domain: "平均", ping: 0)
     @State var currentNetwork : String = ""
     @State var pingButtonString = "Ping!"
-    @State var submitButtonString = ""
+    @State var submitButtonString = "提交此结果"
     @State var alertMessage: String = ""
     @State var isTestDoneOnWifi: Bool = false
     @State var isTestDoneOnVPN: Bool = false
@@ -34,120 +34,145 @@ struct ContentView: View {
         
         VStack (spacing: 0){
             
-            //MARK: - Header
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(UIDevice().type.rawValue).font(.title)
-                    Text(currentNetwork)
-                        .onAppear(perform: {
-                            getCurrentNetwork()
-                        })
-                }
-                Spacer()
-                
-                //MARK: - Ping! Button
-                Button(action: {
-                    // Clear the View
-                    averagePing.setPing(ping: 0)
-                    for i in 0...(domainAndPing.count-1)
-                    {
-                        self.domainAndPing.daps[i].setPing(ping:0)
-                    }
-                    hapticsGenerator.prepare()
-                    pingNumberDouble.removeAll()
-                    StartButtonEnabled = false
-                    pingButtonString = "Pinging..."
-                    self.submitButtonString = ""
-                    SubmitButtonEnabled = false
-                    getCurrentNetwork()
-                    
-                    self.pingNext()
-                    
-                    
-                    
-                }, label: {
-                    HStack {
-                        Image(systemName:"play.fill")
-                        Text(pingButtonString)
-                    }
-                    .frame(minWidth: 80, maxWidth: 100, idealHeight: 48, alignment: .center)
-                    .padding()
-                    .background(Color.accentColor)
-                    .cornerRadius(8)
-                    .foregroundColor(.white)
-                    .font(.body)
-                    .shadow(color: .accentColor, radius: 3, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
-                })
-                .disabled(!StartButtonEnabled)
-                
-            }
-            .padding()
-            .background(Color(.secondarySystemBackground))
             
             //MARK: - List
             List {
                 
-                ForEach(domainAndPing.daps){ mDomainAndPing in
-                    //PingListItem(DomainAndping: mDomainAndPing)
-                    HStack {
-                        Text(mDomainAndPing.domain)
-                        Spacer()
-                        Text(mDomainAndPing.latencyString)
-                            .foregroundColor(mDomainAndPing.latencyColor)
+                // Header
+                Section {
+                    
+                    VStack(alignment: .leading) {
+                        Text(UIDevice().type.rawValue).font(.title)
+                        Text(currentNetwork)
+                            .font(.caption)
+                            .onAppear(perform: {
+                                getCurrentNetwork()
+                            })
                     }
+                            
                 }
                 
-                // MARK: - Average Result at the Bottom
-                VStack {
-                    HStack {
-                        Text("平均").font(.headline)
-                        
-                        Spacer()
-                        
-                        //MARK: - Submit Button
-                        HStack {
-                            Button(action: {
-                                
-                                if isTestDoneOnVPN{
-                                    self.alertMessage = "不可以上传基于 VPN 的测试结果，此结果可能不准确。"
-                                    hapticsGeneratorNotifications.notificationOccurred(.warning)
-                                    showAlert = true
-                                    return
-                                }
-                                
-                                if isTestDoneOnWifi{
-                                    self.alertMessage = "不可以上传基于 WiFi 的测试结果，我们只接受使用蜂窝网络进行的测试。"
-                                    hapticsGeneratorNotifications.notificationOccurred(.warning)
-                                    showAlert = true
-                                    return
-                                }
-
-                                
-                                self.showSheetView = true
-                                SubmitButtonEnabled = false
-                            }, label: {
-                                HStack {
-                                    //Image(systemName: "square.and.arrow.up")
-                                    Text(self.submitButtonString)
-                                }
-                                .foregroundColor(Color.accentColor)
-                                
-                            })
-                            .disabled(!SubmitButtonEnabled)
-                            .sheet(isPresented: $showSheetView, content: {
-                                DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: averagePing.ping)
-                            })
-                            .alert(isPresented: $showAlert, content: {
-                                Alert(title: Text("请等一下！"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
-                            })
+                
+                Section{
+                    
+                    //MARK: - Ping! Button
+                    Button(action: {
+                        // Clear the View
+                        averagePing.setPing(ping: 0)
+                        for i in 0...(domainAndPing.count-1)
+                        {
+                            self.domainAndPing.daps[i].setPing(ping:0)
                         }
+                        hapticsGenerator.prepare()
+                        pingNumberDouble.removeAll()
+                        StartButtonEnabled = false
+                        pingButtonString = "Pinging..."
+                        //self.submitButtonString = ""
+                        SubmitButtonEnabled = false
+                        getCurrentNetwork()
                         
-                        Text(averagePing.latencyString)
-                            .foregroundColor(averagePing.latencyColor)
-                            .font(.headline)
-                    }
+                        self.pingNext()
+                        
+                        
+                        
+                    }, label: {
+                        HStack {
+                            Image(systemName:"play.fill")
+                            Text(pingButtonString)
+                                .font(.headline)
+                        }
+                        //.frame(minWidth: 80, maxWidth: 100, idealHeight: 48, alignment: .center)
+                        //.padding()
+                        //.background(Color.accentColor)
+                        //.cornerRadius(8)
+                        //.foregroundColor(.white)
+                        //.font(.body)
+                        //.shadow(color: .accentColor, radius: 3, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+                    })
+                    .disabled(!StartButtonEnabled)
                 }
+                
+               
+                
+                Section{
+                    ForEach(domainAndPing.daps){ mDomainAndPing in
+                        //PingListItem(DomainAndping: mDomainAndPing)
+                        HStack {
+                            Text(mDomainAndPing.domain)
+                            Spacer()
+                            Text(mDomainAndPing.latencyString)
+                                .foregroundColor(mDomainAndPing.latencyColor)
+                        }
+                    }
+                    
+                }
+                
+                
+                // MARK: - Average Result at the Bottom
+                Section {
+                    
+                    VStack {
+                        HStack {
+                            Text("平均").font(.headline)
+                            
+                            Spacer()
+                            
+                            //MARK: - Submit Button
+                            HStack {
+                                
+                            }
+                            
+                            Text(averagePing.latencyString)
+                                .foregroundColor(averagePing.latencyColor)
+                                .font(.headline)
+                        }
+                    }
+                    
+                    if SubmitButtonEnabled{
+                        
+                        Button(action: {
+                            
+                            if isTestDoneOnVPN{
+                                self.alertMessage = "不可以上传基于 VPN 的测试结果，此结果可能不准确。"
+                                hapticsGeneratorNotifications.notificationOccurred(.warning)
+                                showAlert = true
+                                return
+                            }
+                            
+                            if isTestDoneOnWifi{
+                                self.alertMessage = "不可以上传基于 WiFi 的测试结果，我们只接受使用蜂窝网络进行的测试。"
+                                hapticsGeneratorNotifications.notificationOccurred(.warning)
+                                showAlert = true
+                                return
+                            }
+                            
+                            
+                            self.showSheetView = true
+                            SubmitButtonEnabled = false
+                        }, label: {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "square.and.arrow.up")
+                                Text(self.submitButtonString)
+                            }
+                            .foregroundColor(Color.accentColor)
+                            
+                        })
+                        .disabled(!SubmitButtonEnabled)
+                        .sheet(isPresented: $showSheetView, content: {
+                            DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: averagePing.ping)
+                        })
+                        .alert(isPresented: $showAlert, content: {
+                            Alert(title: Text("请等一下！"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
+                        })
+                    }
+                    
+                    
+                    
+                }
+                
             }
+            .listStyle(GroupedListStyle())
         }
     }
     
@@ -160,7 +185,7 @@ struct ContentView: View {
             SubmitButtonEnabled = true
             hapticsGeneratorHeavy.impactOccurred(intensity: 100)
             pingButtonString = "Ping!"
-            self.submitButtonString = "提交此结果"
+            //self.submitButtonString = "提交此结果"
             // if one of the pings didn't come through
             if pingNumberDouble.count < domainAndPing.count {
                 averagePing.setPing(ping: 999999)
