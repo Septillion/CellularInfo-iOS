@@ -61,7 +61,7 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         self.locationStatus = status
-        print(#function, statusString)
+        //print(#function, statusString)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -74,7 +74,7 @@ extension LocationManager: CLLocationManagerDelegate {
         }
         if (self.lastLocation != location){
             self.lastLocation = location}
-        print(#function, location)
+        //print(#function, location)
     }
     
 }

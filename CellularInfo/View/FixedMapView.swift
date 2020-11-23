@@ -10,9 +10,10 @@ import MapKit
 
 struct FixedMapView: UIViewRepresentable {
 
-    @ObservedObject var locationManager = LocationManager()
+    //@ObservedObject var locationManager = LocationManager()
     
     var coordinate: CLLocationCoordinate2D
+    var span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
  
     func makeUIView(context: Context) -> some MKMapView {
         let mkv = MKMapView(frame: .zero)
@@ -21,6 +22,7 @@ struct FixedMapView: UIViewRepresentable {
         //let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
         //mkv.setRegion(region, animated: false)
         //mkv.showsUserLocation = true
+        mkv.showsBuildings = true
         mkv.isUserInteractionEnabled = false
         
         return mkv
@@ -29,6 +31,11 @@ struct FixedMapView: UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) {
         //uiView.setUserTrackingMode(.follow, animated: false)
         uiView.setRegion(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)), animated: false)
+        
+        //let annotation = MKPinAnnotationView()
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        uiView.addAnnotation(annotation)
     }
     
 }
@@ -36,5 +43,6 @@ struct FixedMapView: UIViewRepresentable {
 struct FixedMapView_Previews: PreviewProvider {
     static var previews: some View {
         FixedMapView(coordinate: CLLocationCoordinate2D(latitude: 34.322700, longitude: 108.552500))
+            .previewLayout(.fixed(width: 110, height: 110))
     }
 }

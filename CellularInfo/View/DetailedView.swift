@@ -12,15 +12,15 @@ import CoreLocation
 struct DetailedView: View {
     
     @Binding var showSheetView: Bool
-    var pingNumberAveraged : Double
+    //var pingNumberAveraged : Double
     
     let networkInfo = CellularAndWifiInformation()
     @State var alertMessage: String = "网络错误"
     @State var butttonMesssage: String = "同意并提交"
-    @State var dataReadyForUpload: FinalDataStructure?
+    var dataReadyForUpload: FinalDataStructure
     @State var showAlert: Bool = false
     @State var isSubmitButtonEnabled : Bool = true
-    @ObservedObject var locationManager = LocationManager()
+    
     let hapticsGenerator = UINotificationFeedbackGenerator()
     
     var body: some View {
@@ -29,12 +29,7 @@ struct DetailedView: View {
             VStack {
                 
                 
-                InfoCardView(finalData:FinalDataStructure(
-                                AveragedPingLatency: pingNumberAveraged,
-                                DeviceName: UIDevice().type.rawValue,
-                                Location: locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                                MobileCarrier: networkInfo.carrierName,
-                                RadioAccessTechnology: networkInfo.radioAccessTech))
+                InfoCardView(finalData:dataReadyForUpload)
                     .background(Color(.secondarySystemBackground))
                     .frame(height: 110, alignment: .leading)
                     .cornerRadius(16)
@@ -82,32 +77,29 @@ struct DetailedView: View {
             return
         }
         
-        if pingNumberAveraged == 0 {
+        if dataReadyForUpload.AveragedPingLatency == 0 {
             self.alertMessage = "网络中断"
             hapticsGenerator.notificationOccurred(.warning)
             showAlert = true
             return
         }
         
+        /*
         if locationManager.lastLocation == nil {
             self.alertMessage = "获取位置失败，请确认权限。"
             hapticsGenerator.notificationOccurred(.warning)
             showAlert = true
             return
         }
+        */
         
         self.butttonMesssage = "提交中"
         self.isSubmitButtonEnabled = false
         
-        self.dataReadyForUpload = FinalDataStructure(
-            AveragedPingLatency: pingNumberAveraged,
-            DeviceName: UIDevice().type.rawValue,
-            Location: locationManager.lastLocation?.coordinate ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
-            MobileCarrier: networkInfo.carrierName,
-            RadioAccessTechnology: networkInfo.radioAccessTech)
+        //self.dataReadyForUpload = final
         
         let cloudKitmanager = CloudRelatedStuff.CloudKitManager()
-        cloudKitmanager.PushData(finalData: [dataReadyForUpload!], completionHandler: {_,_ in
+        cloudKitmanager.PushData(finalData: [dataReadyForUpload], completionHandler: {_,_ in
             
             hapticsGenerator.notificationOccurred(.success)
             self.showSheetView = false
@@ -120,3 +112,9 @@ struct DetailedView: View {
 }
 
 
+struct DetailedView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        DetailedView(showSheetView: .constant(true), dataReadyForUpload: FinalDataStructure(AveragedPingLatency: 10, DeviceName: "iPhone", Location: CLLocationCoordinate2D(latitude: 2, longitude: 3), MobileCarrier: "中国移动", RadioAccessTechnology: "6G"))
+    }
+}

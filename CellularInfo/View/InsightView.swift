@@ -20,8 +20,8 @@ struct InsightView: View {
     @State private var TotalDataCountString: String = "-"
     
     //MARK: 范围分布
-    private let TierOne = 100
-    private let TierTwo = 200
+    private let TierOne = 50
+    private let TierTwo = 100
     @State private var PercentOfItemsBelowLatencyTierOne: CGFloat = 0
     @State private var PercentOfItemsBetweenLatencyTierOneAndTierTwo: CGFloat = 0
     @State private var PercentOfItemsAboveLatencyTierTwo: CGFloat = 0
@@ -37,8 +37,6 @@ struct InsightView: View {
     @State var RadioAccessTechPercent: [Double] = [0,0,0,0,0]
     
     var body: some View {
-        
-        
         
         List {
             
@@ -57,7 +55,7 @@ struct InsightView: View {
             }
             
             // MARK: - 总数据量
-            Section {
+            Section (footer: Text("不包含海外数据")) {
                 
                 
                 HStack {
@@ -77,8 +75,6 @@ struct InsightView: View {
                     VStack(alignment: .leading) {
                         Text("范围分布")
                             .font(.headline)
-                        Text("全机型 除去海外数据")
-                            .font(.caption)
                     }
                     Spacer()
                 }
@@ -170,7 +166,7 @@ struct InsightView: View {
                     VStack(alignment: .leading) {
                         Text("平均 Ping 值")
                             .font(.headline)
-                        Text("除去 error 和海外，按数据量排序")
+                        Text("不包含 Error")
                             .font(.caption)
                     }
                     Spacer()
@@ -378,139 +374,131 @@ struct InsightView: View {
             // MARK: - 蜂窝技术覆盖率
             Section{
                 
-                VStack (spacing: 10){
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("蜂窝技术")
+                            .font(.headline)
+                    }
+                    Spacer()
+                }
+                
+                VStack{
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("蜂窝技术")
-                                .font(.headline)
-                            Text("全机型 除去海外数据")
-                                .font(.caption)
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[0])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[0] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[0]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
                         }
-                        Spacer()
+                        
+                        Divider()
+                        
                     }
                     
                     VStack{
                         
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[1])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[1] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[1]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
                         Divider()
                         
-                        VStack{
-                            
-                            HStack {
-                                VStack (alignment: .leading, spacing: 3) {
-                                    HStack {
-                                        Text(RadioAccessTechName[0])
-                                        Spacer()
-                                        Text("\(NSString(format: "%.1f", RadioAccessTechPercent[0] * 100))%")
-                                    }
-                                    GeometryReader { metrics in
-                                        Rectangle()
-                                            .frame(width: max(CGFloat(RadioAccessTechPercent[0]) * metrics.size.width, 1), height: 20)
-                                            .foregroundColor(.accentColor)
-                                    }.frame(height: 20)
+                    }
+                    
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[2])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[2] * 100))%")
                                 }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[2]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
                             }
-                            
-                            Divider()
-                            
                         }
                         
-                        VStack{
-                            
-                            HStack {
-                                VStack (alignment: .leading, spacing: 3) {
-                                    HStack {
-                                        Text(RadioAccessTechName[1])
-                                        Spacer()
-                                        Text("\(NSString(format: "%.1f", RadioAccessTechPercent[1] * 100))%")
-                                    }
-                                    GeometryReader { metrics in
-                                        Rectangle()
-                                            .frame(width: max(CGFloat(RadioAccessTechPercent[1]) * metrics.size.width, 1), height: 20)
-                                            .foregroundColor(.accentColor)
-                                    }.frame(height: 20)
-                                }
-                            }
-                            
-                            Divider()
-                            
-                        }
-                        
-                        VStack{
-                            
-                            HStack {
-                                VStack (alignment: .leading, spacing: 3) {
-                                    HStack {
-                                        Text(RadioAccessTechName[2])
-                                        Spacer()
-                                        Text("\(NSString(format: "%.1f", RadioAccessTechPercent[2] * 100))%")
-                                    }
-                                    GeometryReader { metrics in
-                                        Rectangle()
-                                            .frame(width: max(CGFloat(RadioAccessTechPercent[2]) * metrics.size.width, 1), height: 20)
-                                            .foregroundColor(.accentColor)
-                                    }.frame(height: 20)
-                                }
-                            }
-                            
-                            Divider()
-                            
-                        }
-                        
-                        VStack{
-                            
-                            HStack {
-                                VStack (alignment: .leading, spacing: 3) {
-                                    HStack {
-                                        Text(RadioAccessTechName[3])
-                                        Spacer()
-                                        Text("\(NSString(format: "%.1f", RadioAccessTechPercent[3] * 100))%")
-                                    }
-                                    GeometryReader { metrics in
-                                        Rectangle()
-                                            .frame(width: max(CGFloat(RadioAccessTechPercent[3]) * metrics.size.width, 1), height: 20)
-                                            .foregroundColor(.accentColor)
-                                    }.frame(height: 20)
-                                }
-                            }
-                            
-                            Divider()
-                            
-                        }
-                        
-                        VStack{
-                            
-                            HStack {
-                                VStack (alignment: .leading, spacing: 3) {
-                                    HStack {
-                                        Text(RadioAccessTechName[4])
-                                        Spacer()
-                                        Text("\(NSString(format: "%.1f", RadioAccessTechPercent[4] * 100))%")
-                                    }
-                                    GeometryReader { metrics in
-                                        Rectangle()
-                                            .frame(width: max(CGFloat(RadioAccessTechPercent[4]) * metrics.size.width, 1), height: 20)
-                                            .foregroundColor(.accentColor)
-                                    }.frame(height: 20)
-                                }
-                            }
-                            
-                            //Divider()
-                            
-                        }
-                        
+                        Divider()
                         
                     }
-                    .padding([.leading])
+                    
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[3])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[3] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[3]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                    }
+                    
+                    VStack{
+                        
+                        HStack {
+                            VStack (alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(RadioAccessTechName[4])
+                                    Spacer()
+                                    Text("\(NSString(format: "%.1f", RadioAccessTechPercent[4] * 100))%")
+                                }
+                                GeometryReader { metrics in
+                                    Rectangle()
+                                        .frame(width: max(CGFloat(RadioAccessTechPercent[4]) * metrics.size.width, 1), height: 20)
+                                        .foregroundColor(.accentColor)
+                                }.frame(height: 20)
+                            }
+                        }
+                        
+                        //Divider()
+                        
+                    }
+                    
                     
                 }
+                .padding([.leading])
                 
             }
             
             
             //MARK: - List End
         }.listStyle(GroupedListStyle())
-        
         
     }
     

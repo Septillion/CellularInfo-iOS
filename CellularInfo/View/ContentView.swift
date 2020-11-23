@@ -11,7 +11,10 @@ import SwiftUI
 //MARK: The first page of the app that handles the Ping! functionality.
 struct ContentView: View {
     
-    @State var showSheetView = false
+    @ObservedObject var locationManager = LocationManager()
+    
+    @State var showDetailedViewSheet = false
+    @State var showAutoModeViewSheet = false
     @State var showAlert: Bool = false
     @State var pingNumberDouble : [Double] = []
     @State var StartButtonEnabled : Bool = true
@@ -19,11 +22,14 @@ struct ContentView: View {
     @State var currentArrayIndex: Int = 0
     @State var averagePing = DomainAndPing(id: 10086, domain: "平均", ping: 0)
     @State var currentNetwork : String = ""
+    @State var mobileCarrier: String = ""
+    @State var radioAccessTech: String = ""
     @State var pingButtonString = "Ping!"
     @State var submitButtonString = "提交此结果"
     @State var alertMessage: String = ""
     @State var isTestDoneOnWifi: Bool = false
     @State var isTestDoneOnVPN: Bool = false
+    @State var coordinateAsOfTesting: CLLocationCoordinate2D?
     let hapticsGenerator = UISelectionFeedbackGenerator()
     let hapticsGeneratorHeavy = UIImpactFeedbackGenerator(style: .heavy)
     let hapticsGeneratorNotifications = UINotificationFeedbackGenerator()
@@ -49,17 +55,16 @@ struct ContentView: View {
                                 getCurrentNetwork()
                             })
                     }
-                            
-                }
-                
-                
-                Section{
                     
-                    //MARK: - Ping! Button
                     Button(action: {
+                        
+                        //Aquire current location
+                        //let locationManager = LocationManager()
+                        coordinateAsOfTesting = locationManager.lastLocation?.coordinate
+                        
                         // Clear the View
                         averagePing.setPing(ping: 0)
-                        for i in 0...(domainAndPing.count-1)
+                        for i in 0...(domainAndPing.daps.count-1)
                         {
                             self.domainAndPing.daps[i].setPing(ping:0)
                         }
@@ -72,6 +77,7 @@ struct ContentView: View {
                         getCurrentNetwork()
                         
                         self.pingNext()
+                        
                         
                         
                         
@@ -90,9 +96,8 @@ struct ContentView: View {
                         //.shadow(color: .accentColor, radius: 3, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                     })
                     .disabled(!StartButtonEnabled)
+                    
                 }
-                
-               
                 
                 Section{
                     ForEach(domainAndPing.daps){ mDomainAndPing in
@@ -118,9 +123,6 @@ struct ContentView: View {
                             Spacer()
                             
                             //MARK: - Submit Button
-                            HStack {
-                                
-                            }
                             
                             Text(averagePing.latencyString)
                                 .foregroundColor(averagePing.latencyColor)
@@ -139,6 +141,7 @@ struct ContentView: View {
                                 return
                             }
                             
+                            
                             if isTestDoneOnWifi{
                                 self.alertMessage = "不可以上传基于 WiFi 的测试结果，我们只接受使用蜂窝网络进行的测试。"
                                 hapticsGeneratorNotifications.notificationOccurred(.warning)
@@ -147,7 +150,29 @@ struct ContentView: View {
                             }
                             
                             
-                            self.showSheetView = true
+                            if coordinateAsOfTesting == nil {
+                                self.alertMessage = "无法获取位置，我们只接受位置有效的测试。"
+                                hapticsGeneratorNotifications.notificationOccurred(.warning)
+                                showAlert = true
+                                return
+                            }
+                            
+                            if mobileCarrier == "" {
+                                self.alertMessage = "蜂窝网络未连接，我们只接受使用蜂窝网络进行的测试。"
+                                hapticsGeneratorNotifications.notificationOccurred(.warning)
+                                showAlert = true
+                                return
+                            }
+                            
+                            if averagePing.ping == 0 {
+                                self.alertMessage = "网络中断"
+                                hapticsGeneratorNotifications.notificationOccurred(.warning)
+                                showAlert = true
+                                return
+                            }
+                            
+                            
+                            self.showDetailedViewSheet = true
                             SubmitButtonEnabled = false
                         }, label: {
                             HStack {
@@ -159,8 +184,8 @@ struct ContentView: View {
                             
                         })
                         .disabled(!SubmitButtonEnabled)
-                        .sheet(isPresented: $showSheetView, content: {
-                            DetailedView(showSheetView: self.$showSheetView, pingNumberAveraged: averagePing.ping)
+                        .sheet(isPresented: $showDetailedViewSheet, content: {
+                            DetailedView(showSheetView: self.$showDetailedViewSheet, dataReadyForUpload: FinalDataStructure(AveragedPingLatency: averagePing.ping, DeviceName:UIDevice().type.rawValue , Location: coordinateAsOfTesting!, MobileCarrier: mobileCarrier, RadioAccessTechnology: radioAccessTech))
                         })
                         .alert(isPresented: $showAlert, content: {
                             Alert(title: Text("请等一下！"), message: Text(alertMessage), dismissButton: .default(Text("关闭")))
@@ -169,6 +194,19 @@ struct ContentView: View {
                     
                     
                     
+                }
+                
+                // MARK: - AutoMode Button
+                
+                Section (footer: Text("持续测试并提交结果，适合边走边测")) {
+                    Button(action: {
+                        self.showAutoModeViewSheet = true
+                    }, label: {
+                        Text("边走边测")
+                    })
+                    .sheet(isPresented: $showAutoModeViewSheet, content: {
+                        AutoModeView(showAutoModeViewSheet: $showAutoModeViewSheet)
+                    })
                 }
                 
             }
@@ -187,7 +225,7 @@ struct ContentView: View {
             pingButtonString = "Ping!"
             //self.submitButtonString = "提交此结果"
             // if one of the pings didn't come through
-            if pingNumberDouble.count < domainAndPing.count {
+            if pingNumberDouble.count < domainAndPing.daps.count {
                 averagePing.setPing(ping: 999999)
                 return
             }
@@ -197,9 +235,11 @@ struct ContentView: View {
         }
         
         //MARK: - Ping
+        
         let ping = domainAndPing.daps[currentArrayIndex].domain
         PlainPing.ping(ping, withTimeout: 4.0, completionBlock: {
             (timeElapsed:Double?, error:Error?) in
+            
             if let latency = timeElapsed {
                 print("\(ping) latency (ms): \(latency)")
                 self.domainAndPing.daps[currentArrayIndex].setPing(ping: latency)
@@ -213,6 +253,9 @@ struct ContentView: View {
             currentArrayIndex += 1
             hapticsGenerator.selectionChanged()
             self.pingNext()
+            
+            
+            
         })
     }
     
@@ -220,7 +263,10 @@ struct ContentView: View {
     func getCurrentNetwork() {
         
         let networkInfo = CellularAndWifiInformation()
-        currentNetwork = networkInfo.carrierName + " " + networkInfo.radioAccessTech
+        mobileCarrier = networkInfo.carrierName
+        radioAccessTech = networkInfo.radioAccessTech
+        currentNetwork = mobileCarrier + " " + radioAccessTech
+        
         isTestDoneOnWifi = false
         
         if networkInfo.isWiFiConnected{

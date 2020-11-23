@@ -50,7 +50,7 @@ struct DomainAndPing: Identifiable {
 class AGroupOfDomainsAndPings : ObservableObject {
     
     @Published var daps: [DomainAndPing]
-    var count : Int = 12
+    //var count : Int = 12
     
     init() {
         self.daps = [DomainAndPing(id: 1, domain: "qq.com", ping: 0),

@@ -33,7 +33,7 @@ struct InteractiveMapView: UIViewRepresentable {
         mkv.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 33.955348, longitude: 114.952843), span: MKCoordinateSpan(latitudeDelta: 20, longitudeDelta: 20)), animated: false)
         mkv.showsUserLocation = true
         mkv.showsScale = true
-        mkv.setUserTrackingMode(.follow, animated: true)
+        //mkv.setUserTrackingMode(.follow, animated: true)
         return mkv
     }
     
@@ -44,7 +44,7 @@ struct InteractiveMapView: UIViewRepresentable {
         // MARK: - Pull and Populate Heatmap. Third Attempt, Now progressively fetch data
         
         guard !MKMapRectEqualToRect(uiView.visibleMapRect, lastMapRect) else{
-            print("Map Area didn't change, abort fetching.")
+            //print("Map Area didn't change, abort fetching.")
             return
         }
             
