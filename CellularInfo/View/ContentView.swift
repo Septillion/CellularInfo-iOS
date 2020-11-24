@@ -198,7 +198,7 @@ struct ContentView: View {
                 
                 // MARK: - AutoMode Button
                 
-                Section (footer: Text("持续测试并提交结果，适合边走边测")) {
+                Section (footer: Text("持续测试并上传结果")) {
                     Button(action: {
                         self.showAutoModeViewSheet = true
                     }, label: {
@@ -218,19 +218,26 @@ struct ContentView: View {
         
         //MARK: - Final Work
         guard domainAndPing.daps.count > currentArrayIndex else{
-            currentArrayIndex = 0
-            StartButtonEnabled = true
-            SubmitButtonEnabled = true
-            hapticsGeneratorHeavy.impactOccurred(intensity: 100)
-            pingButtonString = "Ping!"
-            //self.submitButtonString = "提交此结果"
-            // if one of the pings didn't come through
-            if pingNumberDouble.count < domainAndPing.daps.count {
-                averagePing.setPing(ping: 999999)
-                return
+            
+            // Avoid two simultaneous haptics
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                
+                currentArrayIndex = 0
+                StartButtonEnabled = true
+                SubmitButtonEnabled = true
+                hapticsGeneratorHeavy.impactOccurred(intensity: 100)
+                pingButtonString = "Ping!"
+                //self.submitButtonString = "提交此结果"
+                // if one of the pings didn't come through
+                if pingNumberDouble.count < domainAndPing.daps.count {
+                    averagePing.setPing(ping: 999999)
+                    return
+                }
+                // Otherwise
+                averagePing.setPing(ping: (pingNumberDouble.reduce(0,+)/Double(pingNumberDouble.count)))
+                
             }
-            // Otherwise
-            averagePing.setPing(ping: (pingNumberDouble.reduce(0,+)/Double(pingNumberDouble.count)))
+           
             return
         }
         

@@ -12,7 +12,7 @@ struct AutoModeMapView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> some MKMapView {
         let mkv = MKMapView()
-        mkv.isUserInteractionEnabled = false
+        //mkv.isUserInteractionEnabled = false
         return mkv
     }
     

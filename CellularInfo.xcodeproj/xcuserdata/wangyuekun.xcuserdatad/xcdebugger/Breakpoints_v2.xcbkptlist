@@ -654,104 +654,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "pingNext()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AD60492F-0473-4924-8248-FC6A7F393EA8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CellularInfo/View/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "pingNext()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "AD60492F-0473-4924-8248-FC6A7F393EA8 - b58cf3edff3f026b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CellularInfo.ContentView.pingNext() -&gt; ()"
-                  moduleName = "CellularInfo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/View/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "984">
-               </Location>
-               <Location
-                  uuid = "AD60492F-0473-4924-8248-FC6A7F393EA8 - 6c1ce881cedae4aa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #2 (Swift.Double, Swift.Double) -&gt; Swift.Double in implicit closure #1 (Swift.Double.Type) -&gt; (Swift.Double, Swift.Double) -&gt; Swift.Double in CellularInfo.ContentView.pingNext() -&gt; ()"
-                  moduleName = "CellularInfo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wangyuekun/Downloads/CellularInfo/CellularInfo/View/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "678D1140-90EC-43AB-ACEF-2021F93B1E69"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CellularInfo/View/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "pingNext()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "56F9CE9B-6F8B-41A4-A561-2631A2BAFB83"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CellularInfo/View/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "pingNext()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "36BAD61E-247D-4FD8-BE13-DD2FB01C95E7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CellularInfo/View/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "pingNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1326,8 +1230,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "pingNext()"
             landmarkType = "7">
             <Locations>
@@ -1374,8 +1278,8 @@
             filePath = "CellularInfo/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "pingNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1383,15 +1287,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DF84F3B4-7A76-499F-95F9-8AF1E89B9B27"
-            shouldBeEnabled = "Yes"
+            uuid = "CC39CEAD-73ED-4EFA-9F4A-3AB83078E1F7"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CellularInfo/View/AutoModeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "PingTheCrapOutOfIt()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1399,15 +1303,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "33E048FD-B193-4317-A984-71A6A32B1A89"
-            shouldBeEnabled = "Yes"
+            uuid = "937250BD-E294-4082-9535-83F2C83752ED"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CellularInfo/View/AutoModeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "PingTheCrapOutOfIt()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1415,15 +1319,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A22A5643-57BA-4B0E-BAB1-10E3A6115C30"
-            shouldBeEnabled = "Yes"
+            uuid = "9C139425-6D82-49DD-9229-1CE03846B3F5"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CellularInfo/View/AutoModeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "PingTheCrapOutOfIt()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D520E084-78A1-40B6-8ED3-6FAE8E3BD9D2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CellularInfo/View/AutoModeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "PingTheCrapOutOfIt()"
             landmarkType = "7">
          </BreakpointContent>
