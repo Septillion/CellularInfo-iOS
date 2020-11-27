@@ -111,6 +111,10 @@ class CloudRelatedStuff {
             })
         }
         
+        func PullInsight (completion: @escaping (CKRecord?, FetchError) -> Void){
+            
+        }
+        
         func PushData(finalData: [FinalDataStructure], completionHandler: @escaping (CKRecord?, FetchError)->Void){
             let publicDatabase = CKContainer(identifier: "iCloud.publicCellularInfo").publicCloudDatabase
             for i in finalData{
@@ -128,6 +132,23 @@ class CloudRelatedStuff {
                 })
             }
             
+        }
+        
+        func PushInsight (insightData: InsightDataStructure, completionHandler: @escaping (CKRecord?, FetchError) -> Void){
+            
+            let publicDatabase = CKContainer(identifier: "iCloud.publicCellularInfo").publicCloudDatabase
+            let record = insightData.convert()
+            
+            publicDatabase.save(record, completionHandler: {(record, error) in
+                guard error != nil else {
+                    completionHandler(record, .none)
+                    // Delete local data
+                    return
+                }
+                let string1 = error!.localizedDescription
+                print(string1)
+                completionHandler(nil, .addingError)
+            })
         }
         
         private func processQueryResponseWith (records: [CKRecord]?, error: NSError?, completion: @escaping ([CKRecord]?, FetchError)->Void){

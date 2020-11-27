@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C0B1484256FB7820008B0C8 /* InsightDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0B1483256FB7820008B0C8 /* InsightDataStructure.swift */; };
 		6C331B0D2553CAD700C88CAA /* SimplePingAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B092553CAD700C88CAA /* SimplePingAdapter.swift */; };
 		6C331B0E2553CAD700C88CAA /* PlainPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B0B2553CAD700C88CAA /* PlainPing.swift */; };
 		6C331B0F2553CAD700C88CAA /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C331B0C2553CAD700C88CAA /* SimplePing.m */; };
@@ -54,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C0B1483256FB7820008B0C8 /* InsightDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightDataStructure.swift; sourceTree = "<group>"; };
 		6C331AF62552D17A00C88CAA /* CellularInfo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CellularInfo-Bridging-Header.h"; sourceTree = "<group>"; };
 		6C331B092553CAD700C88CAA /* SimplePingAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePingAdapter.swift; sourceTree = "<group>"; };
 		6C331B0A2553CAD700C88CAA /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
@@ -112,6 +114,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C0B14872570A7640008B0C8 /* PingPage */ = {
+			isa = PBXGroup;
+			children = (
+				6CD7C7C625503B8D003F7B42 /* ContentView.swift */,
+				6CAB8CC725592D3C0010BD81 /* PingListItem.swift */,
+			);
+			path = PingPage;
+			sourceTree = "<group>";
+		};
+		6C0B14882570A7780008B0C8 /* InsightPage */ = {
+			isa = PBXGroup;
+			children = (
+				6C77A7482564E3B10078100B /* InsightView.swift */,
+				6C0B1483256FB7820008B0C8 /* InsightDataStructure.swift */,
+			);
+			path = InsightPage;
+			sourceTree = "<group>";
+		};
+		6C0B148A2570A7970008B0C8 /* AutoModePage */ = {
+			isa = PBXGroup;
+			children = (
+				6CCCC344256B8D6B005F3D04 /* AutoModeView.swift */,
+				6CCCC347256BA639005F3D04 /* AutoModeMapView.swift */,
+			);
+			path = AutoModePage;
+			sourceTree = "<group>";
+		};
+		6C0B148C2570A7C30008B0C8 /* ReadyForUploadPage */ = {
+			isa = PBXGroup;
+			children = (
+				6C6341AA2558E37F00E98EA8 /* InfoCardView.swift */,
+				6CD7C7E825510C96003F7B42 /* DetailedView.swift */,
+				6C331B182553D1E300C88CAA /* FixedMapView.swift */,
+			);
+			path = ReadyForUploadPage;
+			sourceTree = "<group>";
+		};
+		6C0B148E2570A7D80008B0C8 /* HeatMapPage */ = {
+			isa = PBXGroup;
+			children = (
+				6CD7C7DF2550423B003F7B42 /* InteractiveMapView.swift */,
+			);
+			path = HeatMapPage;
+			sourceTree = "<group>";
+		};
+		6C0B14902570A7E60008B0C8 /* SupportingClasses */ = {
+			isa = PBXGroup;
+			children = (
+				6CD7C7E525504349003F7B42 /* CellularAndWifiInformation.swift */,
+				6C331B1C2553D7C300C88CAA /* FinalDataStructure.swift */,
+				6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */,
+				6CD7C7E225504249003F7B42 /* LocationManager.swift */,
+			);
+			path = SupportingClasses;
+			sourceTree = "<group>";
+		};
+		6C0B14942570A8000008B0C8 /* OpenSourceStuff */ = {
+			isa = PBXGroup;
+			children = (
+				6CCFD2C725555897004F4F4B /* CoordinateTransformation */,
+				6CCFD2C625555889004F4F4B /* UIDevice */,
+				6CCFD2C52555585A004F4F4B /* PlainPing */,
+				6CCFD20825543B61004F4F4B /* Heatmaps */,
+			);
+			path = OpenSourceStuff;
+			sourceTree = "<group>";
+		};
 		6C331B152553D0A500C88CAA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,22 +236,6 @@
 			path = CoordinateTransformation;
 			sourceTree = "<group>";
 		};
-		6CCFD2C9255558B0004F4F4B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				6CD7C7C625503B8D003F7B42 /* ContentView.swift */,
-				6CCCC344256B8D6B005F3D04 /* AutoModeView.swift */,
-				6C77A7482564E3B10078100B /* InsightView.swift */,
-				6C6341AF2559167800E98EA8 /* MainTabView.swift */,
-				6C6341AA2558E37F00E98EA8 /* InfoCardView.swift */,
-				6CD7C7E825510C96003F7B42 /* DetailedView.swift */,
-				6CD7C7DF2550423B003F7B42 /* InteractiveMapView.swift */,
-				6CCCC347256BA639005F3D04 /* AutoModeMapView.swift */,
-				6C331B182553D1E300C88CAA /* FixedMapView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		6CD7C7B625503B8D003F7B42 = {
 			isa = PBXGroup;
 			children = (
@@ -207,20 +260,18 @@
 				6CD7C7F025512F2F003F7B42 /* CellularInfoRelease.entitlements */,
 				6CD7C7C225503B8D003F7B42 /* AppDelegate.swift */,
 				6CD7C7C425503B8D003F7B42 /* SceneDelegate.swift */,
-				6CCFD2C9255558B0004F4F4B /* View */,
-				6CD7C7E525504349003F7B42 /* CellularAndWifiInformation.swift */,
-				6CAB8CC725592D3C0010BD81 /* PingListItem.swift */,
-				6C331B1C2553D7C300C88CAA /* FinalDataStructure.swift */,
-				6CCFD1A42553DD89004F4F4B /* CloudRelatedStuff.swift */,
-				6CD7C7E225504249003F7B42 /* LocationManager.swift */,
+				6C6341AF2559167800E98EA8 /* MainTabView.swift */,
+				6C0B14872570A7640008B0C8 /* PingPage */,
+				6C0B148A2570A7970008B0C8 /* AutoModePage */,
+				6C0B14882570A7780008B0C8 /* InsightPage */,
+				6C0B148C2570A7C30008B0C8 /* ReadyForUploadPage */,
+				6C0B148E2570A7D80008B0C8 /* HeatMapPage */,
+				6C0B14902570A7E60008B0C8 /* SupportingClasses */,
 				6CD7C7C825503B9C003F7B42 /* Assets.xcassets */,
 				6CD7C7CD25503B9C003F7B42 /* LaunchScreen.storyboard */,
 				6CD7C7D025503B9C003F7B42 /* Info.plist */,
 				6C331AF62552D17A00C88CAA /* CellularInfo-Bridging-Header.h */,
-				6CCFD2C725555897004F4F4B /* CoordinateTransformation */,
-				6CCFD2C625555889004F4F4B /* UIDevice */,
-				6CCFD2C52555585A004F4F4B /* PlainPing */,
-				6CCFD20825543B61004F4F4B /* Heatmaps */,
+				6C0B14942570A8000008B0C8 /* OpenSourceStuff */,
 				6CD7C7CA25503B9C003F7B42 /* Preview Content */,
 			);
 			path = CellularInfo;
@@ -316,6 +367,7 @@
 				6CCFD1B025542BE0004F4F4B /* CoordinateTransformation.m in Sources */,
 				6CAB8CC825592D3C0010BD81 /* PingListItem.swift in Sources */,
 				6CD7C7E02550423B003F7B42 /* InteractiveMapView.swift in Sources */,
+				6C0B1484256FB7820008B0C8 /* InsightDataStructure.swift in Sources */,
 				6CD7C7C325503B8D003F7B42 /* AppDelegate.swift in Sources */,
 				6C331B192553D1E300C88CAA /* FixedMapView.swift in Sources */,
 				6C6341B02559167800E98EA8 /* MainTabView.swift in Sources */,
@@ -475,7 +527,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;
@@ -504,7 +556,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CellularInfo/CellularInfoRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"CellularInfo/Preview Content\"";
 				DEVELOPMENT_TEAM = 86FF3X5A9M;
 				ENABLE_PREVIEWS = YES;

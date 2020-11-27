@@ -506,28 +506,10 @@ struct InsightView: View {
     //MARK: - Function triggered by Fetch Button
     func FetchAllData() {
         
-        //Clean Data
-        recievedData.removeAll()
-        TotalDataCountString = "-"
-        PercentOfItemsBelowLatencyTierOne = 0
-        PercentOfItemsBetweenLatencyTierOneAndTierTwo = 0
-        PercentOfItemsAboveLatencyTierTwo = 0
-        PercentOfError = 0
-        AveragePingDeviceModels = ["-","-","-","-","-","-","-","-","-"]
-        AveragePingNumbers = [0,0,0,0,0,0,0,0,0]
-        AveragePingPercentOfBarLength = [0,0,0,0,0,0,0,0,0]
-        RadioAccessTechName = ["-","-","-","-","-"]
-        RadioAccessTechPercent = [0,0,0,0,0]
-        
-        //Update View
-        isFetchButtonEnabled = false
-        FetchButtonText = "正在下载..."
-        TotalDataCountString = "获取中"
-        
-        let manager = CloudRelatedStuff.CloudKitManager()
+        ClearDataAndView()
         
         //MARK: - Initiating Pull Everything From The Cloud
-        
+        let manager = CloudRelatedStuff.CloudKitManager()
         manager.PullEverythingFromTheCloud(){(records, error) -> Void in
             if let error = error {
                 // Something Wrong
@@ -684,6 +666,31 @@ struct InsightView: View {
                 }
             }
         }
+    }
+    
+    
+    // MARK: - Clear Data and View
+    
+    func ClearDataAndView() {
+        
+        //Clean Data
+        recievedData.removeAll()
+        TotalDataCountString = "-"
+        PercentOfItemsBelowLatencyTierOne = 0
+        PercentOfItemsBetweenLatencyTierOneAndTierTwo = 0
+        PercentOfItemsAboveLatencyTierTwo = 0
+        PercentOfError = 0
+        AveragePingDeviceModels = ["-","-","-","-","-","-","-","-","-"]
+        AveragePingNumbers = [0,0,0,0,0,0,0,0,0]
+        AveragePingPercentOfBarLength = [0,0,0,0,0,0,0,0,0]
+        RadioAccessTechName = ["-","-","-","-","-"]
+        RadioAccessTechPercent = [0,0,0,0,0]
+        
+        //Update View
+        isFetchButtonEnabled = false
+        FetchButtonText = "正在下载..."
+        TotalDataCountString = "获取中"
+        
     }
     
     //MARK: - End of struct

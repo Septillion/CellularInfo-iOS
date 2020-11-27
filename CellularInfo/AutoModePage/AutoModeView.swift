@@ -150,6 +150,11 @@ struct AutoModeView: View {
             self.alertMessage = "请确认：WiFi 关闭、VPN 关闭、蜂窝网络已连接"
             showAlert = true
             
+            print("stopped")
+            isThereAlreadyAPing = false
+            isToggleOn = false
+            averagePing.setPing(ping: 0)
+            
             return
         }
         
@@ -180,9 +185,10 @@ struct AutoModeView: View {
             currentArrayIndex = 0
             
             // Find out Average
-            averagePing.setPing(ping: sumOfPingLatencySoFar / Double(domainAndPing.daps.count))
-            if sumOfPingLatencySoFar == 999999{
+            if sumOfPingLatencySoFar >= 999999{
                 averagePing.setPing(ping: 999999)
+            } else {
+                averagePing.setPing(ping: sumOfPingLatencySoFar / Double(domainAndPing.daps.count))
             }
             print (averagePing.latencyString)
             
@@ -212,7 +218,7 @@ struct AutoModeView: View {
         
         // Ping Work
         let ping = domainAndPing.daps[currentArrayIndex].domain
-        PlainPing.ping(ping, withTimeout: 4.0, completionBlock: {
+        PlainPing.ping(ping, withTimeout: 1.0, completionBlock: {
             (timeElapsed:Double?, error:Error?) in
             
             if let latency = timeElapsed {
@@ -220,8 +226,7 @@ struct AutoModeView: View {
                 self.sumOfPingLatencySoFar += latency
             }
             if let error = error {
-                self.sumOfPingLatencySoFar = 999999
-                //self.pingNumberDouble.append(999999)
+                self.sumOfPingLatencySoFar += 999999
                 print("error: \(error.localizedDescription)")
             }
             currentArrayIndex += 1
