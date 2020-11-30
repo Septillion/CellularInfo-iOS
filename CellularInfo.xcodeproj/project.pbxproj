@@ -59,7 +59,7 @@
 		6C331AF62552D17A00C88CAA /* CellularInfo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CellularInfo-Bridging-Header.h"; sourceTree = "<group>"; };
 		6C331B092553CAD700C88CAA /* SimplePingAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePingAdapter.swift; sourceTree = "<group>"; };
 		6C331B0A2553CAD700C88CAA /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
-		6C331B0B2553CAD700C88CAA /* PlainPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlainPing.swift; path = CellularInfo/PlainPing/PlainPing.swift; sourceTree = SOURCE_ROOT; };
+		6C331B0B2553CAD700C88CAA /* PlainPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlainPing.swift; path = CellularInfo/OpenSourceStuff/PlainPing/PlainPing.swift; sourceTree = SOURCE_ROOT; };
 		6C331B0C2553CAD700C88CAA /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
 		6C331B162553D0A500C88CAA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6C331B182553D1E300C88CAA /* FixedMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedMapView.swift; sourceTree = "<group>"; };

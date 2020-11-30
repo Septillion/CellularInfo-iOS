@@ -589,13 +589,13 @@ struct InsightView: View {
                             
                         }
                         
-                        //MARK: - Calculating Ratio
-                        let count = Double (recievedData.count)
-                        
                         // Populate View
                         FetchButtonText = "加载完成"
                         isFetchButtonEnabled = true
                         
+                        //MARK: - Calculating Ratio
+                        let count = Double (recievedData.count)
+                         
                         //MARK: 总数据量
                         TotalDataCountString = "\(recievedData.count)"
                         

@@ -138,10 +138,13 @@ struct AutoModeView: View {
             isToggleOn = false
             averagePing.setPing(ping: 0)
             
+            //Turn Off Auto Lock
+            UIApplication.shared.isIdleTimerDisabled = false
+            
             return
         }
         
-        //Abort when: Move too slow, Move too fast, not on Cellular, Location Permission not granted
+        //Abort when: (TODO: Move too slow, Move too fast), not on Cellular, Location Permission not granted
         // TODO: Location Permission
         guard isTestDoneOnVPN == false
                 && isTestDoneOnWifi == false
@@ -169,6 +172,9 @@ struct AutoModeView: View {
             self.domainAndPing.daps[i].setPing(ping:0)
         }
         sumOfPingLatencySoFar = 0
+        
+        //Turn Off Auto Lock
+        UIApplication.shared.isIdleTimerDisabled = true
         
         pingNext()
         

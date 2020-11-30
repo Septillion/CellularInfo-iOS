@@ -21,6 +21,11 @@ struct InsightDataStructure {
     var NumberOfRangeBetweenTierOneAndTwo: Int
     var NumberOfRangeAboveTierTwo: Int
     var NumberOfRangeError: Int
+    // UI
+    var UIPercentOfRangeBelowLatencyTierOne: CGFloat = 0
+    var UIPercentOfRangeBetweenTierOneAndTwo: CGFloat = 0
+    var UIPercentOfRangeAboveTierTwo: CGFloat = 0
+    var UIPercentOfRangeError: CGFloat = 0
     
     // 平均 Ping 值
     var AveragePingDeviceModels: [String]
@@ -29,31 +34,6 @@ struct InsightDataStructure {
     // 蜂窝技术
     var RadioAccessTechStrings: [String]
     var RadioAccessTechNumbers: [Double]
-    
-    
-    mutating func populateWith(record: CKRecord){
-        
-        // 更新日期
-        ModifiedAt = record.object(forKey: "modifiedAt") as! Date
-        
-        // 总数据量
-        NumberOfEntries = record.object(forKey: "NumberOfEntries") as! Int
-        
-        // 范围分布
-        NumberOfRangeBelowTierOne = record.object(forKey: "NumberOfRangeBelowTierOne") as! Int
-        NumberOfRangeBetweenTierOneAndTwo = record.object(forKey: "NumberOfRangeBetweenTierOneAndTwo") as! Int
-        NumberOfRangeAboveTierTwo = record.object(forKey: "NumberOfRangeAboveTierTwo") as! Int
-        NumberOfRangeError = record.object(forKey: "NumberOfRangeError") as! Int
-        
-        // 平均 Ping 值
-        AveragePingDeviceModels = record.object(forKey: "AveragePingDeviceModels") as! [String]
-        AveragePingLatencies = record.object(forKey: "AveragePingLatencies")as! [Double]
-        
-        // 蜂窝技术
-        RadioAccessTechStrings = record.object(forKey: "RadioAccessTechStrings") as! [String]
-        RadioAccessTechNumbers = record.object(forKey: "RadioAccessTechNumbers") as! [Double]
-        
-    }
     
     func convert() -> CKRecord {
         
@@ -96,7 +76,7 @@ struct InsightDataStructure {
         NumberOfRangeBetweenTierOneAndTwo = record.object(forKey: "NumberOfRangeBetweenTierOneAndTwo") as! Int
         NumberOfRangeAboveTierTwo = record.object(forKey: "NumberOfRangeAboveTierTwo") as! Int
         NumberOfRangeError = record.object(forKey: "NumberOfRangeError") as! Int
-        
+
         // 平均 Ping 值
         AveragePingDeviceModels = record.object(forKey: "AveragePingDeviceModels") as! [String]
         AveragePingLatencies = record.object(forKey: "AveragePingLatencies")as! [Double]
@@ -105,6 +85,28 @@ struct InsightDataStructure {
         RadioAccessTechStrings = record.object(forKey: "RadioAccessTechStrings") as! [String]
         RadioAccessTechNumbers = record.object(forKey: "RadioAccessTechNumbers") as! [Double]
         
+        calculateUIPercents()
+        
     }
+
+    private mutating func calculateUIPercents(){
+        
+        // 范围分布
+        UIPercentOfRangeBelowLatencyTierOne = CGFloat(NumberOfRangeBelowTierOne) / CGFloat(NumberOfEntries)
+        UIPercentOfRangeBetweenTierOneAndTwo = CGFloat(NumberOfRangeBetweenTierOneAndTwo) / CGFloat(NumberOfEntries)
+        UIPercentOfRangeAboveTierTwo = CGFloat(NumberOfRangeAboveTierTwo) / CGFloat(NumberOfEntries)
+        UIPercentOfRangeError = CGFloat(NumberOfRangeError) / CGFloat(NumberOfEntries)
+        
+        // Unfinished
+        
+    }
+    
+    // TODO: init with recievedData
+    
+}
+
+class TotalNumberObservable: ObservableObject {
+    
+    @Published var count: Int = 0
     
 }

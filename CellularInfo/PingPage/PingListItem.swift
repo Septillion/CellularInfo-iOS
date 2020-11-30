@@ -49,21 +49,18 @@ struct DomainAndPing: Identifiable {
 
 class AGroupOfDomainsAndPings : ObservableObject {
     
-    @Published var daps: [DomainAndPing]
-    //var count : Int = 12
-    
-    init() {
-        self.daps = [DomainAndPing(id: 1, domain: "qq.com", ping: 0),
-                     DomainAndPing(id: 2, domain: "weibo.com", ping: 0),
-                     DomainAndPing(id: 3, domain: "toutiao.com", ping: 0),
-                     DomainAndPing(id: 4, domain: "taobao.com", ping: 0),
-                     DomainAndPing(id: 5, domain: "jd.com", ping: 0),
-                     DomainAndPing(id: 6, domain: "bilibili.com", ping: 0),
-                     DomainAndPing(id: 7, domain: "163.com", ping: 0),
-                     DomainAndPing(id: 8, domain: "iqiyi.com", ping: 0),
-                     DomainAndPing(id: 9, domain: "dianping.com", ping: 0),
-                     DomainAndPing(id: 10, domain: "zhihu.com", ping: 0),
-                     DomainAndPing(id: 11, domain: "sogou.com", ping: 0),
-                     DomainAndPing(id: 12, domain: "pinduoduo.com", ping: 0),]
-    }
+    @Published var daps = [DomainAndPing(id: 1, domain: "qq.com", ping: 0),
+                           DomainAndPing(id: 2, domain: "weibo.com", ping: 0),
+                           DomainAndPing(id: 3, domain: "toutiao.com", ping: 0),
+                           DomainAndPing(id: 4, domain: "taobao.com", ping: 0),
+                           DomainAndPing(id: 5, domain: "jd.com", ping: 0),
+                           DomainAndPing(id: 6, domain: "bilibili.com", ping: 0),
+                           DomainAndPing(id: 7, domain: "163.com", ping: 0),
+                           DomainAndPing(id: 8, domain: "iqiyi.com", ping: 0),
+                           DomainAndPing(id: 9, domain: "dianping.com", ping: 0),
+                           DomainAndPing(id: 10, domain: "zhihu.com", ping: 0),
+                           DomainAndPing(id: 11, domain: "sogou.com", ping: 0),
+                           DomainAndPing(id: 12, domain: "pinduoduo.com", ping: 0),
+                        ]
+        
 }

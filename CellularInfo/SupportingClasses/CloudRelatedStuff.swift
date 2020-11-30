@@ -10,13 +10,14 @@ import Foundation
 import CloudKit
 
 class CloudRelatedStuff {
-    
-    
+ 
     enum FetchError {
         case fetchingError, noRecords, none, addingError
     }
     
     struct CloudKitManager {
+        
+        var totalNumberObservable = TotalNumberObservable()
         
         func PullEverythingFromTheCloud(result: @escaping (_ objects: [CKRecord]?, _ error: Error?) -> Void) {
             
@@ -39,6 +40,7 @@ class CloudRelatedStuff {
                 recurrentOperation.recordFetchedBlock = { (record:CKRecord!) -> Void in
                     print("-> PullEverythingFromTheCloud - recurrentOperations - fetch \(recurrentOperationsCounter)")
                     recurrentOperationsCounter += 1
+                    totalNumberObservable.count += 1
                     records.append(record)
                 }
                 recurrentOperation.queryCompletionBlock = { (cursor: CKQueryOperation.Cursor?, error: Error?) -> Void in
@@ -62,6 +64,7 @@ class CloudRelatedStuff {
             let initialOperation = CKQueryOperation(query: cloudKitQuery)
             initialOperation.recordFetchedBlock = { (record:CKRecord!) -> Void in
                 print("-> PullEverythingFromTheCloud - initialOperation - fetch \(initialOperationCounter)")
+                totalNumberObservable.count += 1
                 initialOperationCounter += 1
                 records.append(record)
             }
@@ -84,8 +87,6 @@ class CloudRelatedStuff {
         
         // Pulling data within visible area
         func PullData(visibleMapRect: MKMapRect, completion: @escaping ([CKRecord]?, FetchError) -> Void){
-            
-            //updateLastMapRect(currentMapRect: visibleMapRect)
             
             //Calculate the Center and Diagnal Length of the MapRect
             let mapCenter = visibleMapRect.origin.coordinate
@@ -111,7 +112,41 @@ class CloudRelatedStuff {
             })
         }
         
-        func PullInsight (completion: @escaping (CKRecord?, FetchError) -> Void){
+        func PullInsight (completion: @escaping ([CKRecord]?, FetchError) -> Void){
+            
+            //Modified to return only the latest record
+            let predicate = NSPredicate(format:"")
+            let publicDatabase = CKContainer(identifier: "iCloud.publicCellularInfo").publicCloudDatabase
+            let query = CKQuery(recordType: "Insight", predicate: predicate)
+            
+            var records = [CKRecord]()
+            
+            query.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
+            
+            let queryOp = CKQueryOperation(query: query)
+            queryOp.resultsLimit = 1
+            queryOp.recordFetchedBlock = {(record: CKRecord) -> Void in
+                print("Record fetched")
+                records.append(record)
+            }
+            queryOp.queryCompletionBlock = {(cursor: CKQueryOperation.Cursor?, error: Error?) -> Void in
+                if (error != nil){
+                    print("Fetch Error")
+                    completion(nil, .fetchingError)
+                } else {
+                    print("Fetch Complete")
+                    completion(records, .none)
+                }
+            }
+            publicDatabase.add(queryOp)
+            
+            /*  // Original Code
+            publicDatabase.perform(query, inZoneWith: CKRecordZone.default().zoneID, completionHandler: {(records, error) -> Void in
+                self.processQueryResponseWith(records: records, error: error as NSError?, completion: {fetchedRecords, FetchError in
+                    completion(fetchedRecords, FetchError)
+                })
+            })
+            */
             
         }
         
