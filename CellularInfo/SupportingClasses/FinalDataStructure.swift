@@ -35,5 +35,11 @@ struct FinalDataStructure {
         return record
     }
     
+    init(isRandom: Bool) {
+        if isRandom{
+            self.AveragedPingLatency = Double.random(in: 0...300)
+        }
+    }
+    
 }
 

@@ -39,6 +39,7 @@
 		6CD7C7E325504249003F7B42 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7E225504249003F7B42 /* LocationManager.swift */; };
 		6CD7C7E625504349003F7B42 /* CellularAndWifiInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7E525504349003F7B42 /* CellularAndWifiInformation.swift */; };
 		6CD7C7E925510C96003F7B42 /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD7C7E825510C96003F7B42 /* DetailedView.swift */; };
+		6CDFC8B72574E44E0048DE11 /* InsightRangeOfPingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDFC8B62574E44E0048DE11 /* InsightRangeOfPingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,6 +101,7 @@
 		6CD7C7E825510C96003F7B42 /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
 		6CD7C7F025512F2F003F7B42 /* CellularInfoRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CellularInfoRelease.entitlements; sourceTree = "<group>"; };
 		6CD7C7F22551511A003F7B42 /* CellularInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CellularInfo.entitlements; sourceTree = "<group>"; };
+		6CDFC8B62574E44E0048DE11 /* InsightRangeOfPingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightRangeOfPingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				6C77A7482564E3B10078100B /* InsightView.swift */,
+				6CDFC8B62574E44E0048DE11 /* InsightRangeOfPingView.swift */,
 				6C0B1483256FB7820008B0C8 /* InsightDataStructure.swift */,
 			);
 			path = InsightPage;
@@ -373,6 +376,7 @@
 				6C6341B02559167800E98EA8 /* MainTabView.swift in Sources */,
 				6CD7C7E625504349003F7B42 /* CellularAndWifiInformation.swift in Sources */,
 				6CCFD1A52553DD89004F4F4B /* CloudRelatedStuff.swift in Sources */,
+				6CDFC8B72574E44E0048DE11 /* InsightRangeOfPingView.swift in Sources */,
 				6CCCC345256B8D6B005F3D04 /* AutoModeView.swift in Sources */,
 				6CCFD24825543B62004F4F4B /* DTMHeatmapRenderer.m in Sources */,
 				6C331B0F2553CAD700C88CAA /* SimplePing.m in Sources */,
