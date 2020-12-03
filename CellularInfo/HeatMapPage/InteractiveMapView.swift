@@ -58,8 +58,8 @@ struct InteractiveMapView: UIViewRepresentable {
             // Convert data structure
             DispatchQueue.main.async {
                 for i in mRecords {
-                    var data = FinalDataStructure()
-                    data.populateWith(record: i)
+                    let data = FinalDataStructure(record: i)
+                    //data.populateWith(record: i)
                     //self.recievedData.append(data)
                     
                     if (data.Location.latitude != 0)&&(data.Location.longitude != 0){

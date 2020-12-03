@@ -10,7 +10,7 @@ import SwiftUI
 // Data Structure
 struct InsightRangeOfPingData {
     
-    var sortedDataSet: [Double : Double] // [ starting milisecond : percent ]
+    var dataSet: [Double : CGFloat] // [ starting milisecond : percent ]
     
     var numberOfRows: Int = 15
     var maxNumberDisplayed: Double = 300.0
@@ -18,52 +18,90 @@ struct InsightRangeOfPingData {
     init(recievedData: [FinalDataStructure]){
         
         var rawData: [Double : Int] = [:] // [ starting milisecond : count ]
+        var dataUsedByChart : [Double : CGFloat] = [:] // [starting milisecond : length of bar ]
+        var maxNumber: Double = 0 // Highest bar should always be 100% height
+        
         let groupLength = maxNumberDisplayed / Double(numberOfRows)
         
         // Put data in corresponding groups
         for i in recievedData{
             
-            for j in 1...numberOfRows{
+            if i.AveragedPingLatency == 999999{
                 
-                let startingMilisecond = groupLength * Double(j)
+                if rawData[999999] == nil{
+                    rawData[999999] = 0
+                }
+                rawData[999999]! += 1
                 
-                if i.AveragedPingLatency > startingMilisecond
-                    && i.AveragedPingLatency < (startingMilisecond + groupLength){
+            }else{
+                
+                for j in 0...numberOfRows-1{
                     
-                    if rawData[startingMilisecond] == nil {
-                        rawData[startingMilisecond] = 0
+                    let startingMilisecond = groupLength * Double(j)
+                    
+                    if i.AveragedPingLatency > startingMilisecond
+                        && i.AveragedPingLatency < (startingMilisecond + groupLength){
+                        
+                        if rawData[startingMilisecond] == nil {
+                            rawData[startingMilisecond] = 0
+                        }
+                        rawData[startingMilisecond]! += 1
+                        
                     }
                     
-                    rawData[startingMilisecond]! += 1
-                    
                 }
+                
             }
+            
             
         }
         
-        rawData.sorted{(first, second) -> Bool in
-            return first.key > second.key
+        // Fill with Zero
+        for i in 0...numberOfRows - 1{
+            dataUsedByChart[(maxNumberDisplayed / Double(numberOfRows)) * Double(i)] = 0
+        }
+        dataUsedByChart[999999] = 0
+        
+        // Find Maximum Number
+        for j in rawData {
+            if Double(j.value) > maxNumber {
+                maxNumber = Double(j.value)
+            }
         }
         
-        var sortedDataSet : [Double : Double] = [:]
-        
+        // Calculate height percent
         for k in rawData{
-            sortedDataSet[k.key] = Double(k.value / recievedData.count)
+            dataUsedByChart[k.key] = CGFloat(k.value) / CGFloat(maxNumber)
         }
         
-        self.sortedDataSet = sortedDataSet
+        self.dataSet = dataUsedByChart
     }
     
 }
 
 struct InsightRangeOfPingView: View {
     
-    @State var dataSet: InsightRangeOfPingData
+    @Binding var dataSet: InsightRangeOfPingData
     
     var body: some View {
         
         HStack{
-
+            ForEach (dataSet.dataSet.sorted(by: <), id: \.key ){ key, value in
+                //Text("\(key)")
+                //Text("\(value)")
+                GeometryReader { metrics in
+                    VStack {
+                        Spacer()
+                        Rectangle()
+                            .frame(height: max((metrics.size.height - 40) * CGFloat(value) , 1))
+                            .foregroundColor(.accentColor)
+                            .transition(.identity)
+                        Text( key == 999999 ? "err" : "\(Int(key))" )
+                            .font(.system(size: 6))
+                            .frame(height: 10.0)
+                    }
+                }
+            }
             
         }
         
@@ -72,22 +110,99 @@ struct InsightRangeOfPingView: View {
 
 struct InsightRangeOfPingView_Previews: PreviewProvider {
     static var previews: some View {
-        InsightRangeOfPingView(dataSet: InsightRangeOfPingData(recievedData: [
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true),
-                                                                FinalDataStructure(isRandom: true)]))
+        InsightRangeOfPingView(dataSet: .constant(InsightRangeOfPingData(recievedData: [FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),
+                                                                                        FinalDataStructure(fillWithRandom: true),])))
+            .previewLayout(.fixed(width: 320, height: 200))
     }
+    
+    
 }

@@ -20,12 +20,7 @@ struct InsightView: View {
     @State private var TotalDataCountString: String = "-"
     
     //MARK: 范围分布
-    private let TierOne = 50
-    private let TierTwo = 100
-    @State private var PercentOfItemsBelowLatencyTierOne: CGFloat = 0
-    @State private var PercentOfItemsBetweenLatencyTierOneAndTierTwo: CGFloat = 0
-    @State private var PercentOfItemsAboveLatencyTierTwo: CGFloat = 0
-    @State private var PercentOfError: CGFloat = 0
+    @State private var insightRangeOfPingData = InsightRangeOfPingData(recievedData: [])
     
     //MARK: 平均 Ping 值
     @State var AveragePingDeviceModels: [String] = ["-","-","-","-","-","-","-","-","-"]
@@ -56,8 +51,6 @@ struct InsightView: View {
             
             // MARK: - 总数据量
             Section (footer: Text("不包含海外数据")) {
-                
-                
                 HStack {
                     Text("总数据量")
                         .font(.headline)
@@ -65,11 +58,10 @@ struct InsightView: View {
                     Text(TotalDataCountString)
                         .foregroundColor(Color(.label))
                 }
-                
             }
             
             // MARK: - 范围分布
-            Section{
+            Section(footer: Text("因存在幸存者偏差，error 比例可能过高")){
                 
                 HStack {
                     VStack(alignment: .leading) {
@@ -78,84 +70,10 @@ struct InsightView: View {
                     }
                     Spacer()
                 }
-                
-                VStack{
-                    
-                    //Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            
-                            HStack {
-                                Text("小于 \(TierOne)ms")
-                                Spacer()
-                                Text("\(NSString(format: "%.1f", PercentOfItemsBelowLatencyTierOne * 100))%")
-                            }
-                            
-                            GeometryReader { metrics in
-                                Rectangle()
-                                    .frame(width: max(PercentOfItemsBelowLatencyTierOne * metrics.size.width , 1) , height: 20)
-                                    .foregroundColor(.accentColor)
-                            }.frame(height: 20)
-                            
-                        }
-                    }
-                    
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("介于 \(TierOne)ms 和 \(TierTwo)ms 之间")
-                                Spacer()
-                                Text("\(NSString(format: "%.1f", PercentOfItemsBetweenLatencyTierOneAndTierTwo * 100))%")
-                            }
-                            GeometryReader { metrics in
-                                Rectangle()
-                                    .frame(width: max (PercentOfItemsBetweenLatencyTierOneAndTierTwo * metrics.size.width, 1), height: 20)
-                                    .foregroundColor(.accentColor)
-                            }.frame(height: 20)
-                        }
-                    }
-                    
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("大于 \(TierTwo)ms")
-                                Spacer()
-                                Text("\(NSString(format: "%.1f", PercentOfItemsAboveLatencyTierTwo * 100))%")
-                            }
-                            GeometryReader { metrics in
-                                Rectangle()
-                                    .frame(width: max(PercentOfItemsAboveLatencyTierTwo * metrics.size.width, 1), height: 20)
-                                    .foregroundColor(.accentColor)
-                            }.frame(height: 20)
-                        }
-                    }
-                    
-                    Divider()
-                    
-                    HStack {
-                        VStack (alignment: .leading, spacing: 3) {
-                            HStack {
-                                Text("error（可能存在幸存者偏差）")
-                                Spacer()
-                                Text("\(NSString(format: "%.1f", PercentOfError * 100))%")
-                            }
-                            GeometryReader { metrics in
-                                Rectangle()
-                                    .frame(width: max(PercentOfError * metrics.size.width, 1), height: 20)
-                                    .foregroundColor(.accentColor)
-                            }.frame(height: 20)
-                        }
-                    }
-                    
-                    //Divider()
-                    
-                }
-                .padding([.leading])
+
+                InsightRangeOfPingView(dataSet: $insightRangeOfPingData)
+                    .frame(height: 200)
+                    .padding(.leading)
                 
             }
             
@@ -521,13 +439,6 @@ struct InsightView: View {
                     
                     // initiating temporary variables
                     
-                    //MARK: Data Count: 范围分布
-                    var NumberOfItemsBelowLatencyTierOne = 0.0
-                    var NumberOfItemsBetweenLatencyTierOneAndTierTwo = 0.0
-                    var NumberOfItemsAboveLatencyTierTwo = 0.0
-                    var NumberOfError = 0.0
-                    var LouWangZhiYu = 0.0
-                    
                     //MARK: Data Count: 平均 Ping 值
                     var averagePingCombined: [String : Double] = [:] // String: Device Model, Double: Sum of Ping
                     var averagePingCount: [String : Int ] = [:] // String: Device Model, Double: How Many Are There
@@ -541,8 +452,8 @@ struct InsightView: View {
                     DispatchQueue.main.async {
                         
                         for i in mRecords {
-                            var data = FinalDataStructure()
-                            data.populateWith(record: i)
+                            let data = FinalDataStructure(record: i)
+                            //data.populateWith(record: i)
                             
                             // Ignore data that is outside of China.
                             guard !CoordinateTransformation.isLocationOut(ofChina: data.Location) else{
@@ -550,19 +461,6 @@ struct InsightView: View {
                             }
                             
                             self.recievedData.append(data)
-                            
-                            //MARK: Sort Data: 范围分布
-                            if data.AveragedPingLatency <= Double(TierOne) {
-                                NumberOfItemsBelowLatencyTierOne += 1
-                            }else if data.AveragedPingLatency > Double(TierOne) && data.AveragedPingLatency < Double(TierTwo) {
-                                NumberOfItemsBetweenLatencyTierOneAndTierTwo += 1
-                            }else if data.AveragedPingLatency >= Double(TierTwo) && data.AveragedPingLatency < 999999{
-                                NumberOfItemsAboveLatencyTierTwo += 1
-                            }else if data.AveragedPingLatency == 999999 {
-                                NumberOfError += 1
-                            }else {
-                                LouWangZhiYu += 1
-                            }
                             
                             //MARK: Sort Data: 平均 Ping 值
                             //Initializing Dictionaries
@@ -594,16 +492,13 @@ struct InsightView: View {
                         isFetchButtonEnabled = true
                         
                         //MARK: - Calculating Ratio
-                        let count = Double (recievedData.count)
+                        //let count = Double (recievedData.count)
                          
                         //MARK: 总数据量
                         TotalDataCountString = "\(recievedData.count)"
                         
                         //MARK: Analyze Data: 范围分布
-                        PercentOfItemsBelowLatencyTierOne = CGFloat(NumberOfItemsBelowLatencyTierOne / count)
-                        PercentOfItemsBetweenLatencyTierOneAndTierTwo = CGFloat(NumberOfItemsBetweenLatencyTierOneAndTierTwo / count)
-                        PercentOfItemsAboveLatencyTierTwo = CGFloat(NumberOfItemsAboveLatencyTierTwo / count)
-                        PercentOfError = CGFloat(NumberOfError / count)
+                        insightRangeOfPingData = InsightRangeOfPingData(recievedData: recievedData)
                         
                         
                         //MARK: 平均 Ping 值
@@ -676,10 +571,6 @@ struct InsightView: View {
         //Clean Data
         recievedData.removeAll()
         TotalDataCountString = "-"
-        PercentOfItemsBelowLatencyTierOne = 0
-        PercentOfItemsBetweenLatencyTierOneAndTierTwo = 0
-        PercentOfItemsAboveLatencyTierTwo = 0
-        PercentOfError = 0
         AveragePingDeviceModels = ["-","-","-","-","-","-","-","-","-"]
         AveragePingNumbers = [0,0,0,0,0,0,0,0,0]
         AveragePingPercentOfBarLength = [0,0,0,0,0,0,0,0,0]
