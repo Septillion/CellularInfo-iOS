@@ -17,6 +17,12 @@ struct FinalDataStructure {
     var MobileCarrier: String
     var RadioAccessTechnology: String
     
+    enum index {
+        case DeviceName
+        case MobileCarrier
+        case RadioAccessTechnology
+    }
+    
     func convert() -> CKRecord{
         let record = CKRecord(recordType: "CellularInfo")
         record.setObject(self.AveragedPingLatency as __CKRecordObjCValue, forKey: "AveragedPingLatency")
@@ -45,12 +51,12 @@ struct FinalDataStructure {
         if fillWithRandom{
             
             self.AveragedPingLatency = Double.random(in: 0...300)
-            if Bool.random() {
+            if Bool.random() && Bool.random() && Bool.random() && Bool.random() && Bool.random(){
                 self.AveragedPingLatency = 999999
             }
             self.DeviceName = "Random iPhone \(Int.random(in: 20...30))"
             self.Location = CLLocationCoordinate2D(latitude: Double.random(in: 0...300), longitude: Double.random(in: 0...300))
-            self.MobileCarrier = ["Random Carrier"].randomElement()!
+            self.MobileCarrier = ["Random Carrier","Random Carrier 2","Random Carrier 3"].randomElement()!
             self.RadioAccessTechnology = ["6G","7G","8G","nmWave"].randomElement()!
         }
         

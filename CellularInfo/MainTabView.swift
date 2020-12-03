@@ -42,7 +42,7 @@ struct MainTabView: View {
                     
                     VStack {
                         Spacer()
-                        Text("根据查看范围，数据渐进式加载")
+                        Text("根据查看范围，数据渐进式加载，红色为 Error。")
                             .padding()
                             .font(.caption)
                         

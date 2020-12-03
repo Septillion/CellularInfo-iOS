@@ -12,8 +12,8 @@ struct InsightRangeOfPingData {
     
     var dataSet: [Double : CGFloat] // [ starting milisecond : percent ]
     
-    var numberOfRows: Int = 15
-    var maxNumberDisplayed: Double = 300.0
+    var numberOfRows: Int = 16
+    var maxNumberDisplayed: Double = 160.0
     
     init(recievedData: [FinalDataStructure]){
         
@@ -96,7 +96,7 @@ struct InsightRangeOfPingView: View {
                             .frame(height: max((metrics.size.height - 40) * CGFloat(value) , 1))
                             .foregroundColor(.accentColor)
                             .transition(.identity)
-                        Text( key == 999999 ? "err" : "\(Int(key))" )
+                        Text( key == 999999 ? "t/o" : "\(Int(key))" )
                             .font(.system(size: 6))
                             .frame(height: 10.0)
                     }

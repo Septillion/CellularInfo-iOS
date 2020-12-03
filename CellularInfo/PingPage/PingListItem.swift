@@ -41,7 +41,7 @@ struct DomainAndPing: Identifiable {
         }
         
         if self.ping == 999999 {
-            self.latencyString = "error"
+            self.latencyString = "timeout"
             self.latencyColor = Color(.systemGray)
         }
     }
